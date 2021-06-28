@@ -26,19 +26,14 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import MainNavigator from './src/Navigater/MainNavigator';
 
-
-const App= () => {
-  
-
-
+const App = () => {
   return (
-    <SafeAreaView style={{flex:1}}>
-
+    <SafeAreaView style={{flex: 1}}>
+      <MainNavigator />
     </SafeAreaView>
   );
 };
-
-
 
 export default App;
