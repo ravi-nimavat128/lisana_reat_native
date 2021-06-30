@@ -35,7 +35,7 @@ class Splash extends Component {
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Image
           source={require('../assets/logo_main.png')}
-          style={{height: 250, width: 250, resizeMode: 'contain'}}
+          style={{height: 200, width: 200, resizeMode: 'contain'}}
         />
       </View>
     );

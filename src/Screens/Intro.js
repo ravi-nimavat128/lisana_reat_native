@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
-import DeshbordScreen from './DeshbordScreen';
+import Register from './Register';
 
 const slides = [
   {
@@ -132,7 +132,7 @@ class Intro extends Component {
   render() {
     console.log(this.state.slide_key);
     if (this.state.showRealApp) {
-      return <DeshbordScreen />;
+      return <Register navigation={this.props.navigation} />;
     } else {
       return (
         <SafeAreaView style={{flex: 1}}>
