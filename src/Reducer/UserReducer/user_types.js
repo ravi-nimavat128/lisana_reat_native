@@ -1,0 +1,15 @@
+import mainTypes from '../mainTypes';
+
+export default {
+  USER_ID: mainTypes.USER_DETAILS + 'USER_ID',
+  INTRO_STSTUS: mainTypes.USER_DETAILS + 'INTRO_STSTUS',
+  USER_NAME: mainTypes.USER_DETAILS + 'USER_NAME',
+  BUSINESS_NAME: mainTypes.USER_DETAILS + 'BUSINESS_NAME',
+  MO_NUMBER: mainTypes.USER_DETAILS + 'MO_NUMBER',
+  EMAIL: mainTypes.USER_DETAILS + 'EMAIL',
+  VAT_NO: mainTypes.USER_DETAILS + 'VAT_NO',
+  ORG_NO: mainTypes.USER_DETAILS + 'ORG_NO',
+  ADDRESS: mainTypes.USER_DETAILS + 'ADDRESS',
+  REFERRAL_CODE: mainTypes.USER_DETAILS + 'REFERRAL_CODE',
+  LOGIN_TOKEN: mainTypes.USER_DETAILS + 'LOGIN_TOKEN',
+};

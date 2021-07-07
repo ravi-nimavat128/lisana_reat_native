@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
+import {connect} from 'react-redux';
+import {addIntroStatus} from '../Reducer/UserReducer/user_actions';
 
 import Register from './Register';
 
@@ -128,6 +130,7 @@ class Intro extends Component {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
     this.setState({showRealApp: true});
+    this.props.addIntroStatus(true);
   };
   render() {
     console.log(this.state.slide_key);
@@ -167,4 +170,10 @@ class Intro extends Component {
     }
   }
 }
-export default Intro;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  addIntroStatus,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Intro);

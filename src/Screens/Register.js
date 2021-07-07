@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import {
   Text,
   View,
@@ -9,6 +10,7 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
@@ -26,8 +28,34 @@ class Register extends Component {
       VAT_number: '',
       org_number: '',
       checkbox_value: false,
+      password: '',
     };
   }
+
+  _get_register = () => {
+    let formData = new FormData();
+    formData.append('name', this.state.full_name);
+    formData.append('business_name', this.state.business_name);
+    formData.append('email', this.state.email);
+    formData.append('mobile_no', this.state.phone_number);
+    formData.append('vat_no', this.state.VAT_number);
+    formData.append('org_no', this.state.org_number);
+    formData.append('address', this.state.address);
+    formData.append('type', this.state.select_tab);
+    formData.append('password', this.state.password);
+    // formData.append('referral_code', this.state.txt_leandmark);
+
+    axios
+      .post('http://binarygeckos.com/lisana/api/add_user', formData)
+      .then(response => {
+        if (response.data.status == 1) {
+          Alert.alert('', 'your account has been created successfully');
+          this.props.navigation.navigate('BottomNavigator');
+        } else {
+          alert(response.data.message);
+        }
+      });
+  };
 
   render() {
     console.log('is select tab ', this.state.select_tab);
@@ -141,6 +169,17 @@ class Register extends Component {
                 <View style={styles.edt_box}>
                   <TextInput
                     style={styles.edt_txt}
+                    placeholder="Password"
+                    secureTextEntry
+                    onChangeText={text =>
+                      this.setState({
+                        password: text,
+                      })
+                    }></TextInput>
+                </View>
+                <View style={styles.edt_box}>
+                  <TextInput
+                    style={styles.edt_txt}
                     placeholder="Personal number"
                     onChangeText={text =>
                       this.setState({
@@ -198,6 +237,17 @@ class Register extends Component {
                     onChangeText={text =>
                       this.setState({
                         email: text,
+                      })
+                    }></TextInput>
+                </View>
+                <View style={styles.edt_box}>
+                  <TextInput
+                    style={styles.edt_txt}
+                    placeholder="Password"
+                    secureTextEntry
+                    onChangeText={text =>
+                      this.setState({
+                        password: text,
                       })
                     }></TextInput>
                 </View>
@@ -277,7 +327,7 @@ class Register extends Component {
             </View>
             <TouchableOpacity
               style={styles.btn_create}
-              onPress={() => this.props.navigation.navigate('BottomNavigator')}>
+              onPress={() => this._get_register()}>
               <Text
                 style={{
                   alignSelf: 'center',

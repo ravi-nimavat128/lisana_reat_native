@@ -9,8 +9,23 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
+import axios from 'axios';
+import {
+  addUserId,
+  addUserName,
+  addBusiness_name,
+  addMobile_no,
+  addEmail,
+  addVAT_no,
+  addORG_no,
+  addAddress,
+  addReferral_code,
+  addLoginToken,
+} from '../Reducer/UserReducer/user_actions';
+import {connect} from 'react-redux';
 
 class SignIn extends Component {
   constructor(props) {
@@ -25,8 +40,36 @@ class SignIn extends Component {
       VAT_number: '',
       org_number: '',
       checkbox_value: false,
+      password: '',
     };
   }
+  _logIn = () => {
+    let formData = new FormData();
+    formData.append('email', this.state.email);
+    formData.append('password', this.state.password);
+    formData.append('device_id', 123);
+
+    axios
+      .post('http://binarygeckos.com/lisana/api/login', formData)
+      .then(Response => {
+        if (Response.data.status == 1) {
+          Alert.alert('', Response.data.message);
+          this.props.navigation.navigate('BottomNavigator');
+          this.props.addUserId(Response.data.user_id);
+          this.props.addUserName(Response.data.name);
+          this.props.addBusiness_name(Response.data.business_name);
+          this.props.addMobile_no(Response.data.mobile_no);
+          this.props.addEmail(Response.data.email);
+          this.props.addVAT_no(Response.data.vat_no);
+          this.props.addORG_no(Response.data.org_no);
+          this.props.addAddress(Response.data.address);
+          this.props.addReferral_code(Response.data.referral_code);
+          this.props.addLoginToken(Response.data.token);
+        } else {
+          alert(Response.data.message);
+        }
+      });
+  };
 
   render() {
     console.log('is select tab ', this.state.select_tab);
@@ -61,10 +104,11 @@ class SignIn extends Component {
               <View style={styles.edt_box}>
                 <TextInput
                   style={styles.edt_txt}
-                  placeholder="Personal number"
+                  secureTextEntry
+                  placeholder="Password"
                   onChangeText={text =>
                     this.setState({
-                      personal_number: text,
+                      password: text,
                     })
                   }></TextInput>
               </View>
@@ -113,7 +157,7 @@ class SignIn extends Component {
 
             <TouchableOpacity
               style={styles.btn_create}
-              onPress={() => this.props.navigation.navigate('BottomNavigator')}>
+              onPress={() => this._logIn()}>
               <Text
                 style={{
                   alignSelf: 'center',
@@ -197,4 +241,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignIn;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  addUserId,
+  addUserName,
+  addBusiness_name,
+  addMobile_no,
+  addEmail,
+  addVAT_no,
+  addORG_no,
+  addAddress,
+  addReferral_code,
+  addLoginToken,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

@@ -18,6 +18,13 @@ import {
   View,
 } from 'react-native';
 
+import {PersistGate} from 'redux-persist/integration/react';
+// import Splash from './screens/Splash';
+// import Login from './screens/Login';
+
+import {connect, Provider} from 'react-redux';
+import reduxStore from './src/Store/store';
+
 import {
   Colors,
   DebugInstructions,
@@ -29,9 +36,15 @@ import {
 import MainNavigator from './src/Navigater/MainNavigator';
 
 const App = () => {
+  const {store, persistor} = reduxStore();
+
   return (
     <SafeAreaView style={{flex: 1}}>
-      <MainNavigator />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MainNavigator />
+        </PersistGate>
+      </Provider>
     </SafeAreaView>
   );
 };

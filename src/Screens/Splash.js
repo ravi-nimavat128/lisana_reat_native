@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
+import {connect} from 'react-redux';
 // import {connect} from 'react-redux';
 // import {add_pushnotification_token} from '../reducers/UserReducer/user_actions';
 // import PushNotificationIOS from '@react-native-community/push-notification-ios';
@@ -26,7 +27,13 @@ class Splash extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.replace('Intro');
+      {
+        this.props.intro_status != true
+          ? this.props.user_idd != ''
+            ? this.props.navigation.replace('BottomNavigator')
+            : this.props.navigation.replace('Register')
+          : this.props.navigation.replace('Intro');
+      }
     }, 2000);
   }
 
@@ -49,7 +56,14 @@ class Splash extends Component {
 //   add_pushnotification_token,
 // };
 
-export default Splash;
+const mapStateToProps = state => ({
+  user_idd: state.userDetails.user_id,
+  intro_status: state.userDetails.intro_status,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Splash);
 
 const styles = StyleSheet.create({
   container: {
