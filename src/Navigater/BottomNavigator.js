@@ -72,8 +72,12 @@ const BottomNavigator = props => {
         style: {
           position: 'absolute',
           height: 112,
-          borderColor: 'gray',
+          borderColor: '#E6E6E8',
+          borderLeftColor: '#E6E6E8',
+          borderRightColor: '#E6E6E8',
           borderTopWidth: 1,
+          borderLeftWidth: 1,
+          borderRightWidth: 1,
 
           borderTopRightRadius: 30,
           borderTopLeftRadius: 30,

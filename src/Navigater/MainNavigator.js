@@ -8,6 +8,9 @@ import Splash from '../Screens/Splash';
 import Register from '../Screens/Register';
 import SignIn from '../Screens/SignIn';
 import BottomNavigator from '../Navigater/BottomNavigator';
+import ForgotPassword from '../Screens/ForgotPassword';
+import HowLisanaWork from '../Screens/HowLisanaWork';
+import HelpFAQ from '../Screens/HelpFAQ';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +43,21 @@ export default function MainNavigation() {
         <Stack.Screen
           name="SignIn"
           component={SignIn}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="HowLisanaWork"
+          component={HowLisanaWork}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="HelpFAQ"
+          component={HelpFAQ}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

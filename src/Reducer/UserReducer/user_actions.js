@@ -48,3 +48,7 @@ export const addLoginToken = payload => ({
   type: user_types.LOGIN_TOKEN,
   payload,
 });
+export const LogOut = payload => ({
+  type: user_types.LOGOUT,
+  payload,
+});

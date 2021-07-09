@@ -12,4 +12,5 @@ export default {
   ADDRESS: mainTypes.USER_DETAILS + 'ADDRESS',
   REFERRAL_CODE: mainTypes.USER_DETAILS + 'REFERRAL_CODE',
   LOGIN_TOKEN: mainTypes.USER_DETAILS + 'LOGIN_TOKEN',
+  LOGOUT: mainTypes.USER_DETAILS + 'LOGOUT',
 };

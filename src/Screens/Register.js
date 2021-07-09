@@ -13,11 +13,14 @@ import {
   Alert,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: false,
+
       select_tab: 1,
       full_name: '',
       address: '',
@@ -33,6 +36,10 @@ class Register extends Component {
   }
 
   _get_register = () => {
+    this.setState({
+      isLoading: true,
+    });
+
     let formData = new FormData();
     formData.append('name', this.state.full_name);
     formData.append('business_name', this.state.business_name);
@@ -49,9 +56,15 @@ class Register extends Component {
       .post('http://binarygeckos.com/lisana/api/add_user', formData)
       .then(response => {
         if (response.data.status == 1) {
+          this.setState({
+            isLoading: false,
+          });
           Alert.alert('', 'your account has been created successfully');
           this.props.navigation.navigate('BottomNavigator');
         } else {
+          this.setState({
+            isLoading: false,
+          });
           alert(response.data.message);
         }
       });
@@ -67,6 +80,18 @@ class Register extends Component {
     console.log('checkbox ', this.state.checkbox_value);
     return (
       <SafeAreaView style={{flex: 1}}>
+        <Spinner
+          //visibility of Overlay Loading Spinner
+          visible={this.state.isLoading}
+          //Text with the Spinner
+          textContent={'Loading...'}
+          size={'large'}
+          animation={'fade'}
+          cancelable={false}
+          color="#EC4464"
+          //Text style of the Spinner Text
+          textStyle={{color: '#EC4464', fontSize: 20, marginLeft: 10}}
+        />
         <ScrollView style={{flexL: 1}}>
           <Image
             source={require('../assets/logo_smoll.png')}
@@ -150,6 +175,8 @@ class Register extends Component {
                   <TextInput
                     style={styles.edt_txt}
                     placeholder="Phone number"
+                    maxLength={10}
+                    keyboardType={'phone-pad'}
                     onChangeText={text =>
                       this.setState({
                         phone_number: text,
@@ -160,6 +187,7 @@ class Register extends Component {
                   <TextInput
                     style={styles.edt_txt}
                     placeholder="Email"
+                    keyboardType="email-address"
                     onChangeText={text =>
                       this.setState({
                         email: text,
@@ -181,6 +209,7 @@ class Register extends Component {
                   <TextInput
                     style={styles.edt_txt}
                     placeholder="Personal number"
+                    keyboardType="number-pad"
                     onChangeText={text =>
                       this.setState({
                         personal_number: text,
@@ -224,6 +253,8 @@ class Register extends Component {
                   <TextInput
                     style={styles.edt_txt}
                     placeholder="Phone number"
+                    maxLength={10}
+                    keyboardType="phone-pad"
                     onChangeText={text =>
                       this.setState({
                         phone_number: text,
@@ -234,6 +265,7 @@ class Register extends Component {
                   <TextInput
                     style={styles.edt_txt}
                     placeholder="Email"
+                    keyboardType={'email-address'}
                     onChangeText={text =>
                       this.setState({
                         email: text,
@@ -256,6 +288,7 @@ class Register extends Component {
                     <TextInput
                       style={styles.edt_txt}
                       placeholder="VAT number"
+                      keyboardType="number-pad"
                       onChangeText={text =>
                         this.setState({
                           VAT_number: text,
@@ -265,6 +298,7 @@ class Register extends Component {
                   <View style={[styles.edt_box, {flex: 1, marginLeft: 10}]}>
                     <TextInput
                       style={styles.edt_txt}
+                      keyboardType="number-pad"
                       placeholder="Org. Number"
                       onChangeText={text =>
                         this.setState({
@@ -277,6 +311,7 @@ class Register extends Component {
                   <TextInput
                     style={styles.edt_txt}
                     placeholder="Personal number"
+                    keyboardType="number-pad"
                     onChangeText={text =>
                       this.setState({
                         personal_number: text,
@@ -327,7 +362,59 @@ class Register extends Component {
             </View>
             <TouchableOpacity
               style={styles.btn_create}
-              onPress={() => this._get_register()}>
+              onPress={() => {
+                if (this.state.select_tab == 1) {
+                  if (this.state.full_name == '') {
+                    alert('Please enter your full name');
+                  } else if (this.state.address == '') {
+                    alert('Please enter your address');
+                  } else if (this.state.phone_number == '') {
+                    alert('Please enter your phone number');
+                  } else if (this.state.email == '') {
+                    alert('Please enter your email');
+                  } else if (this.state.password == '') {
+                    alert('Please enter your Password');
+                  } else if (this.state.password.length == 6) {
+                    alert(
+                      'The password must be of minimum length 8 characters',
+                    );
+                  } else if (this.state.personal_number == '') {
+                    alert('Please enter your Personal number');
+                  } else if (this.state.checkbox_value == false) {
+                    alert('Agree to terms & condition');
+                  } else {
+                    this._get_register();
+                  }
+                } else {
+                  if (this.state.full_name == '') {
+                    alert('Please enter your full name');
+                  } else if (this.state.business_name == '') {
+                    alert('Please enter your Business name');
+                  } else if (this.state.address == '') {
+                    alert('Please enter your address');
+                  } else if (this.state.phone_number == '') {
+                    alert('Please enter your Phone number');
+                  } else if (this.state.email == '') {
+                    alert('Please enter your email');
+                  } else if (this.state.password == '') {
+                    alert('Please enter your Password');
+                  } else if (this.state.password.length == 6) {
+                    alert(
+                      'The password must be of minimum length 8 characters',
+                    );
+                  } else if (this.state.VAT_number == '') {
+                    alert('Please enter your VAT number');
+                  } else if (this.state.org_number == '') {
+                    alert('Please enter your ORG number');
+                  } else if (this.state.personal_number == '') {
+                    alert('Please enter your Personal number');
+                  } else if (this.state.checkbox_value == false) {
+                    alert('Agree to terms & condition');
+                  } else {
+                    this._get_register();
+                  }
+                }
+              }}>
               <Text
                 style={{
                   alignSelf: 'center',

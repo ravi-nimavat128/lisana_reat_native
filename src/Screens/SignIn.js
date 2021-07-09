@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import axios from 'axios';
+
 import {
   addUserId,
   addUserName,
@@ -25,12 +26,15 @@ import {
   addReferral_code,
   addLoginToken,
 } from '../Reducer/UserReducer/user_actions';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 import {connect} from 'react-redux';
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: false,
       full_name: '',
       address: '',
       phone_number: '',
@@ -44,6 +48,10 @@ class SignIn extends Component {
     };
   }
   _logIn = () => {
+    this.setState({
+      isLoading: true,
+    });
+
     let formData = new FormData();
     formData.append('email', this.state.email);
     formData.append('password', this.state.password);
@@ -53,6 +61,9 @@ class SignIn extends Component {
       .post('http://binarygeckos.com/lisana/api/login', formData)
       .then(Response => {
         if (Response.data.status == 1) {
+          this.setState({
+            isLoading: false,
+          });
           Alert.alert('', Response.data.message);
           this.props.navigation.navigate('BottomNavigator');
           this.props.addUserId(Response.data.user_id);
@@ -66,6 +77,9 @@ class SignIn extends Component {
           this.props.addReferral_code(Response.data.referral_code);
           this.props.addLoginToken(Response.data.token);
         } else {
+          this.setState({
+            isLoading: false,
+          });
           alert(Response.data.message);
         }
       });
@@ -81,6 +95,18 @@ class SignIn extends Component {
     console.log('checkbox ', this.state.checkbox_value);
     return (
       <SafeAreaView style={{flex: 1}}>
+        <Spinner
+          //visibility of Overlay Loading Spinner
+          visible={this.state.isLoading}
+          //Text with the Spinner
+          textContent={'Loading...'}
+          size={'large'}
+          animation={'fade'}
+          cancelable={false}
+          color="#EC4464"
+          //Text style of the Spinner Text
+          textStyle={{color: '#EC4464', fontSize: 20, marginLeft: 10}}
+        />
         <ScrollView style={{flexL: 1}}>
           <Image
             source={require('../assets/logo_smoll.png')}
@@ -95,6 +121,7 @@ class SignIn extends Component {
                 <TextInput
                   style={styles.edt_txt}
                   placeholder="Email"
+                  keyboardType={'email-address'}
                   onChangeText={text =>
                     this.setState({
                       email: text,
@@ -113,6 +140,19 @@ class SignIn extends Component {
                   }></TextInput>
               </View>
             </View>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('ForgotPassword')}>
+              <Text
+                style={{
+                  alignSelf: 'flex-end',
+                  marginTop: 5,
+                  marginRight: 3,
+                  fontSize: 13,
+                  color: '#EC4464',
+                }}>
+                Forgot Password
+              </Text>
+            </TouchableOpacity>
 
             <View
               style={{
@@ -157,7 +197,17 @@ class SignIn extends Component {
 
             <TouchableOpacity
               style={styles.btn_create}
-              onPress={() => this._logIn()}>
+              onPress={() => {
+                if (this.state.email == '') {
+                  alert('Please enter Email');
+                } else if (this.state.password == '') {
+                  alert('Please enter Password');
+                } else if (this.state.checkbox_value == false) {
+                  alert('Agree to terms & condition');
+                } else {
+                  this._logIn();
+                }
+              }}>
               <Text
                 style={{
                   alignSelf: 'center',
