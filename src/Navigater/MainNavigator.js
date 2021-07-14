@@ -11,6 +11,7 @@ import BottomNavigator from '../Navigater/BottomNavigator';
 import ForgotPassword from '../Screens/ForgotPassword';
 import HowLisanaWork from '../Screens/HowLisanaWork';
 import HelpFAQ from '../Screens/HelpFAQ';
+import Notification from '../Screens/Notification';
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,11 @@ export default function MainNavigation() {
         <Stack.Screen
           name="HelpFAQ"
           component={HelpFAQ}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={Notification}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
