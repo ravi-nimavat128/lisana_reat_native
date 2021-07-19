@@ -9,35 +9,7 @@ import Home from '../Screens/Home';
 import Job from '../Screens/Job';
 import Inquiries from '../Screens/Inquiries';
 import Message from '../Screens/Message';
-// import SearchScreen from '../screens/Search';
-// import TagScreen from '../screens/Tag';
-// import CartScreen from '../screens/Cart';
-// import ProfileScreen from '../screens/Profile';
-// import TopTabNavigator from './TopTabNavigator';
-
-// import Splash from '../screens/Splash';
-// import {createStackNavigator, HeaderTitle} from '@react-navigation/stack';
-// import Help from '../screens/Help';
-// import AboutUs from '../screens/AboutUs';
-// import ContactUs from '../screens/ContactUs';
-// import PrivacyPolicy from '../screens/PrivacyPolicy';
-// import TermsCondition from '../screens/TermsCondition';
-// import ReturnRefund from '../screens/ReturnRefund';
-// import Login from '../screens/Login';
-// import Order from '../screens/Order';
-// import ApplyCoupon from '../screens/ApplyCoupon';
-// import CartIcon from '../Components/CartIcon';
-// import {connect} from 'react-redux';
-// import {addToCart} from '../reducers/cartItems/actions';
-// import SignUp from '../screens/SignUp';
-// import EditProfile from '../screens/EditProfile';
-// import PastOrder from '../screens/PastOrder';
-// import Address from '../screens/Address';
-// import MyOrder from '../screens/MyOrder';
-// import ManageAddres from '../screens/ManageAddres';
-// import EditAddress from '../screens/EditAddress';
-// import PaymentOption from '../screens/PaymentOption';
-// import PaymentScreen from '../screens/PaymentScreen';
+import AddInquiry from '../Screens/AddInquiry';
 
 var home_icon = require('../assets/icon_home.png');
 var inq_icon = require('../assets/icon_inquiries.png');
@@ -159,9 +131,10 @@ const BottomNavigator = props => {
       />
       <Tab.Screen
         name="Red"
-        component={Home}
+        component={AddInquiry}
         options={{
           tabBarLabel: 'Red',
+          tabBarVisible: false,
           tabBarIcon: ({focused, color, size}) => (
             <View>
               <Image

@@ -200,6 +200,8 @@ class Home extends Component {
               data={slider_data}
               renderItem={CarouselCardItem}
               sliderWidth={SLIDER_WIDTH}
+              autoplay={true}
+              autoplayInterval={2000}
               itemWidth={ITEM_WIDTH}
               inactiveSlideShift={0}
               onSnapToItem={index => this.setState({slider_dot: index})}
@@ -221,6 +223,7 @@ class Home extends Component {
               // tappableDots={true}
             />
           </View>
+
           <View
             style={{
               flexDirection: 'row',
