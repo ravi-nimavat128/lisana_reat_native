@@ -12,6 +12,9 @@ import ForgotPassword from '../Screens/ForgotPassword';
 import HowLisanaWork from '../Screens/HowLisanaWork';
 import HelpFAQ from '../Screens/HelpFAQ';
 import Notification from '../Screens/Notification';
+import Success_inquiry from '../Screens/Success_inquiry';
+import Inquiries from '../Screens/Inquiries';
+import SetDate from '../Screens/SetDate';
 
 const Stack = createStackNavigator();
 
@@ -64,6 +67,16 @@ export default function MainNavigation() {
         <Stack.Screen
           name="Notification"
           component={Notification}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Success_inquiry"
+          component={Success_inquiry}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SetDate"
+          component={SetDate}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

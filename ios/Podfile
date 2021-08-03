@@ -14,6 +14,8 @@ target 'Lisana' do
 
   pod 'react-native-image-base64', :path => '../node_modules/react-native-image-base64'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'LisanaTests' do
     inherit! :complete
     # Pods for testing

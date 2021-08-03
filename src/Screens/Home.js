@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import {
   Text,
   View,
@@ -18,6 +19,7 @@ import CarouselCardItem, {
   SLIDER_WIDTH,
   ITEM_WIDTH,
 } from '../Component/CarouselCardItem';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 
@@ -104,10 +106,42 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: false,
       selected_id: 1,
       slider_dot: 0,
+      slider_data: [],
+      category_list: [],
     };
   }
+
+  // componentDidMount() {
+  //   this._get_slider_data();
+  // }
+
+  _get_slider_data = () => {
+    // this.setState({isLoading: true});
+    const token = 'Bearer '.concat(this.props.login_token);
+
+    var headers = {
+      Authorization: token,
+    };
+
+    axios
+      .get('http://binarygeckos.com/lisana/api/dashboard', null, {
+        headers: headers,
+      })
+      .then(Response => {
+        // this.setState({isLoading: false});
+        if (Response.data.status == 0) {
+          this.setState({
+            category_list: Response.data.category_list,
+            slider_data: Response.data.slider_list,
+          });
+        } else {
+          alert(Response.data.message);
+        }
+      });
+  };
 
   _renderItemImageSlider = ({item, index}) => {
     return (
@@ -137,10 +171,23 @@ class Home extends Component {
   };
 
   render() {
+    console.log('slider data', JSON.stringify(this.state.slider_data, null, 2));
     return (
       <SafeAreaView
         style={{backgroundColor: 'white', flex: 1, marginBottom: 85}}>
         <ScrollView>
+          <Spinner
+            //visibility of Overlay Loading Spinner
+            visible={this.state.isLoading}
+            //Text with the Spinner
+            textContent={'Loading...'}
+            size={'large'}
+            animation={'fade'}
+            cancelable={false}
+            color="#EC4464"
+            //Text style of the Spinner Text
+            textStyle={{color: '#EC4464', fontSize: 20, marginLeft: 10}}
+          />
           <View
             style={{flexDirection: 'row', marginHorizontal: 24, marginTop: 28}}>
             <Image
@@ -201,6 +248,7 @@ class Home extends Component {
               renderItem={CarouselCardItem}
               sliderWidth={SLIDER_WIDTH}
               autoplay={true}
+              loop
               autoplayInterval={2000}
               itemWidth={ITEM_WIDTH}
               inactiveSlideShift={0}

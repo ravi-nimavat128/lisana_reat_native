@@ -17,7 +17,7 @@ const CarouselCardItem = ({item, index}) => {
         source={item.imgUrl}
         style={styles.image}
         imageStyle={{borderRadius: 20}}>
-        <View style={{marginHorizontal: 20, marginTop: 15}}>
+        {/* <View style={{marginHorizontal: 20, marginTop: 15}}>
           <Text style={{fontSize: 15, color: 'white', marginRight: 80}}>
             {item.body}
           </Text>
@@ -41,6 +41,7 @@ const CarouselCardItem = ({item, index}) => {
             </Text>
           </View>
         </View>
+       */}
       </ImageBackground>
     </View>
   );
