@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
 
 export default class UpcomingJobs extends Component {
   render() {
     return (
       <View style={{flex: 1, backgroundColor: 'white'}}>
-        <View
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('JobListEvent');
+          }}
           style={{marginHorizontal: 24, marginTop: 24, flexDirection: 'row'}}>
           <Image
             source={require('../assets/inq_img.png')}
@@ -47,7 +50,7 @@ export default class UpcomingJobs extends Component {
               </Text>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }

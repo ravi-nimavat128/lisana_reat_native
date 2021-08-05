@@ -20,6 +20,9 @@ import Member from '../Screens/Member';
 import PersonalSettings from '../Screens/PersonalSettings';
 import NotificationSetting from '../Screens/NotificationSetting';
 import Language from '../Screens/Language';
+import ShareAccount from '../Screens/ShareAccount';
+import JobListEvent from '../Screens/JobListEvent';
+import InviteFriends from '../Screens/InviteFriends';
 
 const Stack = createStackNavigator();
 
@@ -107,6 +110,21 @@ export default function MainNavigation() {
         <Stack.Screen
           name="Language"
           component={Language}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ShareAccount"
+          component={ShareAccount}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="JobListEvent"
+          component={JobListEvent}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="InviteFriends"
+          component={InviteFriends}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

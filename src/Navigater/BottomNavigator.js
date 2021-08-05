@@ -10,6 +10,7 @@ import Job from '../Screens/Job';
 import Inquiries from '../Screens/Inquiries';
 import Message from '../Screens/Message';
 import AddInquiry from '../Screens/AddInquiry';
+import JobMil from '../Screens/JobListEvent';
 
 var home_icon = require('../assets/icon_home.png');
 var inq_icon = require('../assets/icon_inquiries.png');

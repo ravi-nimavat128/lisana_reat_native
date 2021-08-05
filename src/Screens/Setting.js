@@ -173,7 +173,11 @@ export class Setting extends Component {
               source={require('../assets/right_arrow.png')}
               style={styles.small_img}></Image>
           </TouchableOpacity>
-          <TouchableOpacity style={{marginTop: 81}}>
+          <TouchableOpacity
+            style={{marginTop: 81}}
+            onPress={() => {
+              this.props.navigation.navigate('ShareAccount');
+            }}>
             <View
               style={{
                 marginHorizontal: 24,

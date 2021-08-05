@@ -68,7 +68,7 @@ export class NotificationSetting extends Component {
               offColor="#A3A3A3"
               //   label="Example label"
               labelStyle={{color: 'black', fontWeight: '900'}}
-              size="large"
+              size="miduam"
               onToggle={isOn =>
                 this.setState({new_message: !this.state.new_message})
               }
@@ -112,7 +112,7 @@ export class NotificationSetting extends Component {
               offColor="#A3A3A3"
               //   label="Example label"
               labelStyle={{color: 'black', fontWeight: '900'}}
-              size="small"
+              size="miduam"
               onToggle={isOn =>
                 this.setState({new_invitation: !this.state.new_invitation})
               }
@@ -133,7 +133,7 @@ export class NotificationSetting extends Component {
               offColor="#A3A3A3"
               //   label="Example label"
               labelStyle={{color: 'black', fontWeight: '900'}}
-              size="large"
+              size="miduam"
               onToggle={isOn => this.setState({reminder: !this.state.reminder})}
             />
           </View>
@@ -153,7 +153,7 @@ export class NotificationSetting extends Component {
               offColor="#A3A3A3"
               //   label="Example label"
               labelStyle={{color: 'black', fontWeight: '900'}}
-              size="large"
+              size="miduam"
               onToggle={isOn =>
                 this.setState({job_update: !this.state.job_update})
               }
@@ -174,7 +174,7 @@ export class NotificationSetting extends Component {
               offColor="#A3A3A3"
               //   label="Example label"
               labelStyle={{color: 'black', fontWeight: '900'}}
-              size="large"
+              size="miduam"
               onToggle={isOn =>
                 this.setState({job_finished: !this.state.job_finished})
               }
