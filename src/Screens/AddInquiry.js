@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DocumentPicker from 'react-native-document-picker';
+import MultiSelect from 'multi-select-react-native';
 import {
   SafeAreaView,
   Text,
@@ -24,6 +25,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 // import RNFS from 'react-native-fs';
 import {FlatGrid} from 'react-native-super-grid';
+import PickerModal from 'react-native-picker-modal-view';
 const itemsPerRow = 3;
 // import {Dropdown} from 'react-native-material-dropdown';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -99,7 +101,11 @@ class AddInquiry extends Component {
       multipleFile: [],
       all_service: [],
       selected_checkbox_id: [],
+      startworkList: [],
       selected_date: 0,
+      all_cat: [],
+      cat_id: [],
+      work_id: 0,
     };
   }
 
@@ -114,7 +120,58 @@ class AddInquiry extends Component {
 
   componentDidMount() {
     this._get_all_service();
+    this._getstartwork();
+    this._get_all_cat();
   }
+
+  _get_all_cat = () => {
+    const token = 'Bearer '.concat(this.props.login_token);
+
+    var headers = {
+      Authorization: token,
+    };
+
+    axios
+      .get('http://binarygeckos.com/lisana/api/get_all_category', null, {
+        headers: headers,
+      })
+      .then(Response => {
+        if (Response.data.status == 1) {
+          this.setState({
+            all_cat: Response.data.result.map(i => {
+              return {...i, title: i.name};
+            }),
+          });
+        } else {
+          alert(Response.data.message);
+        }
+      });
+  };
+
+  _getstartwork = () => {
+    const token = 'Bearer '.concat(this.props.login_token);
+
+    var headers = {
+      Authorization: token,
+    };
+
+    axios
+      .get('http://binarygeckos.com/lisana/api/get_all_startwork', null, {
+        headers: headers,
+      })
+      .then(Response => {
+        if (Response.data.status == 1) {
+          this.setState({
+            startworkList: Response.data.result.map(i => ({
+              Name: i.name,
+              Id: i.id,
+            })),
+          });
+        } else {
+          alert(Response.data.message);
+        }
+      });
+  };
 
   _add_inq = () => {
     const token = 'Bearer '.concat(this.props.login_token);
@@ -329,8 +386,13 @@ class AddInquiry extends Component {
     );
   };
 
+  onSelectedItemsChange = selectedItems => {
+    this.setState({selectedItems});
+  };
+
   render() {
     console.log('all service', this.state.all_service);
+    console.log('select cat id', this.state.cat_id);
 
     console.log(
       'my doctument',
@@ -402,39 +464,95 @@ class AddInquiry extends Component {
           </Text>
 
           <View style={styles.edt_box}>
-            <Picker
-              selectedValue={this.state.value}
-              mode="dropdown"
-              style={{marginLeft: 20}}
-              onValueChange={(itemValue, itemIndex) =>
-                this.setState({value: itemValue})
-              }>
-              {DATA1.map(i => (
-                <Picker.Item label={i.Value} value={i.Id} />
-              ))}
-              {/* <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" /> */}
-            </Picker>
+            {/* <PickerModal
+              renderSelectView={(disabled, selected, showModal) => (
+                <TouchableOpacity
+                  style={{justifyContent: 'center', flex: 1}}
+                  disabled={disabled}
+                  onPress={showModal}>
+                  {this.state.cat_id == 0 ? (
+                    <Text style={{marginLeft: 24}}>Select category</Text>
+                  ) : (
+                    <Text style={{marginLeft: 24}}>{selected.Name}</Text>
+                  )}
+                </TouchableOpacity>
+              )}
+              onSelected={selected => {
+                this.setState({cat_id: selected.Id});
+                console.log(
+                  'selected cat id',
+                  JSON.stringify(this.state.cat_id, null, 2),
+                );
+              }}
+              onClosed={console.log('close')}
+              onBackButtonPressed={console.log('back pressed')}
+              items={this.state.all_cat}
+              sortingLanguage={'tr'}
+              showToTopButton={true}
+              selected={this.state.cat_id}
+              showAlphabeticalIndex={true}
+              autoGenerateAlphabeticalIndex={true}
+              selectPlaceholderText={'Choose one...'}
+              onEndReached={() => console.log('list ended...')}
+              searchPlaceholderText={'Search...'}
+              requireSelection={false}
+              autoSort={true}
+            /> */}
+            <MultiSelect
+              data={this.state.all_cat}
+              selectedItems={this.state.cat_id}
+              tintColor="#f792a5"
+              setSelectedItems={t => {
+                this.setState({
+                  cat_id: t,
+                });
+              }}
+              componentStyle={{
+                flex: 1,
+                justifyContent: 'center',
+                marginLeft: 24,
+                fontSize: 20,
+              }}
+            />
           </View>
           <View style={styles.edt_box}>
             <TextInput
-              placeholder="Royal Palm St. No. 18"
+              placeholder="Add location"
               style={{marginLeft: 20}}></TextInput>
           </View>
           <View style={styles.edt_box}>
-            <Picker
-              selectedValue={this.state.value1}
-              mode="dropdown"
-              style={{marginLeft: 20}}
-              onValueChange={(itemValue, itemIndex) =>
-                this.setState({value1: itemValue})
-              }>
-              {DATA2.map(i => (
-                <Picker.Item label={i.Value} value={i.Id} />
-              ))}
-              {/* <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" /> */}
-            </Picker>
+            <PickerModal
+              renderSelectView={(disabled, selected, showModal) => (
+                <TouchableOpacity
+                  style={{justifyContent: 'center', flex: 1}}
+                  disabled={disabled}
+                  onPress={showModal}>
+                  {this.state.work_id == 0 ? (
+                    <Text style={{marginLeft: 24}}>
+                      When do you want to start work?
+                    </Text>
+                  ) : (
+                    <Text style={{marginLeft: 24}}>{selected.Name}</Text>
+                  )}
+                </TouchableOpacity>
+              )}
+              onSelected={selected => {
+                this.setState({work_id: selected.Id});
+              }}
+              onClosed={console.log('close')}
+              onBackButtonPressed={console.log('back pressed')}
+              items={this.state.startworkList}
+              sortingLanguage={'tr'}
+              showToTopButton={true}
+              selected={this.state.startworkList}
+              showAlphabeticalIndex={true}
+              autoGenerateAlphabeticalIndex={true}
+              selectPlaceholderText={'Choose one...'}
+              onEndReached={() => console.log('list ended...')}
+              searchPlaceholderText={'Search...'}
+              requireSelection={false}
+              autoSort={false}
+            />
           </View>
           <TouchableOpacity
             style={styles.edt_box}

@@ -1,10 +1,59 @@
 import React, {Component} from 'react';
-import {Text, View, Image, TouchableOpacity} from 'react-native';
+import {Text, View, Image, TouchableOpacity, FlatList} from 'react-native';
+import axios from 'axios';
+import {connect} from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class AllInquiries extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      all_inq: [],
+      isLoading: false,
+    };
+  }
+
+  componentDidMount() {
+    this._get_all_inq();
+  }
+
+  _get_all_inq = () => {
+    this.setState({
+      isLoading: true,
+    });
+
+    const token = 'Bearer '.concat(this.props.login_token);
+
+    var headers = {
+      Authorization: token,
+    };
+
+    let formData = new FormData();
+    formData.append('user_id', this.props.user_id);
+    formData.append('type', 4);
+
+    axios
+      .post('http://binarygeckos.com/lisana/api/my_inquirys', formData, {
+        headers: headers,
+      })
+      .then(Response => {
+        if (Response.data.status == 1) {
+          this.setState({
+            isLoading: false,
+            all_inq: Response.data.result,
+          });
+        } else {
+          this.setState({isLoading: false});
+
+          alert(Response.data.message);
+        }
+      });
+  };
+
+  ItemView = ({item, index}) => {
     return (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View>
         <View
           style={{marginHorizontal: 24, marginTop: 24, flexDirection: 'row'}}>
           <Image
@@ -141,7 +190,37 @@ class AllInquiries extends Component {
         </View>
       </View>
     );
+  };
+
+  render() {
+    return (
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+        <Spinner
+          //visibility of Overlay Loading Spinner
+          visible={this.state.isLoading}
+          //Text with the Spinner
+          textContent={'Loading...'}
+          size={'large'}
+          animation={'fade'}
+          cancelable={false}
+          color="#EC4464"
+          //Text style of the Spinner Text
+          textStyle={{color: '#EC4464', fontSize: 20, marginLeft: 10}}
+        />
+        <FlatList
+          data={this.state.all_inq}
+          keyExtractor={id => id.toString()}
+          renderItem={this.ItemView}></FlatList>
+      </View>
+    );
   }
 }
 
-export default AllInquiries;
+const mapStateToProps = state => ({
+  login_token: state.userDetails.login_token,
+  user_id: state.userDetails.user_id,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllInquiries);

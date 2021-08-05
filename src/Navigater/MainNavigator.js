@@ -15,6 +15,11 @@ import Notification from '../Screens/Notification';
 import Success_inquiry from '../Screens/Success_inquiry';
 import Inquiries from '../Screens/Inquiries';
 import SetDate from '../Screens/SetDate';
+import Setting from '../Screens/Setting';
+import Member from '../Screens/Member';
+import PersonalSettings from '../Screens/PersonalSettings';
+import NotificationSetting from '../Screens/NotificationSetting';
+import Language from '../Screens/Language';
 
 const Stack = createStackNavigator();
 
@@ -77,6 +82,31 @@ export default function MainNavigation() {
         <Stack.Screen
           name="SetDate"
           component={SetDate}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Setting"
+          component={Setting}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Member"
+          component={Member}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PersonalSettings"
+          component={PersonalSettings}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="NotificationSetting"
+          component={NotificationSetting}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Language"
+          component={Language}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

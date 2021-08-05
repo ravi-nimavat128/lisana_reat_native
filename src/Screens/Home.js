@@ -171,7 +171,7 @@ class Home extends Component {
   };
 
   render() {
-    console.log('slider data', JSON.stringify(this.state.slider_data, null, 2));
+    // console.log('slider data', JSON.stringify(this.state.slider_data, null, 2));
     return (
       <SafeAreaView
         style={{backgroundColor: 'white', flex: 1, marginBottom: 85}}>
@@ -188,16 +188,22 @@ class Home extends Component {
             //Text style of the Spinner Text
             textStyle={{color: '#EC4464', fontSize: 20, marginLeft: 10}}
           />
+
           <View
             style={{flexDirection: 'row', marginHorizontal: 24, marginTop: 28}}>
-            <Image
-              source={require('../assets/logo_smoll.png')}
-              style={{
-                height: 56,
-                width: 56,
-                borderRadius: 56 / 2,
-                resizeMode: 'contain',
-              }}></Image>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate('Setting');
+              }}>
+              <Image
+                source={require('../assets/logo_smoll.png')}
+                style={{
+                  height: 56,
+                  width: 56,
+                  borderRadius: 56 / 2,
+                  resizeMode: 'contain',
+                }}></Image>
+            </TouchableOpacity>
             <View
               style={{
                 flexDirection: 'column',
@@ -229,6 +235,7 @@ class Home extends Component {
                 style={{height: 22, width: 22, resizeMode: 'center'}}></Image>
             </TouchableOpacity>
           </View>
+
           <View>
             <FlatList
               data={Data}
@@ -326,7 +333,12 @@ class Home extends Component {
           </View>
 
           <View
-            style={{marginHorizontal: 24, marginTop: 24, flexDirection: 'row'}}>
+            style={{
+              marginHorizontal: 24,
+              marginBottom: 120,
+              marginTop: 24,
+              flexDirection: 'row',
+            }}>
             <Image
               source={require('../assets/inq_img.png')}
               style={{
