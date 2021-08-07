@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+// import Container, {Toast} from 'toastify-react-native';
+
 import {
   Text,
   View,
@@ -66,7 +68,7 @@ class SignIn extends Component {
           this.setState({
             isLoading: false,
           });
-          Alert.alert('', Response.data.message);
+          // Alert.alert('', Response.data.message);
           this.props.navigation.navigate('BottomNavigator');
           this.props.addUserId(Response.data.user_id);
           this.props.addUserName(Response.data.name);
@@ -78,6 +80,7 @@ class SignIn extends Component {
           this.props.addAddress(Response.data.address);
           this.props.addReferral_code(Response.data.referral_code);
           this.props.addLoginToken(Response.data.token);
+          // Toast.success('Login Successfully...');
         } else {
           this.setState({
             isLoading: false,
@@ -97,6 +100,8 @@ class SignIn extends Component {
     console.log('checkbox ', this.state.checkbox_value);
     return (
       <SafeAreaView style={{flex: 1}}>
+        {/* <Container position="top" animationStyle="fancy" /> */}
+
         <Spinner
           //visibility of Overlay Loading Spinner
           visible={this.state.isLoading}

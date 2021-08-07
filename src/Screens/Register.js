@@ -155,7 +155,11 @@ class Register extends Component {
                 <View style={styles.edt_box}>
                   <TextInput
                     style={styles.edt_txt}
+                    returnKeyType="next"
                     placeholder="Enter your full name"
+                    onSubmitEditing={() => {
+                      this.address.focus();
+                    }}
                     onChangeText={text =>
                       this.setState({
                         full_name: text,
@@ -165,6 +169,13 @@ class Register extends Component {
                 <View style={styles.edt_box}>
                   <TextInput
                     style={styles.edt_txt}
+                    onSubmitEditing={() => {
+                      this.phone_number.focus();
+                    }}
+                    ref={input => {
+                      this.address = input;
+                    }}
+                    returnKeyType="next"
                     placeholder="Address"
                     onChangeText={text =>
                       this.setState({
@@ -175,6 +186,13 @@ class Register extends Component {
                 <View style={styles.edt_box}>
                   <TextInput
                     style={styles.edt_txt}
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      this.email.focus();
+                    }}
+                    ref={input => {
+                      this.phone_number = input;
+                    }}
                     placeholder="Phone number"
                     maxLength={10}
                     keyboardType={'phone-pad'}
@@ -186,6 +204,13 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      this.password.focus();
+                    }}
+                    ref={input => {
+                      this.email = input;
+                    }}
                     style={styles.edt_txt}
                     placeholder="Email"
                     keyboardType="email-address"
@@ -197,6 +222,13 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      this.personal_number.focus();
+                    }}
+                    ref={input => {
+                      this.password = input;
+                    }}
                     style={styles.edt_txt}
                     placeholder="Password"
                     secureTextEntry
@@ -208,6 +240,11 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    returnKeyType="next"
+                    // onSubmitEditing={() => { this.personal_number.focus(); }}
+                    ref={input => {
+                      this.personal_number = input;
+                    }}
                     style={styles.edt_txt}
                     placeholder="Personal number"
                     keyboardType="number-pad"
@@ -222,6 +259,13 @@ class Register extends Component {
               <View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    onSubmitEditing={() => {
+                      this.business_name.focus();
+                    }}
+                    // ref={input => {
+                    //   this.password = input;
+                    // }}
+                    returnKeyType="next"
                     style={styles.edt_txt}
                     placeholder="Enter your full name"
                     onChangeText={text =>
@@ -232,6 +276,13 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    onSubmitEditing={() => {
+                      this.address.focus();
+                    }}
+                    ref={input => {
+                      this.business_name = input;
+                    }}
+                    returnKeyType="next"
                     style={styles.edt_txt}
                     placeholder="Enter your business name"
                     onChangeText={text =>
@@ -242,6 +293,13 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    onSubmitEditing={() => {
+                      this.phone_number.focus();
+                    }}
+                    ref={input => {
+                      this.address = input;
+                    }}
+                    returnKeyType="next"
                     style={styles.edt_txt}
                     placeholder="Address"
                     onChangeText={text =>
@@ -252,6 +310,13 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    onSubmitEditing={() => {
+                      this.email.focus();
+                    }}
+                    ref={input => {
+                      this.phone_number = input;
+                    }}
+                    returnKeyType="next"
                     style={styles.edt_txt}
                     placeholder="Phone number"
                     maxLength={10}
@@ -264,6 +329,13 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    onSubmitEditing={() => {
+                      this.password.focus();
+                    }}
+                    ref={input => {
+                      this.email = input;
+                    }}
+                    returnKeyType="next"
                     style={styles.edt_txt}
                     placeholder="Email"
                     keyboardType={'email-address'}
@@ -275,6 +347,13 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    onSubmitEditing={() => {
+                      this.VAT_number.focus();
+                    }}
+                    ref={input => {
+                      this.password = input;
+                    }}
+                    returnKeyType="next"
                     style={styles.edt_txt}
                     placeholder="Password"
                     secureTextEntry
@@ -287,6 +366,13 @@ class Register extends Component {
                 <View style={{flexDirection: 'row'}}>
                   <View style={[styles.edt_box, {flex: 1, marginRight: 10}]}>
                     <TextInput
+                      onSubmitEditing={() => {
+                        this.org_number.focus();
+                      }}
+                      ref={input => {
+                        this.VAT_number = input;
+                      }}
+                      returnKeyType="next"
                       style={styles.edt_txt}
                       placeholder="VAT number"
                       keyboardType="number-pad"
@@ -298,6 +384,13 @@ class Register extends Component {
                   </View>
                   <View style={[styles.edt_box, {flex: 1, marginLeft: 10}]}>
                     <TextInput
+                      onSubmitEditing={() => {
+                        this.personal_number.focus();
+                      }}
+                      ref={input => {
+                        this.org_number = input;
+                      }}
+                      returnKeyType="next"
                       style={styles.edt_txt}
                       keyboardType="number-pad"
                       placeholder="Org. Number"
@@ -310,6 +403,13 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    //  onSubmitEditing={() => {
+                    //     this.personal_number.focus();
+                    //   }}
+                    ref={input => {
+                      this.personal_number = input;
+                    }}
+                    returnKeyType="next"
                     style={styles.edt_txt}
                     placeholder="Personal number"
                     keyboardType="number-pad"
@@ -371,6 +471,8 @@ class Register extends Component {
                     alert('Please enter your address');
                   } else if (this.state.phone_number == '') {
                     alert('Please enter your phone number');
+                  } else if (this.state.phone_number.length != 10) {
+                    alert('Please enter proper Phone number');
                   } else if (this.state.email == '') {
                     alert('Please enter your email');
                   } else if (reg.test(this.state.email) == false) {
@@ -397,6 +499,8 @@ class Register extends Component {
                     alert('Please enter your address');
                   } else if (this.state.phone_number == '') {
                     alert('Please enter your Phone number');
+                  } else if (this.state.phone_number.length != 10) {
+                    alert('Please enter proper Phone number');
                   } else if (this.state.email == '') {
                     alert('Please enter your email');
                   } else if (this.state.password == '') {

@@ -134,6 +134,8 @@ export class SetDate extends Component {
         <ScrollView>
           <CalendarPicker
             scrollable
+            showDayStragglers
+            minDate={new Date()}
             previousTitleStyle={{color: '#EC4464'}}
             nextTitleStyle={{color: '#EC4464'}}
             selectedDayColor="#EC4464"

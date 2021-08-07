@@ -9,6 +9,8 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
+import {connect} from 'react-redux';
+import {LogOut} from '../Reducer/UserReducer/user_actions';
 
 export class Setting extends Component {
   constructor(props) {
@@ -174,6 +176,22 @@ export class Setting extends Component {
               style={styles.small_img}></Image>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => {
+              this.props.LogOut();
+              this.props.navigation.replace('Splash');
+            }}
+            style={[styles.box, {marginTop: 45}]}>
+            <View style={{flexDirection: 'row'}}>
+              <Image
+                source={require('../assets/logout_icon.png')}
+                style={[styles.small_img, {tintColor: 'red'}]}></Image>
+              <Text style={[styles.txt, {color: 'red'}]}>Logout</Text>
+            </View>
+            <Image
+              source={require('../assets/right_arrow.png')}
+              style={styles.small_img}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={{marginTop: 81}}
             onPress={() => {
               this.props.navigation.navigate('ShareAccount');
@@ -199,8 +217,13 @@ export class Setting extends Component {
     );
   }
 }
+const mapStateToProps = state => ({});
 
-export default Setting;
+const mapDispatchToProps = {
+  LogOut,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Setting);
 
 const styles = StyleSheet.create({
   headerr: {

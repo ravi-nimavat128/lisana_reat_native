@@ -11,6 +11,7 @@ class SentInq extends Component {
     this.state = {
       sent_inq: [],
       isLoading: false,
+      status: 0,
     };
   }
 
@@ -42,11 +43,12 @@ class SentInq extends Component {
           this.setState({
             isLoading: false,
             sent_inq: Response.data.result,
+            status: Response.data.status,
           });
         } else {
           this.setState({isLoading: false});
 
-          alert(Response.data.message);
+          // alert(Response.data.message);
         }
       });
   };
@@ -145,10 +147,19 @@ class SentInq extends Component {
           //Text style of the Spinner Text
           textStyle={{color: '#EC4464', fontSize: 20, marginLeft: 10}}
         />
-        <FlatList
-          data={this.state.sent_inq}
-          keyExtractor={id => id.toString()}
-          renderItem={this.ItemView}></FlatList>
+        {this.state.status == 0 ? (
+          <View
+            style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+            <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+              No Record Found
+            </Text>
+          </View>
+        ) : (
+          <FlatList
+            data={this.state.sent_inq}
+            keyExtractor={id => id.toString()}
+            renderItem={this.ItemView}></FlatList>
+        )}
       </View>
     );
   }
