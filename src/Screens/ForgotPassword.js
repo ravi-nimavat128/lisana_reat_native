@@ -13,6 +13,7 @@ import {
   Alert,
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
 class ForgotPassword extends Component {
   constructor(props) {
@@ -99,6 +100,8 @@ class ForgotPassword extends Component {
             onPress={() => {
               if (this.state.email == '') {
                 alert('Please enter Email');
+              } else if (reg.test(this.state.email) == false) {
+                alert('Please enter Correct Email..');
               } else {
                 this.forgot_pass();
               }

@@ -13,6 +13,7 @@ const initialState = {
   org_no: '',
   referral_code: '',
   intro_status: false,
+  time_date: '',
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -71,6 +72,13 @@ const UserReducer = (state = initialState, action) => {
         ...state,
         intro_status: action.payload,
       };
+
+    case user_types.TIMEDATE:
+      return {
+        ...state,
+        time_date: action.payload,
+      };
+
     case user_types.LOGOUT:
       return initialState;
 

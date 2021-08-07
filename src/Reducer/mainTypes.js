@@ -1,3 +1,4 @@
 export default {
   USER_DETAILS: 'USER_DETAILS/',
+  DATE_DETAILS: 'DATE_DETAILS/',
 };

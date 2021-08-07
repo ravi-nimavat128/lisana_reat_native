@@ -28,7 +28,7 @@ class Splash extends Component {
   componentDidMount() {
     setTimeout(() => {
       {
-        this.props.intro_status != true
+        this.props.intro_status == true
           ? this.props.user_idd != ''
             ? this.props.navigation.replace('BottomNavigator')
             : this.props.navigation.replace('Register')

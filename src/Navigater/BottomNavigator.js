@@ -11,6 +11,7 @@ import Inquiries from '../Screens/Inquiries';
 import Message from '../Screens/Message';
 import AddInquiry from '../Screens/AddInquiry';
 import JobMil from '../Screens/JobListEvent';
+import {connect} from 'react-redux';
 
 var home_icon = require('../assets/icon_home.png');
 var inq_icon = require('../assets/icon_inquiries.png');
@@ -36,7 +37,7 @@ const Tab = createBottomTabNavigator();
 const BottomNavigator = props => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName={props.inq_tab == 1 ? 'Inquiries' : 'Home'}
       tabBarOptions={{
         keyboardHidesTabBar: true,
         activeTintColor: '#BE984A',
@@ -226,4 +227,10 @@ const BottomNavigator = props => {
   );
 };
 
-export default BottomNavigator;
+const mapStateToProps = state => ({
+  inq_tab: state.dateDetails.inq_tab,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BottomNavigator);

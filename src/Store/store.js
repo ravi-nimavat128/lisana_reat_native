@@ -1,10 +1,12 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import UserReducer from '../Reducer/UserReducer/UserReducer';
+import DateReducer from '../Reducer/DateReducer/DateReducer';
 import {persistStore, persistReducer} from 'redux-persist';
 
 const rootreducer = combineReducers({
   userDetails: UserReducer,
+  dateDetails: DateReducer,
 });
 
 const persistConfig = {

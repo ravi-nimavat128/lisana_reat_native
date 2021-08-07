@@ -30,6 +30,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 import {connect} from 'react-redux';
 
+let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -200,6 +202,8 @@ class SignIn extends Component {
               onPress={() => {
                 if (this.state.email == '') {
                   alert('Please enter Email');
+                } else if (reg.test(this.state.email) == false) {
+                  alert('Please enter Correct Email..');
                 } else if (this.state.password == '') {
                   alert('Please enter Password');
                 } else if (this.state.checkbox_value == false) {
@@ -219,7 +223,8 @@ class SignIn extends Component {
                 Sign in
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Register')}>
               <Text
                 style={{
                   alignSelf: 'center',

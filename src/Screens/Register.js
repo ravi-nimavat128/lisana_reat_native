@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import Spinner from 'react-native-loading-spinner-overlay';
+let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
 class Register extends Component {
   constructor(props) {
@@ -372,6 +373,8 @@ class Register extends Component {
                     alert('Please enter your phone number');
                   } else if (this.state.email == '') {
                     alert('Please enter your email');
+                  } else if (reg.test(this.state.email) == false) {
+                    alert('Please enter Correct Email..');
                   } else if (this.state.password == '') {
                     alert('Please enter your Password');
                   } else if (this.state.password.length == 6) {
@@ -398,6 +401,8 @@ class Register extends Component {
                     alert('Please enter your email');
                   } else if (this.state.password == '') {
                     alert('Please enter your Password');
+                  } else if (reg.test(this.state.email) == false) {
+                    alert('Please enter Correct Email..');
                   } else if (this.state.password.length == 6) {
                     alert(
                       'The password must be of minimum length 8 characters',

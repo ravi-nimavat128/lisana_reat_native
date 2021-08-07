@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import DocumentPicker from 'react-native-document-picker';
 import MultiSelect from 'multi-select-react-native';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 import {
   SafeAreaView,
   Text,
@@ -92,6 +94,8 @@ class AddInquiry extends Component {
     this.state = {
       is_check: false,
       modalVisible: false,
+      inq_title: '',
+      add_location: '',
       open: false,
       value: '',
       value1: '',
@@ -102,10 +106,12 @@ class AddInquiry extends Component {
       all_service: [],
       selected_checkbox_id: [],
       startworkList: [],
+      descritation: '',
       selected_date: 0,
       all_cat: [],
       cat_id: [],
       work_id: 0,
+      isLoading: false,
     };
   }
 
@@ -174,6 +180,7 @@ class AddInquiry extends Component {
   };
 
   _add_inq = () => {
+    this.setState({isLoading: true});
     const token = 'Bearer '.concat(this.props.login_token);
 
     var headers = {
@@ -187,18 +194,18 @@ class AddInquiry extends Component {
     }));
 
     let formData = new FormData();
-    formData.append('inquirie_title', 'Painting Music Studio');
+    formData.append('inquirie_title', this.state.inq_title);
     formData.append('user_id', this.props.user_id);
-    formData.append('cat_id', 1);
-    formData.append('location', 'Royal Plam St. 18');
-    formData.append('start_work_id', 2);
-    formData.append('date', '16 - 07 - 2021');
-    formData.append('method', 'Remote');
-    formData.append('services_id', 2);
+    formData.append('cat_id', this.state.cat_id.join(','));
+    formData.append('location', this.state.add_location);
+    formData.append('start_work_id', this.state.work_id);
+    formData.append('date', this.props.date + ' ' + this.props.time);
+    formData.append('method', this.props.method_name);
     formData.append(
-      'descritation',
-      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus blanditiis atque',
+      'services_id',
+      this.state.selected_checkbox_id.map(i => i.id).join(','),
     );
+    formData.append('descritation', this.state.descritation);
     // RNFS.readFile(file, 'base64').then(res => {
     //   console.log(res);
     // });
@@ -233,9 +240,10 @@ class AddInquiry extends Component {
         headers: headers,
       })
       .then(responses => {
+        this.setState({isLoading: false});
         if (responses.data.status == 1) {
-          alert('Your Inquiry is added successful');
-          this.props.navigation.navigate('BottomNavigator');
+          // alert('Your Inquiry is added successful');
+          this.props.navigation.navigate('Success_inquiry');
         } else {
           alert(responses.data.message);
         }
@@ -392,7 +400,7 @@ class AddInquiry extends Component {
 
   render() {
     console.log('all service', this.state.all_service);
-    console.log('select cat id', this.state.cat_id);
+    console.log('select cat id', this.state.cat_id.join(','));
 
     console.log(
       'my doctument',
@@ -401,6 +409,18 @@ class AddInquiry extends Component {
     console.log('my Userid', this.props.user_id);
     return (
       <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
+        <Spinner
+          //visibility of Overlay Loading Spinner
+          visible={this.state.isLoading}
+          //Text with the Spinner
+          textContent={'Loading...'}
+          size={'large'}
+          animation={'fade'}
+          cancelable={false}
+          color="#EC4464"
+          //Text style of the Spinner Text
+          textStyle={{color: '#EC4464', fontSize: 20, marginLeft: 10}}
+        />
         <View style={styles.header}>
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
             <Image
@@ -462,6 +482,12 @@ class AddInquiry extends Component {
             Asking an inquiry requires you to fill in this form. We will get
             back to you within 24 hours with confirmation
           </Text>
+          <View style={styles.edt_box}>
+            <TextInput
+              placeholder="Inquirie Title"
+              onChangeText={txt => this.setState({inq_title: txt})}
+              style={{marginLeft: 20}}></TextInput>
+          </View>
 
           <View style={styles.edt_box}>
             {/* <PickerModal
@@ -518,6 +544,7 @@ class AddInquiry extends Component {
           <View style={styles.edt_box}>
             <TextInput
               placeholder="Add location"
+              onChangeText={txt => this.setState({add_location: txt})}
               style={{marginLeft: 20}}></TextInput>
           </View>
           <View style={styles.edt_box}>
@@ -585,9 +612,15 @@ class AddInquiry extends Component {
                 this.setState({selected_date: date});
               }}
             /> */}
-            <Text style={{marginLeft: 20}}>
-              Select time to book quote visit
-            </Text>
+            {this.props.date == '' ? (
+              <Text style={{marginLeft: 20}}>
+                Select time to book quote visit
+              </Text>
+            ) : (
+              <Text style={{marginLeft: 20}}>
+                {this.props.date + ' ' + this.props.time}
+              </Text>
+            )}
           </TouchableOpacity>
           <Text
             style={{
@@ -756,6 +789,9 @@ class AddInquiry extends Component {
             <TextInput
               placeholder="Describe the work..."
               multiline={true}
+              onChangeText={txt => {
+                this.setState({descritation: txt});
+              }}
               style={{
                 margin: 12,
 
@@ -927,6 +963,9 @@ class AddInquiry extends Component {
 const mapStateToProps = state => ({
   login_token: state.userDetails.login_token,
   user_id: state.userDetails.user_id,
+  date: state.dateDetails.date,
+  time: state.dateDetails.time,
+  method_name: state.dateDetails.method_name,
 });
 
 const mapDispatchToProps = {};

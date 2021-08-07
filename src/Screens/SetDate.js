@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {FlatGrid} from 'react-native-super-grid';
-
+import moment from 'moment';
 import {
   Text,
   View,
@@ -12,6 +12,12 @@ import {
   ScrollView,
 } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
+import {connect} from 'react-redux';
+import {
+  addDate,
+  addTime,
+  addMethodName,
+} from '../Reducer/DateReducer/date_actions';
 
 const time_data = [
   {
@@ -60,16 +66,26 @@ export class SetDate extends Component {
     super(props);
 
     this.state = {
-      selectedStartDate: null,
+      selectedStartDate: '',
+      markedDate: moment(new Date()).format('DD-MM-YYYY'),
+      datee: '',
       selected_time_id: 1,
+      selected_time_name: '09:00AM',
       selected_method_id: 1,
+      selected_method_name: 'Remote',
     };
     this.onDateChange = this.onDateChange.bind(this);
   }
+
+  date_change = date => {
+    // return <Moment format="DD/MM/YYYY">{date}</Moment>;
+  };
+
   onDateChange(date) {
     this.setState({
-      selectedStartDate: date,
+      selectedStartDate: moment(date).format('DD-MM-YYYY'),
     });
+    this.date_change(date);
   }
 
   // componentDidMount() {
@@ -78,8 +94,18 @@ export class SetDate extends Component {
 
   render() {
     console.log('time id', this.state.selected_time_id);
-    const {selectedStartDate} = this.state;
-    const startDate = selectedStartDate ? selectedStartDate.toString() : '';
+    console.log('time name', this.state.selected_time_name);
+    console.log('method id', this.state.selected_method_id);
+    console.log('method name', this.state.selected_method_name);
+
+    console.log(
+      'main time and date',
+      this.state.selectedStartDate + ' ' + this.state.selected_time_name,
+    );
+
+    // console.log('dateeeeeeeeee', this.state.datee);
+    // const {selectedStartDate} = this.state;
+    // const startDate = selectedStartDate ? selectedStartDate.toString() : '';
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View style={styles.header}>
@@ -111,15 +137,21 @@ export class SetDate extends Component {
             previousTitleStyle={{color: '#EC4464'}}
             nextTitleStyle={{color: '#EC4464'}}
             selectedDayColor="#EC4464"
+            weekdays={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
             selectedDayTextColor="white"
             selectedDayTextStyle={{fontWeight: 'bold'}}
             todayBackgroundColor="#fff"
             todayTextStyle={{color: 'black'}}
             onDateChange={this.onDateChange}
           />
-          {/* <View>
-          <Text>SELECTED DATE:{startDate}</Text>
-        </View> */}
+          <View>
+            <Text>
+              SELECTED DATE:
+              {this.state.selectedStartDate
+                ? this.state.selectedStartDate.toString()
+                : ''}
+            </Text>
+          </View>
 
           <Text
             style={{
@@ -144,7 +176,12 @@ export class SetDate extends Component {
                 <View>
                   {/* {this.setState({selected_time_id: 1})} */}
                   <TouchableOpacity
-                    onPress={() => this.setState({selected_time_id: t.id})}
+                    onPress={() =>
+                      this.setState({
+                        selected_time_id: t.id,
+                        selected_time_name: t.name,
+                      })
+                    }
                     style={{
                       borderRadius: 6,
                       justifyContent: 'center',
@@ -202,7 +239,12 @@ export class SetDate extends Component {
                 <View>
                   {/* {this.setState({selected_time_id: 1})} */}
                   <TouchableOpacity
-                    onPress={() => this.setState({selected_method_id: t.id})}
+                    onPress={() =>
+                      this.setState({
+                        selected_method_id: t.id,
+                        selected_method_name: t.name,
+                      })
+                    }
                     style={{
                       borderRadius: 6,
                       justifyContent: 'center',
@@ -253,7 +295,17 @@ export class SetDate extends Component {
               style={{marginLeft: 20}}></TextInput>
           </View>
 
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (this.state.selectedStartDate == '') {
+                alert('Please select Date');
+              } else {
+                this.props.addDate(this.state.selectedStartDate);
+                this.props.addTime(this.state.selected_time_name);
+                this.props.addMethodName(this.state.selected_method_name);
+                this.props.navigation.goBack({});
+              }
+            }}>
             <View
               style={{
                 marginHorizontal: 56,
@@ -285,4 +337,13 @@ const styles = StyleSheet.create({
     marginBottom: 35,
   },
 });
-export default SetDate;
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  addTime,
+  addDate,
+  addMethodName,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SetDate);

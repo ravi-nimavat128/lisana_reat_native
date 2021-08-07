@@ -8,6 +8,8 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
+import {connect} from 'react-redux';
+import {addInqTab} from '../Reducer/DateReducer/date_actions';
 
 export class Success_inquiry extends Component {
   render() {
@@ -36,12 +38,12 @@ export class Success_inquiry extends Component {
               processing it immediately. For further information, We will get in
               touch with you to discuss further details.
             </Text>
-            <TouchableOpacity
-              style={{flex: 1, marginTop: 120}}
-              onPress={() => {
-                this.props.navigation.navigate('BottomNavigator');
-              }}>
-              <View
+            <View style={{flex: 1, marginTop: 120}}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.addInqTab(1);
+                  this.props.navigation.navigate('BottomNavigator');
+                }}
                 style={{
                   marginHorizontal: 24,
                   backgroundColor: '#EC4464',
@@ -57,8 +59,8 @@ export class Success_inquiry extends Component {
                   style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
                   See My Inquiry
                 </Text>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -66,4 +68,10 @@ export class Success_inquiry extends Component {
   }
 }
 
-export default Success_inquiry;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  addInqTab,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Success_inquiry);
