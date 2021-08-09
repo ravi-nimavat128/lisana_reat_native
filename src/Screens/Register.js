@@ -14,6 +14,8 @@ import {
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import Spinner from 'react-native-loading-spinner-overlay';
+import {connect} from 'react-redux';
+import {add_login_status} from '../Reducer/UserReducer/user_actions';
 let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
 class Register extends Component {
@@ -62,6 +64,7 @@ class Register extends Component {
           });
           Alert.alert('', 'your account has been created successfully');
           this.props.navigation.navigate('BottomNavigator');
+          this.props.add_login_status(true);
         } else {
           this.setState({
             isLoading: false,
@@ -606,5 +609,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+const mapStateToProps = state => ({});
 
-export default Register;
+const mapDispatchToProps = {
+  add_login_status,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

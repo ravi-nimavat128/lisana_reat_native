@@ -4,6 +4,10 @@ export const addUserId = payload => ({
   type: user_types.USER_ID,
   payload,
 });
+export const add_login_status = payload => ({
+  type: user_types.LOGIN_STATUS,
+  payload,
+});
 export const addUserName = payload => ({
   type: user_types.USER_NAME,
   payload,

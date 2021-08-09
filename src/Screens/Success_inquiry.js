@@ -42,7 +42,7 @@ export class Success_inquiry extends Component {
               <TouchableOpacity
                 onPress={() => {
                   this.props.addInqTab(1);
-                  this.props.navigation.navigate('BottomNavigator');
+                  this.props.navigation.replace('BottomNavigator');
                 }}
                 style={{
                   marginHorizontal: 24,

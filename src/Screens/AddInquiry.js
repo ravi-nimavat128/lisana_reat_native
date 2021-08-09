@@ -304,7 +304,7 @@ class AddInquiry extends Component {
       }
       //Setting the state to show multiple file attributes
       this.setState({
-        multipleFile: results,
+        multipleFile: [...this.state.multipleFile, ...results],
       });
 
       // setMultipleFile(results);
@@ -801,7 +801,32 @@ class AddInquiry extends Component {
 
           <TouchableOpacity
             onPress={() => {
-              this._add_inq();
+              if (this.state.inq_title == '') {
+                alert('Please enter Inquirie title');
+              } else if (this.state.cat_id == []) {
+                alert('Please Select Category');
+              } else if (this.state.add_location == '') {
+                alert('Please enter Location');
+              } else if (this.state.work_id == '') {
+                alert('Please Select When do you want to start work?');
+              } else if (this.props.date == '') {
+                alert('Please Select time to book quote visit');
+              } else if (
+                this.state.selected_checkbox_id.length < 1 ||
+                this.state.selected_checkbox_id.length == 'undefined'
+              ) {
+                alert('Please Select services you want');
+              } else if (
+                this.state.multipleFile < 1 ||
+                this.state.multipleFile == 'undefined'
+              ) {
+                alert('Please Select Photo / PDF');
+              } else if (this.state.descritation == []) {
+                alert('Please enter Describe the work');
+              } else {
+                this._add_inq();
+              }
+              // this.props.navigation.navigate('Success_inquiry');
             }}>
             <View
               style={{

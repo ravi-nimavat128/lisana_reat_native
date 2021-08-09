@@ -17,6 +17,11 @@ class SentInq extends Component {
 
   componentDidMount() {
     this._get_sent_inq();
+
+    this.onFocusSubscribe = this.props.navigation.addListener('focus', () => {
+      // Your code
+      this._get_sent_inq();
+    });
   }
 
   _get_sent_inq = () => {
@@ -59,18 +64,20 @@ class SentInq extends Component {
         <View
           style={{marginHorizontal: 24, marginTop: 24, flexDirection: 'row'}}>
           <Image
-            source={require('../assets/inq_img.png')}
+            source={{uri: item.img}}
             style={{
               height: 83,
               width: 76,
               marginRight: 16,
-              resizeMode: 'contain',
+              borderRadius: 12,
+              // resizeMode: 'contain',
             }}></Image>
+
           <View style={{flex: 1}}>
             <Text style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
-              Renovating Bathroom
+              {item.inquirie_title}
             </Text>
-            <View style={{flexDirection: 'row', marginTop: 8}}>
+            {/* <View style={{flexDirection: 'row', marginTop: 8}}>
               <Text
                 style={{
                   color: '#A3A3A3',
@@ -90,41 +97,31 @@ class SentInq extends Component {
                 15 March 2021
               </Text>
             </View>
+          */}
             <View
               style={{
-                justifyContent: 'space-between',
                 flexDirection: 'row',
                 marginTop: 20,
                 alignItems: 'center',
               }}>
               <Text
                 style={{
-                  color: '#000000',
-                  fontSize: 12,
-                  fontWeight: 'bold',
+                  color: '#A3A3A3',
+                  fontSize: 11,
                   marginRight: 5,
+                  opacity: 0.5,
                 }}>
-                Processing
+                Total cost
               </Text>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text
-                  style={{
-                    color: '#EC4464',
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                  }}>
-                  Edit{' '}
-                </Text>
-                <Image
-                  source={require('../assets/down_arrow.png')}
-                  style={{
-                    width: 9,
-                    height: 11,
-                    resizeMode: 'center',
-                    tintColor: '#EC4464',
-                    transform: [{rotate: '270deg'}],
-                  }}></Image>
-              </View>
+              <Text
+                style={{
+                  color: '#EC4464',
+                  fontSize: 14,
+                  fontWeight: 'bold',
+                  marginRight: 16,
+                }}>
+                ${item.total_cost}
+              </Text>
             </View>
           </View>
         </View>
@@ -134,7 +131,7 @@ class SentInq extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1, backgroundColor: 'white', marginBottom: 80}}>
         <Spinner
           //visibility of Overlay Loading Spinner
           visible={this.state.isLoading}
@@ -157,6 +154,7 @@ class SentInq extends Component {
         ) : (
           <FlatList
             data={this.state.sent_inq}
+            style={{marginBottom: 35}}
             keyExtractor={id => id.toString()}
             renderItem={this.ItemView}></FlatList>
         )}

@@ -1,6 +1,7 @@
 import {template} from '@babel/core';
 import user_types from './user_types';
 const initialState = {
+  login_status: false,
   login_token: '',
   user_id: '',
   mo_number: '',
@@ -17,6 +18,11 @@ const initialState = {
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case user_types.LOGIN_STATUS:
+      return {
+        ...state,
+        login_status: action.payload,
+      };
     case user_types.LOGIN_TOKEN:
       return {
         ...state,

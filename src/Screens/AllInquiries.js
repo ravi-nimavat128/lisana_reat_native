@@ -17,6 +17,11 @@ class AllInquiries extends Component {
 
   componentDidMount() {
     this._get_all_inq();
+
+    this.onFocusSubscribe = this.props.navigation.addListener('focus', () => {
+      // Your code
+      this._get_all_inq();
+    });
   }
 
   _get_all_inq = () => {
@@ -59,18 +64,20 @@ class AllInquiries extends Component {
         <View
           style={{marginHorizontal: 24, marginTop: 24, flexDirection: 'row'}}>
           <Image
-            source={require('../assets/inq_img.png')}
+            source={{uri: item.img}}
             style={{
               height: 83,
               width: 76,
               marginRight: 16,
-              resizeMode: 'contain',
+              borderRadius: 12,
+              // resizeMode: 'contain',
             }}></Image>
+
           <View style={{flex: 1}}>
             <Text style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
               {item.inquirie_title}
             </Text>
-            <View style={{flexDirection: 'row', marginTop: 8}}>
+            {/* <View style={{flexDirection: 'row', marginTop: 8}}>
               <Text
                 style={{
                   color: '#A3A3A3',
@@ -90,6 +97,7 @@ class AllInquiries extends Component {
                 15 March 2021
               </Text>
             </View>
+          */}
             <View
               style={{
                 flexDirection: 'row',
@@ -112,7 +120,7 @@ class AllInquiries extends Component {
                   fontWeight: 'bold',
                   marginRight: 16,
                 }}>
-                $2.450,00
+                ${item.total_cost}
               </Text>
             </View>
           </View>
@@ -123,7 +131,7 @@ class AllInquiries extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1, marginBottom: 80, backgroundColor: 'white'}}>
         <Spinner
           //visibility of Overlay Loading Spinner
           visible={this.state.isLoading}
@@ -148,6 +156,7 @@ class AllInquiries extends Component {
           <FlatList
             data={this.state.all_inq}
             keyExtractor={id => id.toString()}
+            style={{marginBottom: 35}}
             renderItem={this.ItemView}></FlatList>
         )}
       </View>

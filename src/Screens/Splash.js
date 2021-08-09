@@ -29,7 +29,7 @@ class Splash extends Component {
     setTimeout(() => {
       {
         this.props.intro_status == true
-          ? this.props.user_idd != ''
+          ? this.props.login_status != false
             ? this.props.navigation.replace('BottomNavigator')
             : this.props.navigation.replace('Register')
           : this.props.navigation.replace('Intro');
@@ -59,6 +59,7 @@ class Splash extends Component {
 const mapStateToProps = state => ({
   user_idd: state.userDetails.user_id,
   intro_status: state.userDetails.intro_status,
+  login_status: state.userDetails.login_status,
 });
 
 const mapDispatchToProps = {};

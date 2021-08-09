@@ -27,6 +27,7 @@ import {
   addAddress,
   addReferral_code,
   addLoginToken,
+  add_login_status,
 } from '../Reducer/UserReducer/user_actions';
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -69,7 +70,9 @@ class SignIn extends Component {
             isLoading: false,
           });
           // Alert.alert('', Response.data.message);
+
           this.props.navigation.navigate('BottomNavigator');
+          this.props.add_login_status(true);
           this.props.addUserId(Response.data.user_id);
           this.props.addUserName(Response.data.name);
           this.props.addBusiness_name(Response.data.business_name);
@@ -314,6 +317,8 @@ const mapDispatchToProps = {
   addAddress,
   addReferral_code,
   addLoginToken,
+
+  add_login_status,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

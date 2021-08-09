@@ -23,6 +23,8 @@ import Language from '../Screens/Language';
 import ShareAccount from '../Screens/ShareAccount';
 import JobListEvent from '../Screens/JobListEvent';
 import InviteFriends from '../Screens/InviteFriends';
+import ViewQuote from '../Screens/ViewQuote';
+import PreviewQuote from '../Screens/PreviewQuote';
 
 const Stack = createStackNavigator();
 
@@ -125,6 +127,16 @@ export default function MainNavigation() {
         <Stack.Screen
           name="InviteFriends"
           component={InviteFriends}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ViewQuote"
+          component={ViewQuote}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PreviewQuote"
+          component={PreviewQuote}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

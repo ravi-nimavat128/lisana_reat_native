@@ -1,6 +1,7 @@
 import mainTypes from '../mainTypes';
 
 export default {
+  LOGIN_STATUS: mainTypes.USER_DETAILS + 'LOGIN_STATUS',
   USER_ID: mainTypes.USER_DETAILS + 'USER_ID',
   INTRO_STSTUS: mainTypes.USER_DETAILS + 'INTRO_STSTUS',
   USER_NAME: mainTypes.USER_DETAILS + 'USER_NAME',
