@@ -38,10 +38,11 @@ const itemsPerRow = 3;
 // import {Dropdown} from 'react-native-material-dropdown';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
 
-class AddInquiry extends Component {
+class EditInquiry extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      inq_id: 0,
       is_check: false,
       modalVisible: false,
       inq_title: '',
@@ -62,7 +63,12 @@ class AddInquiry extends Component {
       cat_id: [],
       work_id: 0,
       isLoading: false,
+      date: '',
+      time: '',
+      method: '',
+      work_object: null,
       cat_bottom_visible: false,
+      Doctument_array: [],
     };
   }
 
@@ -71,6 +77,65 @@ class AddInquiry extends Component {
     this.setState(state => ({
       cat_bottom_visible: !state.cat_bottom_visible,
     }));
+  };
+
+  onCheckChangedCat(id) {
+    const data = this.state.all_cat;
+    const index = data.findIndex(x => x.id === id);
+    this.setState({cat_id: index});
+    data[index].is_check = !data[index].is_check;
+    this.setState(data);
+  }
+
+  _get_inquiry_details = () => {
+    const token = 'Bearer '.concat(this.props.login_token);
+
+    var headers = {
+      Authorization: token,
+    };
+
+    let formData = new FormData();
+    formData.append('id', this.props.route.params.id);
+
+    axios
+      .post(
+        'http://binarygeckos.com/lisana/api/get_single_inquiry_data',
+        formData,
+        {
+          headers: headers,
+        },
+      )
+      .then(Response => {
+        if (Response.data.status == 1) {
+          this.props.addDate(Response.data.date),
+            this.props.addTime(Response.data.time),
+            this.props.addMethodName(Response.data.method);
+          this.setState(
+            {
+              inq_id: this.props.route.params.id,
+              inq_title: Response.data.inquirie_title,
+              cat_id: Response.data.cat_id.split(','),
+              add_location: Response.data.location,
+              work_id: Response.data.start_work_id,
+              // date: Response.data.date,
+              // time: Response.data.time,
+              // method: Response.data.method,
+              selected_checkbox_id: Response.data.services_id.split(','),
+              multipleFile: Response.data.inquiry_attachment,
+            },
+            () => {
+              this._get_all_service(this.state.selected_checkbox_id);
+              this._getstartwork(this.state.work_id);
+              this._get_all_cat(this.state.cat_id);
+            },
+          );
+
+          ///
+        } else {
+          this._get_all_service();
+          alert(Response.data.message);
+        }
+      });
   };
 
   onDeleteByIndex = index => {
@@ -83,12 +148,13 @@ class AddInquiry extends Component {
   };
 
   componentDidMount() {
-    this._get_all_service();
+    // this._get_all_service();
     this._getstartwork();
     this._get_all_cat();
+    this._get_inquiry_details();
   }
 
-  _get_all_cat = () => {
+  _get_all_cat = (cat_idd?) => {
     const token = 'Bearer '.concat(this.props.login_token);
 
     var headers = {
@@ -103,7 +169,11 @@ class AddInquiry extends Component {
         if (Response.data.status == 1) {
           this.setState({
             all_cat: Response.data.result.map(i => {
-              return {...i, is_check: false};
+              return {
+                ...i,
+                is_check:
+                  cat_idd && cat_idd.includes(i.id.toString()) ? true : false,
+              };
             }),
           });
         } else {
@@ -112,7 +182,7 @@ class AddInquiry extends Component {
       });
   };
 
-  _getstartwork = () => {
+  _getstartwork = (workk_id?) => {
     const token = 'Bearer '.concat(this.props.login_token);
 
     var headers = {
@@ -130,6 +200,9 @@ class AddInquiry extends Component {
               Name: i.name,
               Id: i.id,
             })),
+            work_object: Response.data.result.filter(i => workk_id == i.id)[0]
+              ? Response.data.result.filter(i => workk_id == i.id)[0]
+              : null,
           });
         } else {
           alert(Response.data.message);
@@ -137,7 +210,7 @@ class AddInquiry extends Component {
       });
   };
 
-  _add_inq = () => {
+  _update_inq = () => {
     this.setState({isLoading: true});
     const token = 'Bearer '.concat(this.props.login_token);
 
@@ -152,15 +225,15 @@ class AddInquiry extends Component {
     }));
 
     let formData = new FormData();
+    formData.append('id', this.props.route.params.id);
     formData.append('inquirie_title', this.state.inq_title);
-    formData.append('user_id', this.props.user_id);
     formData.append('cat_id', this.state.cat_id.map(i => i.id).join(','));
     formData.append('location', this.state.add_location);
     formData.append('start_work_id', this.state.work_id);
     formData.append('date', this.props.date + ' ' + this.props.time);
     formData.append('method', this.props.method_name);
     formData.append('services_id', this.state.selected_checkbox_id.join(','));
-    formData.append('descritation', this.state.descritation);
+    // formData.append('descritation', this.state.descritation);
     // RNFS.readFile(file, 'base64').then(res => {
     //   console.log(res);
     // });
@@ -169,8 +242,11 @@ class AddInquiry extends Component {
     // type: 'image/jpeg',
     // uri: 'content://com.android.providers.media.documents/document/image%3A393356',
     // });
+    let img_array = this.state.multipleFile
+      .filter(i => i.uri)
+      .map(i => ({...i}));
 
-    this.state.multipleFile.map(i =>
+    img_array.map(i =>
       formData.append('attachment[]', {
         uri: Platform.OS === 'android' ? i.uri : i.uri.replace('file://', ''),
         name: i.name,
@@ -191,29 +267,34 @@ class AddInquiry extends Component {
     //   )
 
     axios
-      .post('http://binarygeckos.com/lisana/api/add_inquiry', formData, {
-        headers: headers,
-      })
+      .post(
+        'http://binarygeckos.com/lisana/api/update_inquiry_details',
+        formData,
+        {
+          headers: headers,
+        },
+      )
       .then(responses => {
         this.setState({isLoading: false});
         if (responses.data.status == 1) {
           // alert('Your Inquiry is added successful');
+          // this.props.addTime(''),
+          //   this.props.addDate(''),
+          //   this.props.addMethodName('');
           this.props.navigation.navigate('Success_inquiry');
-          this.props.addTime(''),
-            this.props.addDate(''),
-            this.props.addMethodName('');
         } else {
           alert(responses.data.message);
         }
       });
   };
 
-  _get_all_service = () => {
+  _get_all_service = (services_ids?) => {
     const token = 'Bearer '.concat(this.props.login_token);
 
     var headers = {
       Authorization: token,
     };
+    console.log('ServidecIDS', services_ids);
 
     axios
       .get('http://binarygeckos.com/lisana/api/get_all_services', null, {
@@ -225,7 +306,10 @@ class AddInquiry extends Component {
             all_service: Response.data.result.map((item, sindex) => {
               return {
                 ...item,
-                is_check: false,
+                is_check:
+                  services_ids && services_ids.includes(item.id.toString())
+                    ? true
+                    : false,
               };
             }),
           });
@@ -237,17 +321,11 @@ class AddInquiry extends Component {
 
   onCheckChanged(id) {
     const data = this.state.all_service;
+
     const index = data.findIndex(x => x.id === id);
     this.setState({selected_checkbox_id: index});
     data[index].is_check = !data[index].is_check;
-    this.setState(data);
-  }
-  onCheckChangedCat(id) {
-    const data = this.state.all_cat;
-    const index = data.findIndex(x => x.id === id);
-    this.setState({cat_id: index});
-    data[index].is_check = !data[index].is_check;
-    this.setState(data);
+    this.setState(data.id);
   }
 
   selectMultipleFile = async () => {
@@ -270,8 +348,6 @@ class AddInquiry extends Component {
       this.setState({
         multipleFile: [...this.state.multipleFile, ...results],
       });
-
-      // setMultipleFile(results);
     } catch (err) {
       //Handling any exception (If any)
       if (DocumentPicker.isCancel(err)) {
@@ -313,7 +389,7 @@ class AddInquiry extends Component {
             source={
               item.type == 'application/pdf'
                 ? require('../assets/pdg_bg.png')
-                : {uri: item.uri}
+                : {uri: item.uri ? item.uri : item.attachment}
             }>
             {item.type == 'application/pdf' ? (
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -364,26 +440,39 @@ class AddInquiry extends Component {
 
   render() {
     console.log(
-      'all Catttttttttt',
-      JSON.stringify(this.state.all_cat, null, 2),
-    );
-    console.log(
-      'Selected Catttttttttt',
-      JSON.stringify(this.state.cat_id, null, 2),
-    );
-    console.log(
-      'Selected Service id',
-      JSON.stringify(this.state.selected_checkbox_id, null, 2),
+      'all selected service',
+      this.state.selected_checkbox_id.join(','),
     );
 
-    // console.log('all service', this.state.all_service);
     // console.log('select cat id', this.state.cat_id.join(','));
 
+    // console.log(
+    //   'my doctument',
+    //   JSON.stringify(this.state.multipleFile, null, 2),
+    // );
+
+    // console.log('get all services', this._get_all_service());
+
+    let img_array = this.state.multipleFile
+      .filter(i => i.uri)
+      .map(i => ({...i}));
+
     console.log(
-      'my doctument',
-      JSON.stringify(this.state.multipleFile, null, 2),
-    );
-    console.log('my Userid', this.props.user_id);
+      'Multipal selece doctument array',
+      JSON.stringify(img_array, null, 2),
+    ),
+      console.log('CAT IDDDDDDDD', JSON.stringify(this.state.cat_id, null, 2)),
+      console.log('ALL CATTTTTTT', JSON.stringify(this.state.all_cat, null, 2)),
+      console.log(
+        'ALL SERVICES',
+        JSON.stringify(this.state.all_service, null, 2),
+      );
+    console.log('work_iddddddddd', this.state.work_id);
+    console.log('work_Object', JSON.stringify(this.state.work_object, null, 2));
+
+    console.log('selected_checkbox_idddddddd', this.state.selected_checkbox_id);
+    console.log('multipleFileeeeeeee', this.state.multipleFile);
+
     return (
       <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
         <Spinner
@@ -417,7 +506,7 @@ class AddInquiry extends Component {
                 fontWeight: 'bold',
                 fontSize: 16,
               }}>
-              Ask Inquiry
+              Inquiry
             </Text>
           </View>
         </View>
@@ -448,7 +537,7 @@ class AddInquiry extends Component {
           </View>
            */}
 
-          <Text
+          {/* <Text
             style={{
               color: '#A3A3A3',
               fontSize: 12,
@@ -458,10 +547,11 @@ class AddInquiry extends Component {
             }}>
             Asking an inquiry requires you to fill in this form. We will get
             back to you within 24 hours with confirmation
-          </Text>
+          </Text> */}
           <View style={styles.edt_box}>
             <TextInput
               placeholder="Inquirie Title"
+              defaultValue={this.state.inq_title}
               onChangeText={txt => this.setState({inq_title: txt})}
               style={{marginLeft: 20}}></TextInput>
           </View>
@@ -525,10 +615,17 @@ class AddInquiry extends Component {
                 marginLeft: 24,
                 fontSize: 13,
               }}>
-              {/* Select Category */}
+              {/* Select category */}
               {this.state.cat_id.length < 1
                 ? 'Select category'
-                : this.state.cat_id.map(i => i.name).join(' , ')}
+                : // : this.state.all_cat.map(cat =>
+                  //     this.state.cat_id.filter(i => cat.id == i.id)[0]
+                  //       ? this.state.cat_id.filter(i => cat.id == i.id)[0]
+                  //       : null,
+                  this.state.all_cat
+                    .filter(i => i.is_check == true)
+                    .map(i => i.name)
+                    .join(' , ')}
             </Text>
             <BottomSheet
               visible={this.state.cat_bottom_visible}
@@ -625,6 +722,7 @@ class AddInquiry extends Component {
           <View style={styles.edt_box}>
             <TextInput
               placeholder="Add location"
+              defaultValue={this.state.add_location}
               onChangeText={txt => this.setState({add_location: txt})}
               style={{marginLeft: 20}}></TextInput>
           </View>
@@ -635,24 +733,29 @@ class AddInquiry extends Component {
                   style={{justifyContent: 'center', flex: 1}}
                   disabled={disabled}
                   onPress={showModal}>
-                  {this.state.work_id == 0 ? (
+                  {this.state.work_object == null ? (
                     <Text style={{marginLeft: 24}}>
                       When do you want to start work?
                     </Text>
                   ) : (
-                    <Text style={{marginLeft: 24}}>{selected.Name}</Text>
+                    <Text style={{marginLeft: 24}}>
+                      {this.state.work_object.name
+                        ? this.state.work_object.name
+                        : selected.Name}
+                    </Text>
                   )}
                 </TouchableOpacity>
               )}
               onSelected={selected => {
-                this.setState({work_id: selected.Id});
+                this.setState({work_object: selected, work_id: selected.Id});
               }}
               onClosed={console.log('close')}
               onBackButtonPressed={console.log('back pressed')}
               items={this.state.startworkList}
               sortingLanguage={'tr'}
               showToTopButton={true}
-              selected={this.state.startworkList}
+              defaultValue={this.state.work_object}
+              selected={this.state.work_object}
               showAlphabeticalIndex={true}
               autoGenerateAlphabeticalIndex={true}
               selectPlaceholderText={'Choose one...'}
@@ -755,16 +858,22 @@ class AddInquiry extends Component {
                   key={key}
                   checked={item.is_check}
                   onPress={() => {
-                    console.log('check change', this.state.all_service);
                     this.onCheckChanged(item.id);
+                    console.log('check change', this.state.all_service);
                     this.setState({
                       selected_checkbox_id: this.state.all_service
                         .filter(i => i.is_check == true)
                         .map(i => i.id),
-                      // selected_checkbox_id: this.state.all_service.find(
-                      //   i => i.is_check == item.is_check,
-                      // ),
                     });
+                    // this.state.all_service.filter(i =>
+                    //   i.is_check == true
+                    //     ? this.setState({selected_checkbox_id: i.id})
+                    //     : null,
+                    // );
+                    console.log(
+                      'new checkbox array',
+                      this.state.selected_checkbox_id,
+                    );
                   }}
                 />
                 {/* <CheckBox
@@ -856,11 +965,10 @@ class AddInquiry extends Component {
               borderRadius: 10,
               marginHorizontal: 24,
               marginVertical: 24,
-              marginTop: 35,
               borderColor: '#DFDFE2',
               borderWidth: 1,
               justifyContent: 'flex-start',
-              height: 150,
+              height: 112,
             }}>
             <TextInput
               placeholder="Describe the work..."
@@ -870,8 +978,7 @@ class AddInquiry extends Component {
               }}
               style={{
                 margin: 12,
-                flex: 1,
-                textAlignVertical: 'top',
+
                 alignSelf: 'flex-start',
               }}></TextInput>
           </View>
@@ -893,15 +1000,15 @@ class AddInquiry extends Component {
                 this.state.selected_checkbox_id.length == 'undefined'
               ) {
                 alert('Please Select services you want');
-              } else if (
-                this.state.multipleFile < 1 ||
-                this.state.multipleFile == 'undefined'
-              ) {
-                alert('Please Select Photo / PDF');
-              } else if (this.state.descritation == []) {
-                alert('Please enter Describe the work');
+                // } else if (
+                //   this.state.multipleFile < 1 ||
+                //   this.state.multipleFile == 'undefined'
+                // ) {
+                //   alert('Please Select Photo / PDF');
+                // } else if (this.state.descritation == []) {
+                //   alert('Please enter Describe the work');
               } else {
-                this._add_inq();
+                this._update_inq();
               }
               // this.props.navigation.navigate('Success_inquiry');
             }}>
@@ -917,7 +1024,7 @@ class AddInquiry extends Component {
                 alignItems: 'center',
               }}>
               <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-                Create Inquiry
+                Save Edit
               </Text>
             </View>
           </TouchableOpacity>
@@ -1076,7 +1183,7 @@ const mapDispatchToProps = {
   addMethodName,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddInquiry);
+export default connect(mapStateToProps, mapDispatchToProps)(EditInquiry);
 
 const styles = StyleSheet.create({
   header: {

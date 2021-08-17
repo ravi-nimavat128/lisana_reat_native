@@ -61,7 +61,7 @@ const method_data = [
   },
 ];
 
-export class SetDate extends Component {
+export class EditSetDate extends Component {
   constructor(props) {
     super(props);
 
@@ -93,6 +93,11 @@ export class SetDate extends Component {
   // }
 
   render() {
+    let datee = this.props.date;
+
+    console.log(' dateeeeeeee', datee.toString());
+    console.log('new dateeeeeeee', moment(datee.toString()).format());
+
     console.log('time id', this.state.selected_time_id);
     console.log('time name', this.state.selected_time_name);
     console.log('method id', this.state.selected_method_id);
@@ -136,6 +141,7 @@ export class SetDate extends Component {
             scrollable
             showDayStragglers
             minDate={new Date()}
+            selectedStartDate={moment(this.props.date).format()}
             previousTitleStyle={{color: '#EC4464'}}
             nextTitleStyle={{color: '#EC4464'}}
             selectedDayColor="#EC4464"
@@ -147,12 +153,12 @@ export class SetDate extends Component {
             onDateChange={this.onDateChange}
           />
           <View>
-            {/* <Text>
+            <Text>
               SELECTED DATE:
               {this.state.selectedStartDate
                 ? this.state.selectedStartDate.toString()
                 : ''}
-            </Text> */}
+            </Text>
           </View>
 
           <Text
@@ -340,7 +346,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  date: state.dateDetails.date,
+  time: state.dateDetails.time,
+  method_name: state.dateDetails.method_name,
+});
 
 const mapDispatchToProps = {
   addTime,
@@ -348,4 +358,4 @@ const mapDispatchToProps = {
   addMethodName,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SetDate);
+export default connect(mapStateToProps, mapDispatchToProps)(EditSetDate);

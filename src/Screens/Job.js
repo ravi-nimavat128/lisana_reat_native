@@ -58,7 +58,7 @@ export default class Job extends Component {
         {/* <Text> this is Inquirues screen </Text> */}
         <Tab.Navigator
           swipeEnabled={false}
-          initialRouteName={UpcomingJobs}
+          initialRouteName="Upcoming"
           // screenOptions={({route}) => ({
           //   tabBarLabel: ({focused, color, size}) => {
           //     if (route.name === 'Delivery') return button1();

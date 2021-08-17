@@ -25,6 +25,11 @@ import JobListEvent from '../Screens/JobListEvent';
 import InviteFriends from '../Screens/InviteFriends';
 import ViewQuote from '../Screens/ViewQuote';
 import PreviewQuote from '../Screens/PreviewQuote';
+import SeeInquiry from '../Screens/SeeInquiry';
+import EditSetDate from '../Screens/EditSetDate';
+import EditInquiry from '../Screens/EditInquiry';
+import AddReview from '../Screens/AddReview';
+import ShowReview from '../Screens/ShowReview';
 
 const Stack = createStackNavigator();
 
@@ -137,6 +142,31 @@ export default function MainNavigation() {
         <Stack.Screen
           name="PreviewQuote"
           component={PreviewQuote}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SeeInquiry"
+          component={SeeInquiry}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EditSetDate"
+          component={EditSetDate}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EditInquiry"
+          component={EditInquiry}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddReview"
+          component={AddReview}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ShowReview"
+          component={ShowReview}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

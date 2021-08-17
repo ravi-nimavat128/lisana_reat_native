@@ -36,7 +36,7 @@ class QuotesInq extends Component {
 
     let formData = new FormData();
     formData.append('user_id', this.props.user_id);
-    formData.append('type', 4);
+    formData.append('type', 5);
 
     axios
       .post('http://binarygeckos.com/lisana/api/my_inquirys', formData, {
@@ -79,7 +79,7 @@ class QuotesInq extends Component {
             <Text style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
               {item.inquirie_title}
             </Text>
-            {/* <View style={{flexDirection: 'row', marginTop: 8}}>
+            <View style={{flexDirection: 'row', marginTop: 8}}>
               <Text
                 style={{
                   color: '#A3A3A3',
@@ -96,10 +96,10 @@ class QuotesInq extends Component {
                   marginRight: 16,
                   opacity: 0.5,
                 }}>
-                15 March 2021
+                {item.acceptance_date}
               </Text>
             </View>
-          */}
+
             <View
               style={{
                 flexDirection: 'row',
@@ -148,10 +148,17 @@ class QuotesInq extends Component {
         />
         {this.state.status == 0 ? (
           <View
-            style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-              No Record Found
-            </Text>
+            style={{
+              flex: 1,
+              marginHorizontal: 30,
+              marginTop: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('../assets/empty_gif.gif')}
+              style={{height: 120, width: 120}}></Image>
+            <Text style={{fontSize: 12, color: 'gray'}}>No Record Found</Text>
           </View>
         ) : (
           <FlatList

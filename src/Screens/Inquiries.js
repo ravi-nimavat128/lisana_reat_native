@@ -57,7 +57,7 @@ export default class Inquiries extends Component {
         {/* <Text> this is Inquirues screen </Text> */}
         <Tab.Navigator
           swipeEnabled={false}
-          initialRouteName={AllInquiries}
+          initialRouteName="All_Inquiries"
           // screenOptions={({route}) => ({
           //   tabBarLabel: ({focused, color, size}) => {
           //     if (route.name === 'Delivery') return button1();
@@ -96,7 +96,7 @@ export default class Inquiries extends Component {
             // labelStyle: {fontSize: 20, textTransform: 'capitalize'},
           }}>
           <Tab.Screen
-            name="All Inquiries"
+            name="All_Inquiries"
             component={AllInquiries}
             listeners={{
               tabPress: e => {

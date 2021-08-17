@@ -102,7 +102,9 @@ class PreviewQuote extends Component {
     url: this.pdf_url,
     base64: 'JVBERi0xLjMKJcfs...',
   };
-  pdf_url = [this.props.route.params.pdf].join();
+  pdf_url = [this.props.route.params.pdf].join()
+    ? [this.props.route.params.pdf].join()
+    : '';
 
   render() {
     const resourceType = 'url';
@@ -141,17 +143,33 @@ class PreviewQuote extends Component {
             </Text>
           </View>
         </View>
+        {this.pdf_url == '' ? (
+          <View
+            style={{
+              flex: 1,
+              marginHorizontal: 30,
+              marginTop: -70,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('../assets/empty_gif.gif')}
+              style={{height: 120, width: 120}}></Image>
+            <Text style={{fontSize: 12, color: 'gray'}}>No PDF Found</Text>
+          </View>
+        ) : (
+          <View style={{flex: 1}}>
+            <PDFView
+              fadeInDuration={250.0}
+              style={{flex: 1, marginHorizontal: 15}}
+              resource={this.pdf_url}
+              resourceType={resourceType}
+              onLoad={() => console.log(`PDF rendered from ${resourceType}`)}
+              onError={error => console.log('Cannot render PDF', error)}
+            />
+          </View>
+        )}
 
-        <View style={{flex: 1}}>
-          <PDFView
-            fadeInDuration={250.0}
-            style={{flex: 1, marginHorizontal: 15}}
-            resource={this.pdf_url}
-            resourceType={resourceType}
-            onLoad={() => console.log(`PDF rendered from ${resourceType}`)}
-            onError={error => console.log('Cannot render PDF', error)}
-          />
-        </View>
         <View
           style={{
             position: 'absolute',

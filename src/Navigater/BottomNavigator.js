@@ -37,7 +37,9 @@ const Tab = createBottomTabNavigator();
 const BottomNavigator = props => {
   return (
     <Tab.Navigator
-      initialRouteName={props.inq_tab == 1 ? 'Inquiries' : 'Home'}
+      initialRouteName={
+        props.inq_tab == 1 ? 'Inquiries' : props.inq_tab == 2 ? 'Job' : 'Home'
+      }
       tabBarOptions={{
         keyboardHidesTabBar: true,
         activeTintColor: '#BE984A',

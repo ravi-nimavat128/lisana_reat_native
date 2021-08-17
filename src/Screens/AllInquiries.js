@@ -60,7 +60,13 @@ class AllInquiries extends Component {
 
   ItemView = ({item, index}) => {
     return (
-      <View>
+      <TouchableOpacity
+        onPress={() => {
+          this.props.navigation.navigate('SeeInquiry', {
+            id: item.id,
+            type: item.inquirie_type,
+          });
+        }}>
         <View
           style={{marginHorizontal: 24, marginTop: 24, flexDirection: 'row'}}>
           <Image
@@ -125,7 +131,7 @@ class AllInquiries extends Component {
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -147,10 +153,17 @@ class AllInquiries extends Component {
 
         {this.state.status == 0 ? (
           <View
-            style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-              No Record Found
-            </Text>
+            style={{
+              flex: 1,
+              marginHorizontal: 30,
+              marginTop: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('../assets/empty_gif.gif')}
+              style={{height: 120, width: 120}}></Image>
+            <Text style={{fontSize: 12, color: 'gray'}}>No Record Found</Text>
           </View>
         ) : (
           <FlatList

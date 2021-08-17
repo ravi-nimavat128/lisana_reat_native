@@ -150,7 +150,7 @@ class SignIn extends Component {
                   }></TextInput>
               </View>
             </View>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => this.props.navigation.navigate('ForgotPassword')}>
               <Text
                 style={{
@@ -162,7 +162,7 @@ class SignIn extends Component {
                 }}>
                 Forgot Password
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <View
               style={{

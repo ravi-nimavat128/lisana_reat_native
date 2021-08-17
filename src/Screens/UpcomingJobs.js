@@ -11,15 +11,20 @@ class UpcomingJobs extends Component {
     this.state = {
       sent_inq: [],
       isLoading: false,
+      up_coming_job: [],
       status: 0,
     };
   }
 
   componentDidMount() {
-    this._get_sent_inq();
+    this._get_upComing_jobs();
+    this.onFocusSubscribe = this.props.navigation.addListener('focus', () => {
+      // Your code
+      this._get_upComing_jobs();
+    });
   }
 
-  _get_sent_inq = () => {
+  _get_upComing_jobs = () => {
     this.setState({
       isLoading: true,
     });
@@ -42,7 +47,7 @@ class UpcomingJobs extends Component {
         if (Response.data.status == 1) {
           this.setState({
             isLoading: false,
-            sent_inq: Response.data.result,
+            up_coming_job: Response.data.result,
             status: Response.data.status,
           });
         } else {
@@ -57,20 +62,25 @@ class UpcomingJobs extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate('JobListEvent');
+          this.props.navigation.navigate(
+            item.is_review !== 0 ? 'ShowReview' : 'JobListEvent',
+            {
+              id: item.inquirie_id,
+            },
+          );
         }}
         style={{marginHorizontal: 24, marginTop: 24, flexDirection: 'row'}}>
         <Image
-          source={require('../assets/inq_img.png')}
+          source={{uri: item.img}}
           style={{
             height: 83,
             width: 76,
             marginRight: 16,
-            resizeMode: 'contain',
+            borderRadius: 10,
           }}></Image>
         <View style={{flex: 1}}>
           <Text style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
-            Renovating Bathroom
+            {item.inquirie_name}
           </Text>
           <Text style={{fontSize: 11, color: '#A3A3A3', marginTop: 16}}>
             Acceptance date
@@ -96,7 +106,7 @@ class UpcomingJobs extends Component {
                 fontSize: 12,
                 marginRight: 5,
               }}>
-              Tuesday, March 9th
+              {item.acceptance_date}
             </Text>
           </View>
         </View>
@@ -106,7 +116,7 @@ class UpcomingJobs extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1, backgroundColor: 'white', marginBottom: 80}}>
         <Spinner
           //visibility of Overlay Loading Spinner
           visible={this.state.isLoading}
@@ -121,15 +131,23 @@ class UpcomingJobs extends Component {
         />
         {this.state.status == 0 ? (
           <View
-            style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-              No Record Found
-            </Text>
+            style={{
+              flex: 1,
+              marginHorizontal: 30,
+              marginTop: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('../assets/empty_gif.gif')}
+              style={{height: 120, width: 120}}></Image>
+            <Text style={{fontSize: 12, color: 'gray'}}>No Record Found</Text>
           </View>
         ) : (
           <FlatList
-            data={this.state.sent_inq}
+            data={this.state.up_coming_job}
             keyExtractor={id => id.toString()}
+            style={{marginBottom: 35}}
             renderItem={this.ItemView}></FlatList>
         )}
       </View>

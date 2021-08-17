@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   Text,
   View,
+  Alert,
   Image,
   SafeAreaView,
   TouchableOpacity,
@@ -176,10 +177,32 @@ export class Setting extends Component {
               style={styles.small_img}></Image>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {
-              this.props.LogOut();
-              this.props.navigation.replace('Splash');
-            }}
+            // onPress={() => {
+
+            // }}
+            onPress={() =>
+              Alert.alert(
+                '',
+                'Are you sure you want to logout?',
+                [
+                  {
+                    text: 'Yes',
+                    onPress: () => {
+                      this.props.LogOut();
+                      this.props.navigation.replace('Splash');
+                    },
+                  },
+                  {
+                    text: 'No',
+                    onPress: () => console.log('No button clicked'),
+                    style: 'cancel',
+                  },
+                ],
+                {
+                  cancelable: false,
+                },
+              )
+            }
             style={[styles.box, {marginTop: 45}]}>
             <View style={{flexDirection: 'row'}}>
               <Image
