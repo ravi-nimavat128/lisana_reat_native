@@ -26,6 +26,7 @@ class UpcomingJobs extends Component {
 
   _get_upComing_jobs = () => {
     this.setState({
+      up_coming_job: [],
       isLoading: true,
     });
 

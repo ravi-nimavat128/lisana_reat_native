@@ -26,6 +26,7 @@ class SentInq extends Component {
 
   _get_sent_inq = () => {
     this.setState({
+      sent_inq: [],
       isLoading: true,
     });
 
@@ -104,7 +105,52 @@ class SentInq extends Component {
               </Text>
             </View>
           */}
-            <View
+            <Text style={{color: '#A3A3A3', fontSize: 12, marginTop: 8}}>
+              {item.created_at}
+            </Text>
+            {item.inquirie_type == 1 ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginTop: 20,
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}>
+                <Text
+                  style={{
+                    color: 'black',
+                    fontSize: 13,
+                    marginRight: 5,
+                    fontWeight: 'bold',
+                  }}>
+                  Processing
+                </Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    flex: 1,
+                  }}></View>
+                <Text
+                  style={{
+                    color: '#EC4464',
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                    marginRight: 4,
+                  }}>
+                  Edit
+                </Text>
+                <Image
+                  source={require('../assets/right_arrow.png')}
+                  style={{
+                    height: 12,
+                    width: 12,
+                    resizeMode: 'contain',
+                    tintColor: '#EC4464',
+                  }}></Image>
+              </View>
+            ) : null}
+            {/* <View
               style={{
                 flexDirection: 'row',
                 marginTop: 20,
@@ -128,7 +174,7 @@ class SentInq extends Component {
                 }}>
                 ${item.total_cost}
               </Text>
-            </View>
+            </View> */}
           </View>
         </View>
       </TouchableOpacity>

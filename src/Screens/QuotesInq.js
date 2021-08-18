@@ -25,6 +25,7 @@ class QuotesInq extends Component {
 
   _get_sent_inq = () => {
     this.setState({
+      sent_inq: [],
       isLoading: true,
     });
 
@@ -79,26 +80,29 @@ class QuotesInq extends Component {
             <Text style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
               {item.inquirie_title}
             </Text>
-            <View style={{flexDirection: 'row', marginTop: 8}}>
-              <Text
-                style={{
-                  color: '#A3A3A3',
-                  fontSize: 12,
-                  marginRight: 3,
-                  opacity: 0.5,
-                }}>
-                Expired on:
-              </Text>
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 12,
-                  marginRight: 16,
-                  opacity: 0.5,
-                }}>
-                {item.acceptance_date}
-              </Text>
-            </View>
+
+            {item.exp_date !== '' ? (
+              <View style={{flexDirection: 'row', marginTop: 8}}>
+                <Text
+                  style={{
+                    color: '#A3A3A3',
+                    fontSize: 12,
+                    marginRight: 3,
+                    opacity: 0.5,
+                  }}>
+                  Expired on:
+                </Text>
+                <Text
+                  style={{
+                    color: 'black',
+                    fontSize: 12,
+                    marginRight: 16,
+                    opacity: 0.5,
+                  }}>
+                  {item.exp_date}
+                </Text>
+              </View>
+            ) : null}
 
             <View
               style={{

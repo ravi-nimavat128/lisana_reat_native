@@ -26,6 +26,7 @@ class AllInquiries extends Component {
 
   _get_all_inq = () => {
     this.setState({
+      all_inq: [],
       isLoading: true,
     });
 
@@ -83,52 +84,104 @@ class AllInquiries extends Component {
             <Text style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
               {item.inquirie_title}
             </Text>
-            {/* <View style={{flexDirection: 'row', marginTop: 8}}>
-              <Text
+            {item.exp_date !== '' ? (
+              <View style={{flexDirection: 'row', marginTop: 8}}>
+                <Text
+                  style={{
+                    color: '#A3A3A3',
+                    fontSize: 12,
+                    marginRight: 3,
+                    opacity: 0.5,
+                  }}>
+                  Expired on:
+                </Text>
+                <Text
+                  style={{
+                    color: 'black',
+                    fontSize: 12,
+                    marginRight: 16,
+                    opacity: 0.5,
+                  }}>
+                  {item.exp_date}
+                </Text>
+              </View>
+            ) : null}
+
+            {item.inquirie_type !== 1 ? (
+              <View
                 style={{
-                  color: '#A3A3A3',
-                  fontSize: 12,
-                  marginRight: 3,
-                  opacity: 0.5,
+                  flexDirection: 'row',
+                  marginTop: 20,
+                  alignItems: 'center',
                 }}>
-                Expired on:
+                <Text
+                  style={{
+                    color: '#A3A3A3',
+                    fontSize: 11,
+                    marginRight: 5,
+                    opacity: 0.5,
+                  }}>
+                  Total cost
+                </Text>
+                <Text
+                  style={{
+                    color: '#EC4464',
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                    marginRight: 16,
+                  }}>
+                  ${item.total_cost}
+                </Text>
+              </View>
+            ) : null}
+            {item.inquirie_type == 1 ? (
+              <Text style={{color: '#A3A3A3', fontSize: 12, marginTop: 8}}>
+                {item.created_at}
               </Text>
-              <Text
+            ) : null}
+
+            {item.inquirie_type == 1 ? (
+              <View
                 style={{
-                  color: 'black',
-                  fontSize: 12,
-                  marginRight: 16,
-                  opacity: 0.5,
+                  flexDirection: 'row',
+                  marginTop: 15,
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
                 }}>
-                15 March 2021
-              </Text>
-            </View>
-          */}
-            <View
-              style={{
-                flexDirection: 'row',
-                marginTop: 20,
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  color: '#A3A3A3',
-                  fontSize: 11,
-                  marginRight: 5,
-                  opacity: 0.5,
-                }}>
-                Total cost
-              </Text>
-              <Text
-                style={{
-                  color: '#EC4464',
-                  fontSize: 14,
-                  fontWeight: 'bold',
-                  marginRight: 16,
-                }}>
-                ${item.total_cost}
-              </Text>
-            </View>
+                <Text
+                  style={{
+                    color: 'black',
+                    fontSize: 13,
+                    marginRight: 5,
+                    fontWeight: 'bold',
+                  }}>
+                  Processing
+                </Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    flex: 1,
+                  }}></View>
+                <Text
+                  style={{
+                    color: '#EC4464',
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                    marginRight: 4,
+                  }}>
+                  Edit
+                </Text>
+                <Image
+                  source={require('../assets/right_arrow.png')}
+                  style={{
+                    height: 12,
+                    width: 12,
+                    resizeMode: 'contain',
+                    tintColor: '#EC4464',
+                  }}></Image>
+              </View>
+            ) : null}
           </View>
         </View>
       </TouchableOpacity>

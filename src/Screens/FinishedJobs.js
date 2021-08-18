@@ -25,6 +25,7 @@ class FinishedJobs extends Component {
 
   finished_job = () => {
     this.setState({
+      finished_job: [],
       isLoading: true,
     });
 

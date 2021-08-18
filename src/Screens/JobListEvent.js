@@ -306,6 +306,11 @@ class JobListEvent extends Component {
               style={{
                 height: 12,
                 width: 12,
+                width: 12,
+                transform:
+                  this.state.job_visible == 1
+                    ? [{rotate: '90deg'}]
+                    : [{rotate: '0deg'}],
                 resizeMode: 'contain',
                 tintColor: '#525252',
               }}></Image>
@@ -402,6 +407,10 @@ class JobListEvent extends Component {
               style={{
                 height: 12,
                 width: 12,
+                transform:
+                  this.state.event_visible == 1
+                    ? [{rotate: '90deg'}]
+                    : [{rotate: '0deg'}],
                 resizeMode: 'contain',
                 tintColor: '#525252',
               }}></Image>

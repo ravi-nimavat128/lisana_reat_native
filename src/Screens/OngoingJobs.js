@@ -26,6 +26,7 @@ class OngoingJobs extends Component {
 
   _get_on_going_job = () => {
     this.setState({
+      on_going_job: [],
       isLoading: true,
     });
 
