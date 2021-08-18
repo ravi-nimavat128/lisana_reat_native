@@ -117,6 +117,7 @@ class SeeInquiry extends Component {
               cat_id: Response.data.cat_id.split(','),
               add_location: Response.data.location,
               work_id: Response.data.start_work_id,
+              descritation: Response.data.descritation,
               // date: Response.data.date,
               // time: Response.data.time,
               // method: Response.data.method,
@@ -1017,17 +1018,21 @@ class SeeInquiry extends Component {
               borderColor: '#DFDFE2',
               borderWidth: 1,
               justifyContent: 'flex-start',
-              height: 112,
+              height: 135,
             }}>
             <TextInput
               editable={false}
               placeholder="Describe the work..."
               multiline={true}
+              textAlignVertical="top"
+              // value={this.state.descritation}
+              defaultValue={this.state.descritation}
               onChangeText={txt => {
                 this.setState({descritation: txt});
               }}
               style={{
-                margin: 12,
+                marginLeft: 12,
+                marginTop: 8,
 
                 alignSelf: 'flex-start',
               }}></TextInput>

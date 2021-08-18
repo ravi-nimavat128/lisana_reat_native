@@ -117,6 +117,7 @@ class EditInquiry extends Component {
               cat_id: Response.data.cat_id.split(','),
               add_location: Response.data.location,
               work_id: Response.data.start_work_id,
+              descritation: Response.data.descritation,
               // date: Response.data.date,
               // time: Response.data.time,
               // method: Response.data.method,
@@ -968,16 +969,19 @@ class EditInquiry extends Component {
               borderColor: '#DFDFE2',
               borderWidth: 1,
               justifyContent: 'flex-start',
-              height: 112,
+              height: 135,
             }}>
             <TextInput
               placeholder="Describe the work..."
               multiline={true}
+              textAlignVertical="top"
+              defaultValue={this.state.descritation}
               onChangeText={txt => {
                 this.setState({descritation: txt});
               }}
               style={{
-                margin: 12,
+                marginTop: 8,
+                marginLeft: 12,
 
                 alignSelf: 'flex-start',
               }}></TextInput>

@@ -342,10 +342,10 @@ class AddInquiry extends Component {
             }}>
             <Image
               style={{
-                height: 25,
-                width: 25,
+                height: 30,
+                width: 30,
                 resizeMode: 'contain',
-                marginLeft: -14,
+                marginLeft: -18,
                 marginTop: -6,
                 // position: 'absolute',
                 // right: 0,

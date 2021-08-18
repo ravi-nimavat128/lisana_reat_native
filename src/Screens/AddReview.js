@@ -22,7 +22,13 @@ import {addInqTab} from '../Reducer/DateReducer/date_actions';
 export class AddReview extends Component {
   constructor(props) {
     super(props);
-    this.state = {is_visible: false, rating: 0, isLoading: false, comment: ''};
+    this.state = {
+      is_visible: false,
+      rating: 0,
+      descritation: '',
+      isLoading: false,
+      comment: '',
+    };
   }
 
   _add_review = () => {
@@ -176,7 +182,7 @@ export class AddReview extends Component {
                 placeholder="Add your comment"
                 multiline={true}
                 onChangeText={txt => {
-                  this.setState({descritation: txt});
+                  this.setState({comment: txt});
                 }}
                 style={{
                   margin: 12,
