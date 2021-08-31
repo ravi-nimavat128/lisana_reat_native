@@ -78,17 +78,19 @@ export default class Job extends Component {
             // style: {position: 'absolute', top: 0},
 
             tabStyle: {
+              flex: 1,
               justifyContent: 'center',
-              alignSelf: 'flex-start',
+              alignSelf: 'center',
               alignContent: 'center',
               backgroundColor: null,
               height: 65,
               opacity: 0.7,
-              width: 120,
+              // width: 120,
             },
             indicatorStyle: {
               backgroundColor: '#EC4464',
               height: '3%',
+              flex: 1,
               // marginLeft: 19,
               // marginBottom: 8,
               // width: '35%',

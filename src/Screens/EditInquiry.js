@@ -3,6 +3,8 @@ import DocumentPicker from 'react-native-document-picker';
 import MultiSelect from 'multi-select-react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {BottomSheet} from 'react-native-btr';
+import {Toast, DURATION, POSTION} from 'rn-simple-toast';
+
 
 import {
   SafeAreaView,
@@ -69,6 +71,8 @@ class EditInquiry extends Component {
       work_object: null,
       cat_bottom_visible: false,
       Doctument_array: [],
+      toastRef: null,
+
     };
   }
 
@@ -987,23 +991,56 @@ class EditInquiry extends Component {
               }}></TextInput>
           </View>
 
+          <Toast ref={_ref => (this.state.toastRef = _ref)} />
+
+
           <TouchableOpacity
             onPress={() => {
               if (this.state.inq_title == '') {
-                alert('Please enter Inquirie title');
+                // alert('Please enter Inquirie title');
+                this.state.toastRef.show(
+                  'Please enter Inquirie title',
+                  'red',
+                  DURATION.LONG,
+                );
               } else if (this.state.cat_id == []) {
-                alert('Please Select Category');
+                // alert('Please Select Category');
+                this.state.toastRef.show(
+                  'Please Select Category',
+                  'red',
+                  DURATION.LONG,
+                );
               } else if (this.state.add_location == '') {
-                alert('Please enter Location');
+                // alert('Please enter Location');
+                this.state.toastRef.show(
+                  'Please enter Location',
+                  'red',
+                  DURATION.LONG,
+                );
               } else if (this.state.work_id == '') {
-                alert('Please Select When do you want to start work?');
+                // alert('Please Select When do you want to start work?');
+                this.state.toastRef.show(
+                  'Please Select When do you want to start work?',
+                  'red',
+                  DURATION.LONG,
+                );
               } else if (this.props.date == '') {
-                alert('Please Select time to book quote visit');
+                // alert('Please Select time to book quote visit');
+                this.state.toastRef.show(
+                  'Please Select time to book quote visit',
+                  'red',
+                  DURATION.LONG,
+                );
               } else if (
                 this.state.selected_checkbox_id.length < 1 ||
                 this.state.selected_checkbox_id.length == 'undefined'
               ) {
-                alert('Please Select services you want');
+                // alert('Please Select services you want');
+                this.state.toastRef.show(
+                  'Please Select service you want',
+                  'red',
+                  DURATION.LONG,
+                );
                 // } else if (
                 //   this.state.multipleFile < 1 ||
                 //   this.state.multipleFile == 'undefined'

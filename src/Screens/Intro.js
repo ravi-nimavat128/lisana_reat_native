@@ -44,6 +44,7 @@ class Intro extends Component {
     this.state = {
       showRealApp: false,
       slide_key: 0,
+      lan: 1,
     };
   }
   _render_next = () => {
@@ -86,13 +87,50 @@ class Intro extends Component {
             flexDirection: 'row',
             justifyContent: 'space-between',
             marginTop: 15,
+            marginLeft: 24,
           }}>
-          <View></View>
+          <View style={{height: 32, borderRadius: 6, flexDirection: 'row'}}>
+            <TouchableOpacity
+              onPress={() => this.setState({lan: 1})}
+              style={{
+                borderRadius: 6,
+                height: 32,
+                width: 48,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: this.state.lan == 1 ? '#EC4464' : '#00000000',
+              }}>
+              <Image
+                source={require('../assets/lan_english.png')}
+                style={{height: 12, width: 19}}></Image>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({lan: 2})}
+              style={{
+                borderRadius: 6,
+                marginLeft: 3,
+                height: 32,
+                width: 48,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: this.state.lan == 2 ? '#EC4464' : '#00000000',
+              }}>
+              <Image
+                source={require('../assets/lan_swedish.png')}
+                style={{height: 12, width: 19}}></Image>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
             onPress={() => {
               this._onDone();
             }}>
-            <Text style={{fontSize: 20, color: '#EC4464', marginRight: 15}}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: '#EC4464',
+                marginRight: 15,
+                fontFamily: 'Montserrat-Regular',
+              }}>
               Skip
             </Text>
           </TouchableOpacity>
@@ -104,11 +142,12 @@ class Intro extends Component {
           />
           <Text
             style={{
-              fontWeight: 'bold',
+              // fontWeight: 'bold',
               fontSize: 20,
               textAlign: 'center',
               marginHorizontal: 60,
               marginTop: 50,
+              fontFamily: 'Montserrat-Bold',
             }}>
             {item.title}
           </Text>
@@ -119,6 +158,7 @@ class Intro extends Component {
               marginHorizontal: 60,
               marginTop: 15,
               color: '#8F8F8F',
+              fontFamily: 'Montserrat-Regular',
             }}>
             {item.text}
           </Text>

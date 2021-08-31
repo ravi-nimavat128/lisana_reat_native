@@ -17,12 +17,24 @@ const CarouselCardItem = ({item, index}) => {
         source={item.imgUrl}
         style={styles.image}
         imageStyle={{borderRadius: 20}}>
-        {/* <View style={{marginHorizontal: 20, marginTop: 15}}>
-          <Text style={{fontSize: 15, color: 'white', marginRight: 80}}>
+        <View style={{marginHorizontal: 20, marginTop: 15}}>
+          <Text
+            style={{
+              fontSize: 15,
+              color: 'white',
+              marginRight: 80,
+              fontFamily: 'Montserrat-Regular',
+            }}>
             {item.body}
           </Text>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{fontSize: 12, color: 'white', opacity: 0.5}}>
+            <Text
+              style={{
+                fontSize: 12,
+                color: 'white',
+                opacity: 0.5,
+                fontFamily: 'Montserrat-Regular',
+              }}>
               {item.title}
             </Text>
             <View
@@ -36,12 +48,17 @@ const CarouselCardItem = ({item, index}) => {
                 marginTop: 3,
                 marginHorizontal: 5,
               }}></View>
-            <Text style={{fontSize: 12, color: 'white', opacity: 0.5}}>
+            <Text
+              style={{
+                fontSize: 12,
+                color: 'white',
+                opacity: 0.5,
+                fontFamily: 'Montserrat-Regular',
+              }}>
               {item.time}
             </Text>
           </View>
         </View>
-       */}
       </ImageBackground>
     </View>
   );

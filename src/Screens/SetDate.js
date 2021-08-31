@@ -218,6 +218,7 @@ export class SetDate extends Component {
               );
             })}
           </View>
+
           <Text
             style={{
               fontSize: 16,

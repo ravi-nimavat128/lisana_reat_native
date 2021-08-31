@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 // import Container, {Toast} from 'toastify-react-native';
+import {Toast, DURATION, POSTION} from 'rn-simple-toast';
+import {CheckBox} from 'react-native-elements';
 
 import {
   Text,
@@ -13,7 +15,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+// import CheckBox from '@react-native-community/checkbox';
 import axios from 'axios';
 
 import {
@@ -50,6 +52,8 @@ class SignIn extends Component {
       org_number: '',
       checkbox_value: false,
       password: '',
+      password_v: true,
+      toastRef: null,
     };
   }
   _logIn = () => {
@@ -70,6 +74,11 @@ class SignIn extends Component {
             isLoading: false,
           });
           // Alert.alert('', Response.data.message);
+          this.state.toastRef.show(
+            'Login successfully',
+            'green',
+            DURATION.LONG,
+          );
 
           this.props.navigation.navigate('BottomNavigator');
           this.props.add_login_status(true);
@@ -102,7 +111,7 @@ class SignIn extends Component {
     console.log('personal number ', this.state.personal_number);
     console.log('checkbox ', this.state.checkbox_value);
     return (
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         {/* <Container position="top" animationStyle="fancy" /> */}
 
         <Spinner
@@ -132,22 +141,40 @@ class SignIn extends Component {
                   style={styles.edt_txt}
                   placeholder="Email"
                   keyboardType={'email-address'}
+                  placeholderTextColor="#CCCCCC"
                   onChangeText={text =>
                     this.setState({
                       email: text,
                     })
                   }></TextInput>
               </View>
-              <View style={styles.edt_box}>
+              <View
+                style={[
+                  styles.edt_box,
+                  {flexDirection: 'row', alignItems: 'center'},
+                ]}>
                 <TextInput
                   style={styles.edt_txt}
-                  secureTextEntry
+                  secureTextEntry={this.state.password_v}
                   placeholder="Password"
+                  placeholderTextColor="#CCCCCC"
                   onChangeText={text =>
                     this.setState({
                       password: text,
                     })
                   }></TextInput>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({password_v: !this.state.password_v})
+                  }>
+                  <Image
+                    source={
+                      this.state.password_v == true
+                        ? require('../assets/o_eye.png')
+                        : require('../assets/c_eye.png')
+                    }
+                    style={{height: 20, width: 20, marginRight: 10}}></Image>
+                </TouchableOpacity>
               </View>
             </View>
             {/* <TouchableOpacity
@@ -170,7 +197,7 @@ class SignIn extends Component {
                 alignItems: 'center',
                 marginTop: 20,
               }}>
-              <CheckBox
+              {/* <CheckBox
                 style={{alignSelf: 'center'}}
                 // onCheckColor={'#EC4464'}
                 tintColors={{true: '#EC4464'}}
@@ -180,14 +207,54 @@ class SignIn extends Component {
                   this.setState({
                     checkbox_value: newValue,
                   })
-                }></CheckBox>
+                }></CheckBox> */}
+              <CheckBox
+                title={''}
+                size={25}
+                containerStyle={{
+                  backgroundColor: '#00000000',
+                  borderColor: '#00000000',
+                  // marginVertical: -25,
+                  marginLeft: -6,
+                }}
+                backdropColor={'#00000000'}
+                checkedIcon={
+                  <Image
+                    style={{height: 18, width: 18}}
+                    source={require('../assets/checked_checkbox.png')}
+                  />
+                }
+                uncheckedIcon={
+                  <Image
+                    style={{height: 18, width: 18}}
+                    source={require('../assets/white_check_box.png')}
+                  />
+                }
+                iconType="font-awesome"
+                // key={key}
+                checked={this.state.checkbox_value}
+                onPress={() => {
+                  // console.log('check change', this.state.all_service);
+                  // this.onCheckChanged(item.id);
+                  this.setState({
+                    checkbox_value: !this.state.checkbox_value,
+                    // selected_checkbox_id: this.state.all_service
+                    //   .filter(i => i.is_check == true)
+                    //   .map(i => i.id),
+                    // selected_checkbox_id: this.state.all_service.find(
+                    //   i => i.is_check == item.is_check,
+                    // ),
+                  });
+                }}
+              />
               <Text
                 style={{
                   alignSelf: 'center',
                   fontSize: 13,
                   color: '#CCCCCC',
-                  marginLeft: 8,
-                  fontWeight: 'bold',
+                  marginLeft: -8,
+                  // fontWeight: 'bold',
+                  fontFamily: 'Montserrat-Bold',
                 }}>
                 Agree to
               </Text>
@@ -198,24 +265,38 @@ class SignIn extends Component {
                     fontSize: 13,
                     color: '#EC4464',
                     marginLeft: 8,
-                    fontWeight: 'bold',
+                    // fontWeight: 'bold',
+                    fontFamily: 'Montserrat-Bold',
                   }}>
                   terms {'&'} conditions
                 </Text>
               </TouchableOpacity>
             </View>
-
+            <Toast ref={_ref => (this.state.toastRef = _ref)} />
             <TouchableOpacity
               style={styles.btn_create}
               onPress={() => {
                 if (this.state.email == '') {
-                  alert('Please enter Email');
+                  // alert('Please enter Email');
+                  this.state.toastRef.show(
+                    'Please enter Email',
+                    'red',
+                    DURATION.LONG,
+                  );
                 } else if (reg.test(this.state.email) == false) {
-                  alert('Please enter Correct Email..');
+                  this.state.toastRef.show(
+                    'Please enter Correct Email..',
+                    'red',
+                    DURATION.LONG,
+                  );
                 } else if (this.state.password == '') {
-                  alert('Please enter Password');
-                } else if (this.state.checkbox_value == false) {
-                  alert('Agree to terms & condition');
+                  this.state.toastRef.show(
+                    'Please enter Password',
+                    'red',
+                    DURATION.LONG,
+                  );
+                  // } else if (this.state.checkbox_value == false) {
+                  //   alert('Agree to terms & condition');
                 } else {
                   this._logIn();
                 }
@@ -226,7 +307,8 @@ class SignIn extends Component {
                   fontSize: 16,
                   color: 'white',
                   marginLeft: 8,
-                  fontWeight: 'bold',
+                  // fontWeight: 'bold',
+                  fontFamily: 'Montserrat-Bold',
                 }}>
                 Sign in
               </Text>
@@ -240,7 +322,7 @@ class SignIn extends Component {
                   marginTop: 24,
                   color: '#EC4464',
                   marginLeft: 8,
-                  fontWeight: 'bold',
+                  fontFamily: 'Montserrat-Bold',
                   marginBottom: 40,
                 }}>
                 Create with Bank ID
@@ -261,10 +343,12 @@ const styles = StyleSheet.create({
   },
   text_create_acc: {
     fontSize: 16,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     marginTop: 43,
     alignSelf: 'center',
+
     marginBottom: 80,
+    fontFamily: 'Montserrat-Bold',
   },
   tab_bg: {
     flex: 1,
@@ -289,9 +373,11 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   edt_txt: {
+    flex: 1,
     color: 'black',
     fontSize: 13,
     marginLeft: 20,
+    fontFamily: 'Montserrat-Regular',
   },
   btn_create: {
     height: 60,

@@ -53,7 +53,9 @@ const Itemm = ({
       borderColor,
       borderWidth,
     ]}>
-    <Text style={[{fontSize: 11}, textColor]}>{item.titel}</Text>
+    <Text style={[{fontSize: 11, fontFamily: 'Montserrat-Regular'}, textColor]}>
+      {item.titel}
+    </Text>
   </TouchableOpacity>
 );
 var banner_img = require('../assets/banner_img.png');
@@ -210,9 +212,20 @@ class Home extends Component {
                 alignSelf: 'center',
                 marginLeft: 16,
               }}>
-              <Text style={{color: '#7F7F7F', fontSize: 14}}>Morning</Text>
               <Text
-                style={{color: '#040415', fontSize: 24, fontWeight: 'bold'}}>
+                style={{
+                  color: '#7F7F7F',
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
+                Morning
+              </Text>
+              <Text
+                style={{
+                  color: '#040415',
+                  fontSize: 24,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Stevenson
               </Text>
             </View>
@@ -297,7 +310,12 @@ class Home extends Component {
 
             <View style={{flex: 1}}>
               <Text
-                style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
+                style={{
+                  color: '#333333',
+                  fontSize: 18,
+                  // fontWeight: 'bold',
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Reminder
               </Text>
               <Text
@@ -306,6 +324,7 @@ class Home extends Component {
                   fontSize: 11,
                   marginRight: 16,
                   opacity: 0.5,
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 You have one discussion session at 10AM about your bathroom
                 renovation
@@ -319,14 +338,23 @@ class Home extends Component {
               marginHorizontal: 24,
               marginTop: 28,
             }}>
-            <Text style={{color: '#1F1F1F', fontSize: 16, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                color: '#1F1F1F',
+                fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
+              }}>
               Your Inquiries
             </Text>
 
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Inquiries')}>
               <Text
-                style={{color: '#EC4464', fontSize: 12, fontWeight: 'bold'}}>
+                style={{
+                  color: '#EC4464',
+                  fontSize: 12,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Show all
               </Text>
             </TouchableOpacity>
@@ -349,7 +377,11 @@ class Home extends Component {
               }}></Image>
             <View style={{flex: 1}}>
               <Text
-                style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
+                style={{
+                  color: '#333333',
+                  fontSize: 18,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Renovating Bathroom
               </Text>
               <Text
@@ -359,6 +391,7 @@ class Home extends Component {
                   marginRight: 16,
                   opacity: 0.5,
                   marginTop: 8,
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Sent: Sunday, 12 March 2021
               </Text>
@@ -369,6 +402,7 @@ class Home extends Component {
                   marginRight: 16,
                   fontWeight: 'bold',
                   marginTop: 16,
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Processing
               </Text>

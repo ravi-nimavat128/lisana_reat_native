@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Toast, DURATION, POSTION} from 'rn-simple-toast';
+// import {CheckBox} from 'react-native-elements';
+import {CheckBox} from 'react-native-elements';
+
 import {
   Text,
   View,
@@ -12,7 +16,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+// import CheckBox from '@react-native-community/checkbox';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {connect} from 'react-redux';
 import {addUserId, add_login_status} from '../Reducer/UserReducer/user_actions';
@@ -35,6 +39,9 @@ class Register extends Component {
       org_number: '',
       checkbox_value: false,
       password: '',
+      password_v: true,
+      password_vv: true,
+      toastRef: null,
     };
   }
 
@@ -62,7 +69,12 @@ class Register extends Component {
           this.setState({
             isLoading: false,
           });
-          Alert.alert('', 'your account has been created successfully');
+          // Alert.alert('', '');
+          this.state.toastRef.show(
+            'your account has been created successfully',
+            'green',
+            DURATION.LONG,
+          );
           this.props.navigation.navigate('BottomNavigator');
           this.props.add_login_status(true);
           this.props.addUserId(response.data.user_id);
@@ -84,7 +96,7 @@ class Register extends Component {
     console.log('personal number ', this.state.personal_number);
     console.log('checkbox ', this.state.checkbox_value);
     return (
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <Spinner
           //visibility of Overlay Loading Spinner
           visible={this.state.isLoading}
@@ -120,6 +132,9 @@ class Register extends Component {
                 {
                   backgroundColor:
                     this.state.select_tab == 1 ? '#EC4464' : 'white',
+                  borderColor:
+                    this.state.select_tab == 1 ? '#EC4464' : '#DFDFE2',
+                  borderWidth: 1,
                 },
               ]}>
               <Text
@@ -142,6 +157,9 @@ class Register extends Component {
                 {
                   backgroundColor:
                     this.state.select_tab == 2 ? '#EC4464' : 'white',
+                  borderColor:
+                    this.state.select_tab == 2 ? '#EC4464' : '#DFDFE2',
+                  borderWidth: 1,
                 },
               ]}>
               <Text
@@ -158,6 +176,7 @@ class Register extends Component {
               <View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     style={styles.edt_txt}
                     returnKeyType="next"
                     placeholder="Enter your full name"
@@ -172,6 +191,7 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     style={styles.edt_txt}
                     onSubmitEditing={() => {
                       this.phone_number.focus();
@@ -189,6 +209,7 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     style={styles.edt_txt}
                     returnKeyType="next"
                     onSubmitEditing={() => {
@@ -208,6 +229,7 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     returnKeyType="next"
                     onSubmitEditing={() => {
                       this.password.focus();
@@ -224,8 +246,13 @@ class Register extends Component {
                       })
                     }></TextInput>
                 </View>
-                <View style={styles.edt_box}>
+                <View
+                  style={[
+                    styles.edt_box,
+                    {flexDirection: 'row', alignItems: 'center'},
+                  ]}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     returnKeyType="next"
                     onSubmitEditing={() => {
                       this.personal_number.focus();
@@ -233,17 +260,30 @@ class Register extends Component {
                     ref={input => {
                       this.password = input;
                     }}
-                    style={styles.edt_txt}
+                    style={[styles.edt_txt, {flex: 1}]}
                     placeholder="Password"
-                    secureTextEntry
+                    secureTextEntry={this.state.password_v}
                     onChangeText={text =>
                       this.setState({
                         password: text,
                       })
                     }></TextInput>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.setState({password_v: !this.state.password_v})
+                    }>
+                    <Image
+                      source={
+                        this.state.password_v == true
+                          ? require('../assets/o_eye.png')
+                          : require('../assets/c_eye.png')
+                      }
+                      style={{height: 20, width: 20, marginRight: 10}}></Image>
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     returnKeyType="next"
                     // onSubmitEditing={() => { this.personal_number.focus(); }}
                     ref={input => {
@@ -263,6 +303,7 @@ class Register extends Component {
               <View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     onSubmitEditing={() => {
                       this.business_name.focus();
                     }}
@@ -280,6 +321,7 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     onSubmitEditing={() => {
                       this.address.focus();
                     }}
@@ -297,6 +339,7 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     onSubmitEditing={() => {
                       this.phone_number.focus();
                     }}
@@ -314,6 +357,7 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     onSubmitEditing={() => {
                       this.email.focus();
                     }}
@@ -333,6 +377,7 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     onSubmitEditing={() => {
                       this.password.focus();
                     }}
@@ -349,27 +394,45 @@ class Register extends Component {
                       })
                     }></TextInput>
                 </View>
-                <View style={styles.edt_box}>
+                <View
+                  style={[
+                    styles.edt_box,
+                    {flexDirection: 'row', alignItems: 'center'},
+                  ]}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
+                    returnKeyType="next"
                     onSubmitEditing={() => {
                       this.VAT_number.focus();
                     }}
                     ref={input => {
                       this.password = input;
                     }}
-                    returnKeyType="next"
-                    style={styles.edt_txt}
+                    style={[styles.edt_txt, {flex: 1}]}
                     placeholder="Password"
-                    secureTextEntry
+                    secureTextEntry={this.state.password_v}
                     onChangeText={text =>
                       this.setState({
                         password: text,
                       })
                     }></TextInput>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.setState({password_v: !this.state.password_v})
+                    }>
+                    <Image
+                      source={
+                        this.state.password_v == true
+                          ? require('../assets/o_eye.png')
+                          : require('../assets/c_eye.png')
+                      }
+                      style={{height: 20, width: 20, marginRight: 10}}></Image>
+                  </TouchableOpacity>
                 </View>
                 <View style={{flexDirection: 'row'}}>
                   <View style={[styles.edt_box, {flex: 1, marginRight: 10}]}>
                     <TextInput
+                      placeholderTextColor="#CCCCCC"
                       onSubmitEditing={() => {
                         this.org_number.focus();
                       }}
@@ -388,6 +451,7 @@ class Register extends Component {
                   </View>
                   <View style={[styles.edt_box, {flex: 1, marginLeft: 10}]}>
                     <TextInput
+                      placeholderTextColor="#CCCCCC"
                       onSubmitEditing={() => {
                         this.personal_number.focus();
                       }}
@@ -407,6 +471,7 @@ class Register extends Component {
                 </View>
                 <View style={styles.edt_box}>
                   <TextInput
+                    placeholderTextColor="#CCCCCC"
                     //  onSubmitEditing={() => {
                     //     this.personal_number.focus();
                     //   }}
@@ -431,24 +496,65 @@ class Register extends Component {
                 alignItems: 'center',
                 marginTop: 20,
               }}>
-              <CheckBox
+              {/* <CheckBox
                 style={{alignSelf: 'center'}}
                 // onCheckColor={'#EC4464'}
                 tintColors={{true: '#EC4464'}}
                 animationDuration={0.5}
                 value={this.state.checkbox_value}
+                // borderColor={{true: '#E5EAF4'}}
                 onValueChange={newValue =>
                   this.setState({
                     checkbox_value: newValue,
                   })
-                }></CheckBox>
+                }></CheckBox> */}
+              <CheckBox
+                title={''}
+                size={25}
+                containerStyle={{
+                  backgroundColor: '#00000000',
+                  borderColor: '#00000000',
+                  // marginVertical: -25,
+                  marginLeft: -6,
+                }}
+                backdropColor={'#00000000'}
+                checkedIcon={
+                  <Image
+                    style={{height: 18, width: 18}}
+                    source={require('../assets/checked_checkbox.png')}
+                  />
+                }
+                uncheckedIcon={
+                  <Image
+                    style={{height: 18, width: 18}}
+                    source={require('../assets/white_check_box.png')}
+                  />
+                }
+                iconType="font-awesome"
+                // key={key}
+                checked={this.state.checkbox_value}
+                onPress={() => {
+                  // console.log('check change', this.state.all_service);
+                  // this.onCheckChanged(item.id);
+                  this.setState({
+                    checkbox_value: !this.state.checkbox_value,
+                    // selected_checkbox_id: this.state.all_service
+                    //   .filter(i => i.is_check == true)
+                    //   .map(i => i.id),
+                    // selected_checkbox_id: this.state.all_service.find(
+                    //   i => i.is_check == item.is_check,
+                    // ),
+                  });
+                }}
+              />
               <Text
                 style={{
                   alignSelf: 'center',
                   fontSize: 13,
                   color: '#CCCCCC',
-                  marginLeft: 8,
-                  fontWeight: 'bold',
+                  marginLeft: -8,
+                  fontWeight: '500',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Agree to
               </Text>
@@ -459,70 +565,187 @@ class Register extends Component {
                     fontSize: 13,
                     color: '#EC4464',
                     marginLeft: 8,
-                    fontWeight: 'bold',
+                    fontFamily: 'Montserrat-Regular',
+                    fontWeight: '500',
                   }}>
                   terms {'&'} conditions
                 </Text>
               </TouchableOpacity>
             </View>
+            <Toast ref={_ref => (this.state.toastRef = _ref)} />
+
             <TouchableOpacity
               style={styles.btn_create}
               onPress={() => {
                 if (this.state.select_tab == 1) {
                   if (this.state.full_name == '') {
-                    alert('Please enter your full name');
+                    this.state.toastRef.show(
+                      'Please enter your full name',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.address == '') {
-                    alert('Please enter your address');
+                    this.state.toastRef.show(
+                      'Please enter your address',
+                      'red',
+                      DURATION.LONG,
+                    );
+                    // alert('Please enter your address');
                   } else if (this.state.phone_number == '') {
-                    alert('Please enter your phone number');
+                    // alert('Please enter your phone number');
+                    this.state.toastRef.show(
+                      'Please enter your phone number',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.phone_number.length != 10) {
-                    alert('Please enter proper Phone number');
+                    // alert('Please enter proper Phone number');
+                    this.state.toastRef.show(
+                      'Please enter proper phone number',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.email == '') {
-                    alert('Please enter your email');
+                    // alert('Please enter your email');
+                    this.state.toastRef.show(
+                      'Please enter your email',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (reg.test(this.state.email) == false) {
-                    alert('Please enter Correct Email..');
+                    // alert('Please enter Correct Email..');
+                    this.state.toastRef.show(
+                      'Please enter Correct Email..',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.password == '') {
-                    alert('Please enter your Password');
+                    // alert('Please enter your Password');
+                    this.state.toastRef.show(
+                      'Please enter your Password',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.password.length == 6) {
-                    alert(
+                    // alert(
+                    //   'The password must be of minimum length 8 characters',
+                    // );
+                    this.state.toastRef.show(
                       'The password must be of minimum length 8 characters',
+                      'red',
+                      DURATION.LONG,
                     );
                   } else if (this.state.personal_number == '') {
-                    alert('Please enter your Personal number');
+                    // alert('Please enter your Personal number');
+                    this.state.toastRef.show(
+                      'Please enter your Personal number',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.checkbox_value == false) {
-                    alert('Agree to terms & condition');
+                    // alert('Agree to terms & condition');
+                    this.state.toastRef.show(
+                      'Agree to terms & condition',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else {
                     this._get_register();
                   }
                 } else {
                   if (this.state.full_name == '') {
-                    alert('Please enter your full name');
+                    // alert('Please enter your full name');
+                    this.state.toastRef.show(
+                      'Please enter your full name',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.business_name == '') {
-                    alert('Please enter your Business name');
+                    // alert('Please enter your Business name');
+                    this.state.toastRef.show(
+                      'Please enter your Business name',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.address == '') {
-                    alert('Please enter your address');
+                    // alert('Please enter your address');
+                    this.state.toastRef.show(
+                      'Please enter your address',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.phone_number == '') {
-                    alert('Please enter your Phone number');
+                    // alert('Please enter your Phone number');
+                    this.state.toastRef.show(
+                      'Please enter your phone number',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.phone_number.length != 10) {
-                    alert('Please enter proper Phone number');
+                    // alert('Please enter proper Phone number');
+                    this.state.toastRef.show(
+                      'Please enter your proper phone number',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.email == '') {
-                    alert('Please enter your email');
+                    // alert('Please enter your email');
+                    this.state.toastRef.show(
+                      'Please enter your email',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.password == '') {
-                    alert('Please enter your Password');
+                    // alert('Please enter your Password');
+                    this.state.toastRef.show(
+                      'Please enter your password',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (reg.test(this.state.email) == false) {
-                    alert('Please enter Correct Email..');
+                    // alert('Please enter Correct Email..');
+                    this.state.toastRef.show(
+                      'Please enter Correct Email...',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.password.length == 6) {
-                    alert(
+                    // alert(
+                    //   'The password must be of minimum length 8 characters',
+                    // );
+                    this.state.toastRef.show(
                       'The password must be of minimum length 8 characters',
+                      'red',
+                      DURATION.LONG,
                     );
                   } else if (this.state.VAT_number == '') {
-                    alert('Please enter your VAT number');
+                    // alert('Please enter your VAT number');
+                    this.state.toastRef.show(
+                      'Please enter your VAT number',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.org_number == '') {
-                    alert('Please enter your ORG number');
+                    // alert('Please enter your ORG number');
+                    this.state.toastRef.show(
+                      'Please enter your ORG number',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.personal_number == '') {
-                    alert('Please enter your Personal number');
+                    // alert('Please enter your Personal number');
+                    this.state.toastRef.show(
+                      'Please enter your Personal number',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else if (this.state.checkbox_value == false) {
-                    alert('Agree to terms & condition');
+                    // alert('Agree to terms & condition');
+                    this.state.toastRef.show(
+                      'Agree to terms & condition',
+                      'red',
+                      DURATION.LONG,
+                    );
                   } else {
                     this._get_register();
                   }
@@ -534,7 +757,8 @@ class Register extends Component {
                   fontSize: 16,
                   color: 'white',
                   marginLeft: 8,
-                  fontWeight: 'bold',
+                  // fontWeight: 'bold',
+                  fontFamily: 'Montserrat-Bold',
                 }}>
                 Create with Bank ID
               </Text>
@@ -548,7 +772,8 @@ class Register extends Component {
                   marginTop: 24,
                   color: '#EC4464',
                   marginLeft: 8,
-                  fontWeight: 'bold',
+                  // fontWeight: 'bold',
+                  fontFamily: 'Montserrat-Bold',
                   marginBottom: 40,
                 }}>
                 Sign in
@@ -569,9 +794,10 @@ const styles = StyleSheet.create({
   },
   text_create_acc: {
     fontSize: 16,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     marginTop: 43,
     alignSelf: 'center',
+    fontFamily: 'Montserrat-Bold',
   },
   tab_bg: {
     flex: 1,
@@ -582,6 +808,7 @@ const styles = StyleSheet.create({
   },
   tab_txt: {
     fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
   },
   tab_container: {
     marginTop: 36,
@@ -599,6 +826,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 13,
     marginLeft: 20,
+    fontFamily: 'Montserrat-Regular',
   },
   btn_create: {
     height: 60,

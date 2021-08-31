@@ -66,6 +66,7 @@ export default class Inquiries extends Component {
           // })}
           tabBarOptions={{
             swipeEnabled: true,
+
             activeTintColor: '#000000',
             labelStyle: {
               fontSize: 16,
@@ -77,17 +78,19 @@ export default class Inquiries extends Component {
             // style: {position: 'absolute', top: 0},
 
             tabStyle: {
+              flex: 1,
               justifyContent: 'center',
-              alignSelf: 'flex-start',
+              alignSelf: 'center',
               alignContent: 'center',
               backgroundColor: null,
               height: 65,
               opacity: 0.7,
-              width: 120,
+              // width: 120,
             },
             indicatorStyle: {
               backgroundColor: '#EC4464',
               height: '3%',
+              flex: 1,
               // marginLeft: 19,
               // marginBottom: 8,
               // width: '35%',
@@ -96,7 +99,7 @@ export default class Inquiries extends Component {
             // labelStyle: {fontSize: 20, textTransform: 'capitalize'},
           }}>
           <Tab.Screen
-            name="All_Inquiries"
+            name="All Inquiries"
             component={AllInquiries}
             listeners={{
               tabPress: e => {
