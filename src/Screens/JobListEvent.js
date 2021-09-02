@@ -101,6 +101,7 @@ class JobListEvent extends Component {
             color: item.type == 0 ? '#1F1F1F' : '#A3A3A3',
             fontSize: 14,
             marginTop: 15,
+            fontFamily: 'Montserrat-Regular',
           }}>
           {item.start_date}
         </Text>
@@ -121,9 +122,10 @@ class JobListEvent extends Component {
           <Text
             style={{
               color: item.type == 0 ? '#EC4464' : '#A3A3A3',
-              fontWeight: 'bold',
+              // fontWeight: 'bold',
               fontSize: 12,
               marginLeft: 10,
+              fontFamily: 'Montserrat-SemiBold',
             }}>
             {item.start_time}
           </Text>
@@ -133,6 +135,7 @@ class JobListEvent extends Component {
             color: item.type == 0 ? '#3B3B3B' : '#A3A3A3',
             fontSize: 14,
             marginTop: 8,
+            fontFamily: 'Montserrat-Regular',
           }}>
           {item.description}
         </Text>
@@ -266,6 +269,7 @@ class JobListEvent extends Component {
               fontSize: 20,
               marginTop: 30,
               marginLeft: 24,
+              fontFamily: 'Montserrat-Regular',
             }}>
             {this.state.inq_title}
           </Text>
@@ -284,6 +288,7 @@ class JobListEvent extends Component {
                 color: '#A3A3A3',
                 fontSize: 12,
                 marginLeft: 6,
+                fontFamily: 'Montserrat-Regular',
               }}>
               {this.state.inq_date}
             </Text>
@@ -300,7 +305,9 @@ class JobListEvent extends Component {
               justifyContent: 'space-between',
               marginTop: 60,
             }}>
-            <Text>Job Milestone</Text>
+            <Text style={{fontFamily: 'Montserrat-Regular'}}>
+              Job Milestone
+            </Text>
             <Image
               source={require('../assets/right_arrow.png')}
               style={{
@@ -329,7 +336,12 @@ class JobListEvent extends Component {
                   <Image
                     source={require('../assets/empty_gif.gif')}
                     style={{height: 90, width: 90}}></Image>
-                  <Text style={{fontSize: 12, color: 'gray'}}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: 'gray',
+                      fontFamily: 'Montserrat-SemiBold',
+                    }}>
                     No milestone found
                   </Text>
                 </View>
@@ -364,11 +376,15 @@ class JobListEvent extends Component {
                             alignItems: 'center',
                           }}>
                           <View>
-                            <Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular'}}>
                               {this.state.job_milston[position].mileston_name}
                             </Text>
 
-                            <Text style={{color: '#A3A3A3'}}>
+                            <Text
+                              style={{
+                                color: '#A3A3A3',
+                                fontFamily: 'Montserrat-Regular',
+                              }}>
                               {this.state.job_milston[position].start_date}
                               {' - '}
                               {this.state.job_milston[position].end_date}
@@ -401,7 +417,7 @@ class JobListEvent extends Component {
               justifyContent: 'space-between',
               marginTop: 60,
             }}>
-            <Text>Events</Text>
+            <Text style={{fontFamily: 'Montserrat-Regular'}}>Events</Text>
             <Image
               source={require('../assets/right_arrow.png')}
               style={{
@@ -429,7 +445,12 @@ class JobListEvent extends Component {
                   <Image
                     source={require('../assets/empty_gif.gif')}
                     style={{height: 90, width: 90}}></Image>
-                  <Text style={{fontSize: 12, color: 'gray'}}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: 'gray',
+                      fontFamily: 'Montserrat-SemiBold',
+                    }}>
                     No Event found
                   </Text>
                 </View>
@@ -485,7 +506,14 @@ class JobListEvent extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{fontSize: 16, color: 'white'}}>View Quote</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: 'white',
+                  fontFamily: 'Montserrat-Regular',
+                }}>
+                View Quote
+              </Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
@@ -506,7 +534,14 @@ class JobListEvent extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{fontSize: 16, color: 'white'}}>Add Review</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: 'white',
+                  fontFamily: 'Montserrat-Regular',
+                }}>
+                Add Review
+              </Text>
             </TouchableOpacity>
           )}
         </View>

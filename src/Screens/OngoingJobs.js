@@ -80,10 +80,21 @@ class OngoingJobs extends Component {
             borderRadius: 10,
           }}></Image>
         <View style={{flex: 1}}>
-          <Text style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
+          <Text
+            style={{
+              color: '#333333',
+              fontSize: 18,
+              fontFamily: 'Montserrat-SemiBold',
+            }}>
             {item.inquirie_name}
           </Text>
-          <Text style={{fontSize: 11, color: '#A3A3A3', marginTop: 16}}>
+          <Text
+            style={{
+              fontSize: 11,
+              color: '#A3A3A3',
+              marginTop: 16,
+              fontFamily: 'Montserrat-Regular',
+            }}>
             Acceptance date
           </Text>
           <View
@@ -106,6 +117,7 @@ class OngoingJobs extends Component {
                 color: '#000000',
                 fontSize: 12,
                 marginRight: 5,
+                fontFamily: 'Montserrat-Regular',
               }}>
               {item.acceptance_date}
             </Text>
@@ -142,7 +154,14 @@ class OngoingJobs extends Component {
             <Image
               source={require('../assets/empty_gif.gif')}
               style={{height: 120, width: 120}}></Image>
-            <Text style={{fontSize: 12, color: 'gray'}}>No Record Found</Text>
+            <Text
+              style={{
+                fontSize: 12,
+                color: 'gray',
+                fontFamily: 'Montserrat-SemiBold',
+              }}>
+              No Record Found
+            </Text>
           </View>
         ) : (
           <FlatList

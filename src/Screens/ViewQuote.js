@@ -263,8 +263,9 @@ export class ViewQuote extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                // fontFamily:'Montserrat-SemiBold',
                 fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
               }}>
               Quote View
             </Text>
@@ -272,14 +273,31 @@ export class ViewQuote extends Component {
         </View>
 
         <ScrollView>
-          <Text style={{marginLeft: 44, marginTop: 62, fontSize: 16}}>
+          <Text
+            style={{
+              marginLeft: 44,
+              marginTop: 62,
+              fontSize: 16,
+              fontFamily: 'Montserrat-Regular',
+            }}>
             {this.state.inquirie_name}
           </Text>
           <View style={{marginLeft: 44, flexDirection: 'row', marginTop: 4}}>
-            <Text style={{fontSize: 10, color: 'gray', opacity: 0.7}}>
+            <Text
+              style={{
+                fontSize: 10,
+                color: 'gray',
+                opacity: 0.7,
+                fontFamily: 'Montserrat-Regular',
+              }}>
               Accept the quote before{' '}
             </Text>
-            <Text style={{fontSize: 10, color: 'black'}}>
+            <Text
+              style={{
+                fontSize: 10,
+                color: 'black',
+                fontFamily: 'Montserrat-Regular',
+              }}>
               {this.state.acceptance_date}
             </Text>
           </View>
@@ -303,7 +321,11 @@ export class ViewQuote extends Component {
                   backgroundColor: '#EC4464',
                 },
               ]}>
-              <Text style={[styles.tab_txt, {color: '#FFFFFF'}]}>
+              <Text
+                style={[
+                  styles.tab_txt,
+                  {color: '#FFFFFF', fontFamily: 'Montserrat-Regular'},
+                ]}>
                 Total Cost
               </Text>
             </TouchableOpacity>
@@ -322,7 +344,11 @@ export class ViewQuote extends Component {
                   borderWidth: 1,
                 },
               ]}>
-              <Text style={[styles.tab_txt, {color: '#A3A3A3'}]}>
+              <Text
+                style={[
+                  styles.tab_txt,
+                  {color: '#A3A3A3', fontFamily: 'Montserrat-Regular'},
+                ]}>
                 Preview Quote
               </Text>
             </TouchableOpacity>
@@ -338,7 +364,7 @@ export class ViewQuote extends Component {
               style={{
                 fontSize: 32,
                 color: '#3B3B3B',
-                fontWeight: 'bold',
+                fontFamily: 'Montserrat-SemiBold',
               }}>
               ${this.state.grand_total}
             </Text>
@@ -359,6 +385,7 @@ export class ViewQuote extends Component {
                 marginLeft: 20,
                 fontSize: 16,
                 color: '#3B3B3B',
+                fontFamily: 'Montserrat-Regular',
               }}>
               Items
             </Text>
@@ -373,6 +400,7 @@ export class ViewQuote extends Component {
                 style={{
                   fontSize: 14,
                   color: '#A3A3A3',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Work Cost
               </Text>
@@ -380,6 +408,7 @@ export class ViewQuote extends Component {
                 style={{
                   fontSize: 14,
                   color: '#3B3B3B',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 ${this.state.work_cost}
               </Text>
@@ -396,6 +425,7 @@ export class ViewQuote extends Component {
                 style={{
                   fontSize: 14,
                   color: '#A3A3A3',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Material
               </Text>
@@ -403,6 +433,7 @@ export class ViewQuote extends Component {
                 style={{
                   fontSize: 14,
                   color: '#3B3B3B',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 ${this.state.meterial}
               </Text>
@@ -416,6 +447,7 @@ export class ViewQuote extends Component {
                 marginLeft: 20,
                 fontSize: 16,
                 color: '#3B3B3B',
+                fontFamily: 'Montserrat-Regular',
               }}>
               Summary
             </Text>
@@ -425,11 +457,13 @@ export class ViewQuote extends Component {
                 marginHorizontal: 20,
                 marginTop: 24,
                 justifyContent: 'space-between',
+                fontFamily: 'Montserrat-Regular',
               }}>
               <Text
                 style={{
                   fontSize: 14,
                   color: '#A3A3A3',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Total Before ROT{' '}
               </Text>
@@ -437,6 +471,7 @@ export class ViewQuote extends Component {
                 style={{
                   fontSize: 14,
                   color: '#3B3B3B',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 ${this.state.total_before_rot}
               </Text>
@@ -453,6 +488,7 @@ export class ViewQuote extends Component {
                 style={{
                   fontSize: 14,
                   color: '#A3A3A3',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 ROT Deduction
               </Text>
@@ -460,6 +496,7 @@ export class ViewQuote extends Component {
                 style={{
                   fontSize: 14,
                   color: '#3B3B3B',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 ${this.state.rot_deduction}
               </Text>
@@ -476,6 +513,7 @@ export class ViewQuote extends Component {
                 style={{
                   fontSize: 14,
                   color: '#A3A3A3',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Total after ROT{' '}
               </Text>
@@ -483,6 +521,7 @@ export class ViewQuote extends Component {
                 style={{
                   fontSize: 14,
                   color: '#3B3B3B',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 ${this.state.total_after_rot}
               </Text>
@@ -495,6 +534,7 @@ export class ViewQuote extends Component {
               marginTop: 44,
               fontSize: 12,
               color: '#3B3B3B80',
+              fontFamily: 'Montserrat-Regular',
             }}>
             Acceptance date
           </Text>
@@ -505,7 +545,12 @@ export class ViewQuote extends Component {
               marginTop: 4,
               alignItems: 'center',
             }}>
-            <Text style={{fontSize: 18, color: '#3B3B3B', fontWeight: 'bold'}}>
+            <Text
+              style={{
+                fontSize: 18,
+                color: '#3B3B3B',
+                fontFamily: 'Montserrat-SemiBold',
+              }}>
               {this.state.quotation_accept_date}
             </Text>
           </View>
@@ -526,7 +571,12 @@ export class ViewQuote extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 Accept With Bank ID{' '}
               </Text>
             </View>
@@ -544,7 +594,11 @@ export class ViewQuote extends Component {
                 alignItems: 'center',
               }}>
               <Text
-                style={{color: '#525252', fontSize: 16, fontWeight: 'bold'}}>
+                style={{
+                  color: '#525252',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 Ask Us a Question{' '}
               </Text>
             </View>
@@ -568,7 +622,11 @@ export class ViewQuote extends Component {
                 alignItems: 'center',
               }}>
               <Text
-                style={{color: '#EC4464', fontSize: 16, fontWeight: 'bold'}}>
+                style={{
+                  color: '#EC4464',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-SemiBold',
+                }}>
                 Decline The Quote{' '}
               </Text>
             </View>
@@ -606,7 +664,13 @@ export class ViewQuote extends Component {
               <Image
                 source={require('../assets/success_img.png')}
                 style={{marginTop: 10, height: 151, width: 264}}></Image>
-              <Text style={{color: 'black', fontSize: 24, marginTop: 15}}>
+              <Text
+                style={{
+                  color: 'black',
+                  fontSize: 24,
+                  marginTop: 15,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 Congratulations
               </Text>
               <Text
@@ -617,6 +681,7 @@ export class ViewQuote extends Component {
                   opacity: 0.5,
                   textAlign: 'center',
                   marginHorizontal: 57,
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 You have successfully ordered our services. For further
                 information, We will get in touch with you to discuss further
@@ -643,7 +708,7 @@ export class ViewQuote extends Component {
                     style={{
                       color: 'white',
                       fontSize: 16,
-                      fontWeight: 'bold',
+                      fontFamily: 'Montserrat-SemiBold',
                     }}>
                     See My Job List
                   </Text>
@@ -691,6 +756,7 @@ export class ViewQuote extends Component {
                     marginTop: 30,
                     color: '#A3A3A3',
                     fontSize: 12,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   Tell us what makes you {'\n'}decline your inquiries
                 </Text>
@@ -714,6 +780,7 @@ export class ViewQuote extends Component {
                       <CheckBox
                         title={item.name}
                         size={25}
+                        fontFamily="Montserrat-Regular"
                         style={{alignSelf: 'flex-start'}}
                         containerStyle={{
                           backgroundColor: '#00000000',
@@ -778,6 +845,7 @@ export class ViewQuote extends Component {
                       width: '100%',
                       height: '100%',
                       textAlignVertical: 'top',
+                      fontFamily: 'Montserrat-Regular',
                     }}
                     onChangeText={txt => {
                       this.setState({tell_us_more: txt});
@@ -818,7 +886,8 @@ export class ViewQuote extends Component {
                     style={{
                       color: 'white',
                       fontSize: 16,
-                      fontWeight: 'bold',
+                      // fontFamily:'Montserrat-SemiBold',
+                      fontFamily: 'Montserrat-Bold',
                     }}>
                     Confirm
                   </Text>
@@ -851,7 +920,7 @@ const styles = StyleSheet.create({
   },
   text_create_acc: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
     marginTop: 43,
     alignSelf: 'center',
   },

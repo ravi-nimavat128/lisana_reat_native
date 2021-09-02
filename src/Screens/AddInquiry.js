@@ -457,6 +457,7 @@ class AddInquiry extends Component {
               fontSize: 12,
               marginHorizontal: 57,
               textAlign: 'center',
+              fontFamily: 'Montserrat-Regular',
               marginTop: 47,
             }}>
             Asking an inquiry requires you to fill in this form. We will get
@@ -466,7 +467,10 @@ class AddInquiry extends Component {
             <TextInput
               placeholder="Inquirie Title"
               onChangeText={txt => this.setState({inq_title: txt})}
-              style={{marginLeft: 20}}></TextInput>
+              style={{
+                marginLeft: 20,
+                fontFamily: 'Montserrat-Regular',
+              }}></TextInput>
           </View>
 
           <TouchableOpacity
@@ -527,6 +531,7 @@ class AddInquiry extends Component {
                 justifyContent: 'center',
                 marginLeft: 24,
                 fontSize: 13,
+                fontFamily: 'Montserrat-Regular',
               }}>
               {/* Select Category */}
               {this.state.cat_id.length < 1
@@ -568,6 +573,7 @@ class AddInquiry extends Component {
                     marginBottom: 15,
                     color: 'black',
                     fontSize: 14,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   Select Category
                 </Text>
@@ -629,7 +635,10 @@ class AddInquiry extends Component {
             <TextInput
               placeholder="Add location"
               onChangeText={txt => this.setState({add_location: txt})}
-              style={{marginLeft: 20}}></TextInput>
+              style={{
+                marginLeft: 20,
+                fontFamily: 'Montserrat-Regular',
+              }}></TextInput>
           </View>
           <View style={styles.edt_box}>
             <PickerModal
@@ -639,7 +648,11 @@ class AddInquiry extends Component {
                   disabled={disabled}
                   onPress={showModal}>
                   {this.state.work_id == 0 ? (
-                    <Text style={{marginLeft: 24}}>
+                    <Text
+                      style={{
+                        marginLeft: 24,
+                        fontFamily: 'Montserrat-Regular',
+                      }}>
                       When do you want to start work?
                     </Text>
                   ) : (
@@ -697,11 +710,11 @@ class AddInquiry extends Component {
               }}
             /> */}
             {this.props.date == '' ? (
-              <Text style={{marginLeft: 20}}>
+              <Text style={{marginLeft: 20, fontFamily: 'Montserrat-Regular'}}>
                 Select time to book quote visit
               </Text>
             ) : (
-              <Text style={{marginLeft: 20}}>
+              <Text style={{marginLeft: 20, fontFamily: 'Montserrat-Regular'}}>
                 {this.props.date + ' ' + this.props.time}
               </Text>
             )}
@@ -712,6 +725,7 @@ class AddInquiry extends Component {
               marginLeft: 24,
               marginTop: 24,
               fontSize: 16,
+              fontFamily: 'Montserrat-Regular',
             }}>
             Select services you want
           </Text>
@@ -736,6 +750,7 @@ class AddInquiry extends Component {
                 <CheckBox
                   title={item.name}
                   size={25}
+                  fontFamily="Montserrat-Bold"
                   containerStyle={{
                     backgroundColor: '#00000000',
                     borderColor: '#00000000',
@@ -831,7 +846,12 @@ class AddInquiry extends Component {
               }}
               imageStyle={{resizeMode: 'stretch'}}
               source={require('../assets/pink_dot_boxx.png')}>
-              <Text style={{color: '#F1748C', fontSize: 13}}>
+              <Text
+                style={{
+                  color: '#F1748C',
+                  fontSize: 13,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 Upload photos or files
               </Text>
             </ImageBackground>
@@ -876,6 +896,7 @@ class AddInquiry extends Component {
                 flex: 1,
                 textAlignVertical: 'top',
                 alignSelf: 'flex-start',
+                fontFamily: 'Montserrat-Regular',
               }}></TextInput>
           </View>
           <Toast ref={_ref => (this.state.toastRef = _ref)} />
@@ -960,7 +981,12 @@ class AddInquiry extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Create Inquiry
               </Text>
             </View>

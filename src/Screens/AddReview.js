@@ -115,8 +115,9 @@ export class AddReview extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                // fontWeight: 'bold',
                 fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
               }}>
               Add Review
             </Text>
@@ -134,6 +135,7 @@ export class AddReview extends Component {
                 fontSize: 20,
                 marginTop: 30,
                 marginLeft: 24,
+                fontFamily: 'Montserrat-Regular',
               }}>
               {/* {this.state.inq_title} */}
               {this.props.route.params.title}
@@ -153,6 +155,7 @@ export class AddReview extends Component {
                   color: '#A3A3A3',
                   fontSize: 12,
                   marginLeft: 6,
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 {/* {this.state.inq_date} */}
                 {this.props.route.params.date}
@@ -220,6 +223,7 @@ export class AddReview extends Component {
                   width: '100%',
                   textAlignVertical: 'top',
                   alignSelf: 'flex-start',
+                  fontFamily: 'Montserrat-Regular',
                 }}></TextInput>
             </View>
           </View>
@@ -244,7 +248,8 @@ export class AddReview extends Component {
               style={{
                 color: 'white',
                 fontSize: 16,
-                fontWeight: 'bold',
+                // fontWeight: 'bold',
+                fontFamily: 'Montserrat-Bold',
               }}>
               Submit
             </Text>
@@ -282,7 +287,13 @@ export class AddReview extends Component {
             <Image
               source={require('../assets/success_img.png')}
               style={{marginTop: 10, height: 151, width: 264}}></Image>
-            <Text style={{color: 'black', fontSize: 24, marginTop: 15}}>
+            <Text
+              style={{
+                color: 'black',
+                fontSize: 24,
+                marginTop: 15,
+                fontFamily: 'Montserrat-Regular',
+              }}>
               Congratulations
             </Text>
             <Text
@@ -293,6 +304,7 @@ export class AddReview extends Component {
                 opacity: 0.5,
                 textAlign: 'center',
                 marginHorizontal: 91,
+                fontFamily: 'Montserrat-Regular',
               }}>
               Thank you! your feedback has been successfully sent. Your review
               and feedback will always make us growing better
@@ -318,7 +330,8 @@ export class AddReview extends Component {
                   style={{
                     color: 'white',
                     fontSize: 16,
-                    fontWeight: 'bold',
+                    // fontWeight: 'bold',
+                    fontFamily: 'Montserrat-Bold',
                   }}>
                   Go to Home
                 </Text>

@@ -505,8 +505,9 @@ class SeeInquiry extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                // fontWeight: 'bold',
                 fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
               }}>
               Inquiry
             </Text>
@@ -583,7 +584,12 @@ class SeeInquiry extends Component {
                     marginRight: 8,
                   }}
                 />
-                <Text style={{color: '#EC4464', fontSize: 12}}>
+                <Text
+                  style={{
+                    color: '#EC4464',
+                    fontSize: 12,
+                    fontFamily: 'Montserrat-Regular',
+                  }}>
                   Edit Inquiry
                 </Text>
               </View>
@@ -596,7 +602,10 @@ class SeeInquiry extends Component {
               placeholder="Inquirie Title"
               defaultValue={this.state.inq_title}
               onChangeText={txt => this.setState({inq_title: txt})}
-              style={{marginLeft: 20}}></TextInput>
+              style={{
+                marginLeft: 20,
+                fontFamily: 'Montserrat-Regular',
+              }}></TextInput>
           </View>
 
           <TouchableOpacity
@@ -659,6 +668,8 @@ class SeeInquiry extends Component {
                 justifyContent: 'center',
                 marginLeft: 24,
                 fontSize: 13,
+                marginHorizontal: 3,
+                fontFamily: 'Montserrat-Regular',
               }}>
               {/* Select category */}
               {this.state.cat_id.length < 1
@@ -707,6 +718,7 @@ class SeeInquiry extends Component {
                     marginBottom: 15,
                     color: 'black',
                     fontSize: 14,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   Select Category
                 </Text>
@@ -722,6 +734,7 @@ class SeeInquiry extends Component {
                       <CheckBox
                         title={item.name}
                         size={25}
+                        fontFamily="Montserrat-Regular"
                         containerStyle={{
                           backgroundColor: '#00000000',
                           borderColor: '#00000000',
@@ -770,7 +783,10 @@ class SeeInquiry extends Component {
               placeholder="Add location"
               defaultValue={this.state.add_location}
               onChangeText={txt => this.setState({add_location: txt})}
-              style={{marginLeft: 20}}></TextInput>
+              style={{
+                marginLeft: 20,
+                fontFamily: 'Montserrat-Regular',
+              }}></TextInput>
           </View>
           <View style={styles.edt_box}>
             <PickerModal
@@ -781,11 +797,21 @@ class SeeInquiry extends Component {
                   disabled={disabled}
                   onPress={showModal}>
                   {this.state.work_object == null ? (
-                    <Text style={{marginLeft: 24, color: '#A3A3A3'}}>
+                    <Text
+                      style={{
+                        marginLeft: 24,
+                        color: '#A3A3A3',
+                        fontFamily: 'Montserrat-Regular',
+                      }}>
                       When do you want to start work?
                     </Text>
                   ) : (
-                    <Text style={{marginLeft: 24, color: '#A3A3A3'}}>
+                    <Text
+                      style={{
+                        marginLeft: 24,
+                        color: '#A3A3A3',
+                        fontFamily: 'Montserrat-Regular',
+                      }}>
                       {this.state.work_object.name
                         ? this.state.work_object.name
                         : selected.Name}
@@ -845,11 +871,21 @@ class SeeInquiry extends Component {
               }}
             /> */}
             {this.props.date == '' ? (
-              <Text style={{marginLeft: 20, color: '#A3A3A3'}}>
+              <Text
+                style={{
+                  marginLeft: 20,
+                  color: '#A3A3A3',
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 Select time to book quote visit
               </Text>
             ) : (
-              <Text style={{marginLeft: 20, color: '#A3A3A3'}}>
+              <Text
+                style={{
+                  marginLeft: 20,
+                  color: '#A3A3A3',
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 {this.props.date + ' ' + this.props.time}
               </Text>
             )}
@@ -860,6 +896,7 @@ class SeeInquiry extends Component {
               marginLeft: 24,
               marginTop: 24,
               fontSize: 16,
+              fontFamily: 'Montserrat-Regular',
             }}>
             Select services you want
           </Text>
@@ -885,7 +922,11 @@ class SeeInquiry extends Component {
                   disabled
                   title={item.name}
                   size={25}
-                  textStyle={{color: '#A3A3A3'}}
+                  fontFamily="Montserrat-Regular"
+                  textStyle={{
+                    color: '#A3A3A3',
+                    fontFamily: 'Montserrat-Regular',
+                  }}
                   containerStyle={{
                     backgroundColor: '#00000000',
                     borderColor: '#00000000',
@@ -987,7 +1028,12 @@ class SeeInquiry extends Component {
               }}
               imageStyle={{resizeMode: 'stretch'}}
               source={require('../assets/pink_dot_boxx.png')}>
-              <Text style={{color: '#A3A3A3', fontSize: 13}}>
+              <Text
+                style={{
+                  color: '#A3A3A3',
+                  fontSize: 13,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 Upload photos or files
               </Text>
             </ImageBackground>
@@ -1033,7 +1079,7 @@ class SeeInquiry extends Component {
               style={{
                 marginLeft: 12,
                 marginTop: 8,
-
+                fontFamily: 'Montserrat-Regular',
                 alignSelf: 'flex-start',
               }}></TextInput>
           </View>

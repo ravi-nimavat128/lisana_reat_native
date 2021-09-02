@@ -11,12 +11,14 @@ import {
 
 var img = require('../assets/logo_smoll.png');
 
-const DATA =[{
-  img:img,
-  title:'Bathroom Renovat...',
-  type:'Inquiry',
-  time:'12:31 PM'
-}]
+const DATA = [
+  {
+    img: img,
+    title: 'Bathroom Renovat...',
+    type: 'Inquiry',
+    time: '12:31 PM',
+  },
+];
 
 export default class Message extends Component {
   constructor(props) {
@@ -39,8 +41,9 @@ export default class Message extends Component {
           <Text
             style={{
               color: '#1F1F1F',
-              fontWeight: 'bold',
+              // fontWeight: 'bold',
               fontSize: 16,
+              fontFamily: 'Montserrat-Bold',
             }}>
             Messages
           </Text>
@@ -62,14 +65,25 @@ export default class Message extends Component {
               style={{height: 22, width: 22, resizeMode: 'center'}}></Image>
           </TouchableOpacity>
         </View>
-        <View style={{flexDirection: 'row', marginLeft: 24, marginTop: 40}}>
-          <Text style={{fontSize: 12, marginRight: 3}}>All messages</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginLeft: 24,
+            marginTop: 40,
+            fontFamily: 'Montserrat-Regular',
+          }}>
+          <Text
+            style={{
+              fontSize: 12,
+              marginRight: 3,
+              fontFamily: 'Montserrat-Regular',
+            }}>
+            All messages
+          </Text>
           <Text style={{fontSize: 12}}>(2) </Text>
         </View>
         <View>
-          <FlatList>
-
-          </FlatList>
+          <FlatList></FlatList>
         </View>
       </SafeAreaView>
     );

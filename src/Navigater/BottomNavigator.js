@@ -44,6 +44,7 @@ const BottomNavigator = props => {
         keyboardHidesTabBar: true,
         activeTintColor: '#BE984A',
 
+        // labelStyle: {fontFamily: 'Montserrat-Bold'},
         showLabel: false,
         style: {
           position: 'absolute',
@@ -68,7 +69,9 @@ const BottomNavigator = props => {
             <View>
               {focused ? (
                 <View>
-                  <Text style={{fontSize: 12, fontWeight: 'bold'}}>Home</Text>
+                  <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold'}}>
+                    Home
+                  </Text>
                   <View
                     style={{
                       width: 15,
@@ -108,7 +111,7 @@ const BottomNavigator = props => {
             <View>
               {focused ? (
                 <View>
-                  <Text style={{fontSize: 12, fontWeight: 'bold'}}>
+                  <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold'}}>
                     Inquiries
                   </Text>
                   <View
@@ -160,7 +163,9 @@ const BottomNavigator = props => {
             <View>
               {focused ? (
                 <View>
-                  <Text style={{fontSize: 12, fontWeight: 'bold'}}>Job</Text>
+                  <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold'}}>
+                    Job
+                  </Text>
                   <View
                     style={{
                       width: 15,
@@ -193,14 +198,14 @@ const BottomNavigator = props => {
           //   tabBarBadgeStyle: {
           //     backgroundColor: '#BE984A',
           //     marginTop: 10,
-          //     fontWeight: 'bold',
+          //     fontFamily:'Montserrat-Bold',
           //     fontSize: 12,
           //   },
           tabBarIcon: ({focused, color, size}) => (
             <View>
               {focused ? (
                 <View>
-                  <Text style={{fontSize: 12, fontWeight: 'bold'}}>
+                  <Text style={{fontSize: 12, fontFamily: 'Montserrat-Bold'}}>
                     Message
                   </Text>
                   <View

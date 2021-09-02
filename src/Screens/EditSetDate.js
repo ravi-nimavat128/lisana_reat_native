@@ -129,7 +129,8 @@ export class EditSetDate extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                // fontWeight: 'bold',
+                fontFamily: 'Montserrat-Bold',
                 fontSize: 16,
               }}>
               Set Date
@@ -212,6 +213,7 @@ export class EditSetDate extends Component {
                         paddingVertical: 7,
                         fontSize: 12,
                         paddingHorizontal: 10,
+                        fontFamily: 'Montserrat-Regular',
                         color:
                           this.state.selected_time_id == t.id
                             ? '#fff'
@@ -229,7 +231,7 @@ export class EditSetDate extends Component {
               fontSize: 16,
               margin: 24,
               color: '#1F1F1F',
-              fontWeight: 'bold',
+              fontFamily: 'Montserrat-Bold',
             }}>
             Select method
           </Text>
@@ -275,6 +277,7 @@ export class EditSetDate extends Component {
                         paddingVertical: 7,
                         fontSize: 12,
                         paddingHorizontal: 10,
+                        fontFamily: 'Montserrat-Regular',
                         color:
                           this.state.selected_method_id == t.id
                             ? '#fff'
@@ -300,7 +303,10 @@ export class EditSetDate extends Component {
             }}>
             <TextInput
               placeholder="Add location"
-              style={{marginLeft: 20}}></TextInput>
+              style={{
+                marginLeft: 20,
+                fontFamily: 'Montserrat-Regular',
+              }}></TextInput>
           </View>
 
           <TouchableOpacity
@@ -325,7 +331,12 @@ export class EditSetDate extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Submit
               </Text>
             </View>

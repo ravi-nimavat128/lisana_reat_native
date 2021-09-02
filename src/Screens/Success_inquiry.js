@@ -22,7 +22,13 @@ export class Success_inquiry extends Component {
               source={require('../assets/success_img.png')}
               style={{marginTop: 240, height: 151, width: 264}}></Image>
 
-            <Text style={{color: 'black', fontSize: 24, marginTop: 40}}>
+            <Text
+              style={{
+                color: 'black',
+                fontSize: 24,
+                marginTop: 40,
+                fontFamily: 'Montserrat-Regular',
+              }}>
               Congratulations
             </Text>
             <Text
@@ -33,6 +39,7 @@ export class Success_inquiry extends Component {
                 opacity: 0.5,
                 textAlign: 'center',
                 marginHorizontal: 57,
+                fontFamily: 'Montserrat-Regular',
               }}>
               Your inquiry has been successfully created and Lisana will be
               processing it immediately. For further information, We will get in
@@ -56,7 +63,11 @@ export class Success_inquiry extends Component {
                   alignItems: 'center',
                 }}>
                 <Text
-                  style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+                  style={{
+                    color: 'white',
+                    fontSize: 16,
+                    fontFamily: 'Montserrat-Bold',
+                  }}>
                   See My Inquiry
                 </Text>
               </TouchableOpacity>

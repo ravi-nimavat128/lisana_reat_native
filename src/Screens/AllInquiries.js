@@ -81,7 +81,12 @@ class AllInquiries extends Component {
             }}></Image>
 
           <View style={{flex: 1}}>
-            <Text style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                color: '#333333',
+                fontSize: 18,
+                fontFamily: 'Montserrat-SemiBold',
+              }}>
               {item.inquirie_title}
             </Text>
             {item.exp_date !== '' ? (
@@ -92,6 +97,7 @@ class AllInquiries extends Component {
                     fontSize: 12,
                     marginRight: 3,
                     opacity: 0.5,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   Expired on:
                 </Text>
@@ -101,6 +107,7 @@ class AllInquiries extends Component {
                     fontSize: 12,
                     marginRight: 16,
                     opacity: 0.5,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   {item.exp_date}
                 </Text>
@@ -120,6 +127,7 @@ class AllInquiries extends Component {
                     fontSize: 11,
                     marginRight: 5,
                     opacity: 0.5,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   Total cost
                 </Text>
@@ -127,7 +135,8 @@ class AllInquiries extends Component {
                   style={{
                     color: '#EC4464',
                     fontSize: 14,
-                    fontWeight: 'bold',
+                    // fontWeight: 'bold',
+                    fontFamily: 'Montserrat-SemiBold',
                     marginRight: 16,
                   }}>
                   ${item.total_cost}
@@ -135,7 +144,13 @@ class AllInquiries extends Component {
               </View>
             ) : null}
             {item.inquirie_type == 1 ? (
-              <Text style={{color: '#A3A3A3', fontSize: 12, marginTop: 8}}>
+              <Text
+                style={{
+                  color: '#A3A3A3',
+                  fontSize: 12,
+                  marginTop: 8,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 {item.created_at}
               </Text>
             ) : null}
@@ -153,7 +168,8 @@ class AllInquiries extends Component {
                     color: 'black',
                     fontSize: 13,
                     marginRight: 5,
-                    fontWeight: 'bold',
+                    // fontWeight: 'bold',
+                    fontFamily: 'Montserrat-SemiBold',
                   }}>
                   Processing
                 </Text>
@@ -167,8 +183,9 @@ class AllInquiries extends Component {
                   style={{
                     color: '#EC4464',
                     fontSize: 14,
-                    fontWeight: 'bold',
+                    // fontWeight: 'bold',
                     marginRight: 4,
+                    fontFamily: 'Montserrat-SemiBold',
                   }}>
                   Edit
                 </Text>
@@ -216,7 +233,14 @@ class AllInquiries extends Component {
             <Image
               source={require('../assets/empty_gif.gif')}
               style={{height: 120, width: 120}}></Image>
-            <Text style={{fontSize: 12, color: 'gray'}}>No Record Found</Text>
+            <Text
+              style={{
+                fontSize: 12,
+                color: 'gray',
+                fontFamily: 'Montserrat-SemiBold',
+              }}>
+              No Record Found
+            </Text>
           </View>
         ) : (
           <FlatList

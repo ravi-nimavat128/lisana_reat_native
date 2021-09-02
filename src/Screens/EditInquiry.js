@@ -5,7 +5,6 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {BottomSheet} from 'react-native-btr';
 import {Toast, DURATION, POSTION} from 'rn-simple-toast';
 
-
 import {
   SafeAreaView,
   Text,
@@ -72,7 +71,6 @@ class EditInquiry extends Component {
       cat_bottom_visible: false,
       Doctument_array: [],
       toastRef: null,
-
     };
   }
 
@@ -407,6 +405,7 @@ class EditInquiry extends Component {
                     color: '#3B3B3B',
                     fontSize: 9,
                     marginHorizontal: 5,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   {item.name}
                 </Text>
@@ -508,8 +507,9 @@ class EditInquiry extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                // fontWeight: 'bold',
                 fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
               }}>
               Inquiry
             </Text>
@@ -558,7 +558,10 @@ class EditInquiry extends Component {
               placeholder="Inquirie Title"
               defaultValue={this.state.inq_title}
               onChangeText={txt => this.setState({inq_title: txt})}
-              style={{marginLeft: 20}}></TextInput>
+              style={{
+                marginLeft: 20,
+                fontFamily: 'Montserrat-Regular',
+              }}></TextInput>
           </View>
 
           <TouchableOpacity
@@ -619,6 +622,7 @@ class EditInquiry extends Component {
                 justifyContent: 'center',
                 marginLeft: 24,
                 fontSize: 13,
+                fontFamily: 'Montserrat-Regular',
               }}>
               {/* Select category */}
               {this.state.cat_id.length < 1
@@ -667,6 +671,7 @@ class EditInquiry extends Component {
                     marginBottom: 15,
                     color: 'black',
                     fontSize: 14,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   Select Category
                 </Text>
@@ -682,6 +687,7 @@ class EditInquiry extends Component {
                       <CheckBox
                         title={item.name}
                         size={25}
+                        fontFamily="Montserrat-Regular"
                         containerStyle={{
                           backgroundColor: '#00000000',
                           borderColor: '#00000000',
@@ -729,7 +735,10 @@ class EditInquiry extends Component {
               placeholder="Add location"
               defaultValue={this.state.add_location}
               onChangeText={txt => this.setState({add_location: txt})}
-              style={{marginLeft: 20}}></TextInput>
+              style={{
+                marginLeft: 20,
+                fontFamily: 'Montserrat-Regular',
+              }}></TextInput>
           </View>
           <View style={styles.edt_box}>
             <PickerModal
@@ -739,11 +748,19 @@ class EditInquiry extends Component {
                   disabled={disabled}
                   onPress={showModal}>
                   {this.state.work_object == null ? (
-                    <Text style={{marginLeft: 24}}>
+                    <Text
+                      style={{
+                        marginLeft: 24,
+                        fontFamily: 'Montserrat-Regular',
+                      }}>
                       When do you want to start work?
                     </Text>
                   ) : (
-                    <Text style={{marginLeft: 24}}>
+                    <Text
+                      style={{
+                        marginLeft: 24,
+                        fontFamily: 'Montserrat-Regular',
+                      }}>
                       {this.state.work_object.name
                         ? this.state.work_object.name
                         : selected.Name}
@@ -802,11 +819,11 @@ class EditInquiry extends Component {
               }}
             /> */}
             {this.props.date == '' ? (
-              <Text style={{marginLeft: 20}}>
+              <Text style={{marginLeft: 20, fontFamily: 'Montserrat-Regular'}}>
                 Select time to book quote visit
               </Text>
             ) : (
-              <Text style={{marginLeft: 20}}>
+              <Text style={{marginLeft: 20, fontFamily: 'Montserrat-Regular'}}>
                 {this.props.date + ' ' + this.props.time}
               </Text>
             )}
@@ -817,6 +834,7 @@ class EditInquiry extends Component {
               marginLeft: 24,
               marginTop: 24,
               fontSize: 16,
+              fontFamily: 'Montserrat-Regular',
             }}>
             Select services you want
           </Text>
@@ -841,6 +859,7 @@ class EditInquiry extends Component {
                 <CheckBox
                   title={item.name}
                   size={25}
+                  fontFamily="Montserrat-Regular"
                   containerStyle={{
                     backgroundColor: '#00000000',
                     borderColor: '#00000000',
@@ -942,7 +961,12 @@ class EditInquiry extends Component {
               }}
               imageStyle={{resizeMode: 'stretch'}}
               source={require('../assets/pink_dot_boxx.png')}>
-              <Text style={{color: '#F1748C', fontSize: 13}}>
+              <Text
+                style={{
+                  color: '#F1748C',
+                  fontSize: 13,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 Upload photos or files
               </Text>
             </ImageBackground>
@@ -986,13 +1010,12 @@ class EditInquiry extends Component {
               style={{
                 marginTop: 8,
                 marginLeft: 12,
-
+                fontFamily: 'Montserrat-Regular',
                 alignSelf: 'flex-start',
               }}></TextInput>
           </View>
 
           <Toast ref={_ref => (this.state.toastRef = _ref)} />
-
 
           <TouchableOpacity
             onPress={() => {
@@ -1064,7 +1087,12 @@ class EditInquiry extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Save Edit
               </Text>
             </View>

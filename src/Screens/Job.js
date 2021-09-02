@@ -31,8 +31,9 @@ export default class Job extends Component {
           <Text
             style={{
               color: '#1F1F1F',
-              fontWeight: 'bold',
+              // fontWeight: 'bold',
               fontSize: 16,
+              fontFamily: 'Montserrat-Bold',
             }}>
             Jobs
           </Text>
@@ -71,6 +72,7 @@ export default class Job extends Component {
             labelStyle: {
               fontSize: 16,
               textTransform: 'capitalize',
+              fontFamily: 'Montserrat-Regular',
             },
             showLabel: true,
             scrollEnabled: false,

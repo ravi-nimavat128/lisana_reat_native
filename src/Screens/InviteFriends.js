@@ -11,6 +11,7 @@ import {
   ScrollView,
   TextInput,
   Touchable,
+  Linking,
 } from 'react-native';
 import {connect} from 'react-redux';
 
@@ -169,7 +170,8 @@ export class InviteFriends extends Component {
         <TouchableOpacity
           onPress={() => {
             // this.fetchCopiedText();
-            console.log('coppyed text', this.state.copy_text);
+            // console.log('coppyed text', this.state.copy_text);
+            Linking.openURL('whatsapp://send?text=Hello');
           }}>
           <View
             style={{

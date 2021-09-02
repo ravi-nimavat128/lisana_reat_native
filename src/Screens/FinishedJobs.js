@@ -80,7 +80,12 @@ class FinishedJobs extends Component {
               resizeMode: 'contain',
             }}></Image>
           <View style={{flex: 1}}>
-            <Text style={{color: '#333333', fontSize: 18, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                color: '#333333',
+                fontSize: 18,
+                fontFamily: 'Montserrat-SemiBold',
+              }}>
               {item.inquirie_name}
             </Text>
             <View
@@ -98,7 +103,12 @@ class FinishedJobs extends Component {
                     tintColor: '#A3A3A3',
                     marginRight: 8,
                   }}></Image>
-                <Text style={{fontSize: 12, color: 'black'}}>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: 'black',
+                    fontFamily: 'Montserrat-Regular',
+                  }}>
                   Job already finish
                 </Text>
               </View>
@@ -121,6 +131,7 @@ class FinishedJobs extends Component {
                   color: '#A3A3A3',
                   fontSize: 12,
                   marginRight: 6,
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Total cost
               </Text>
@@ -128,8 +139,9 @@ class FinishedJobs extends Component {
                 style={{
                   color: '#EC4464',
                   fontSize: 16,
-                  fontWeight: 'bold',
+                  // fontWeight: 'bold',
                   marginRight: 5,
+                  fontFamily: 'Montserrat-SemiBold',
                 }}>
                 ${item.grand_total}
               </Text>
@@ -167,7 +179,14 @@ class FinishedJobs extends Component {
             <Image
               source={require('../assets/empty_gif.gif')}
               style={{height: 120, width: 120}}></Image>
-            <Text style={{fontSize: 12, color: 'gray'}}>No Record Found</Text>
+            <Text
+              style={{
+                fontSize: 12,
+                color: 'gray',
+                fontFamily: 'Montserrat-SemiBold',
+              }}>
+              No Record Found
+            </Text>
           </View>
         ) : (
           <FlatList
