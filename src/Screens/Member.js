@@ -60,10 +60,20 @@ export class Member extends Component {
                 marginLeft: 16,
               }}>
               <Text
-                style={{color: '#040415', fontSize: 24, fontWeight: 'bold'}}>
+                style={{
+                  color: '#040415',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Stevenson
               </Text>
-              <Text style={{color: '#7F7F7F', fontSize: 14}}>
+              <Text
+                style={{
+                  color: '#7F7F7F',
+                  fontSize: 12,
+                  marginTop: 4,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 1234 - 567 - 8900
               </Text>
             </View>
@@ -99,10 +109,20 @@ export class Member extends Component {
                 marginLeft: 16,
               }}>
               <Text
-                style={{color: '#040415', fontSize: 24, fontWeight: 'bold'}}>
+                style={{
+                  color: '#040415',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Marcus
               </Text>
-              <Text style={{color: '#7F7F7F', fontSize: 14}}>
+              <Text
+                style={{
+                  color: '#7F7F7F',
+                  fontSize: 12,
+                  marginTop: 4,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 1234 - 567 - 8900
               </Text>
             </View>
@@ -138,10 +158,20 @@ export class Member extends Component {
                 marginLeft: 16,
               }}>
               <Text
-                style={{color: '#040415', fontSize: 24, fontWeight: 'bold'}}>
+                style={{
+                  color: '#040415',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Travis
               </Text>
-              <Text style={{color: '#7F7F7F', fontSize: 14}}>
+              <Text
+                style={{
+                  color: '#7F7F7F',
+                  fontSize: 12,
+                  marginTop: 4,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
                 1234 - 567 - 8900
               </Text>
             </View>

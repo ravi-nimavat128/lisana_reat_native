@@ -54,7 +54,7 @@ export class InviteFriends extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                fontFamily: 'Montserrat-Bold',
                 fontSize: 16,
               }}>
               Invite Friends
@@ -68,7 +68,12 @@ export class InviteFriends extends Component {
               source={require('../assets/invite_frds_img.png')}
               style={{width: 215, height: 135, marginTop: 45}}></Image>
 
-            <Text style={{marginTop: 44, fontSize: 24, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                marginTop: 44,
+                fontSize: 24,
+                fontFamily: 'Montserrat-Bold',
+              }}>
               Get Free 1000kr
             </Text>
             <Text
@@ -78,6 +83,7 @@ export class InviteFriends extends Component {
                 color: '#A3A3A3',
                 textAlign: 'center',
                 marginHorizontal: 64,
+                fontFamily: 'Montserrat-Regular',
               }}>
               Invite your friends to use Lisana Mobile Apps and get free 1000kr
               which can be used in this apps
@@ -89,6 +95,7 @@ export class InviteFriends extends Component {
                 color: '#A3A3A3',
                 textAlign: 'center',
                 marginHorizontal: 72,
+                fontFamily: 'Montserrat-Regular',
               }}>
               You have{' '}
               {
@@ -99,7 +106,7 @@ export class InviteFriends extends Component {
                     color: '#EC4464',
                     textAlign: 'center',
                     marginHorizontal: 72,
-                    fontWeight: 'bold',
+                    fontFamily: 'Montserrat-Bold',
                   }}>
                   3000kr
                 </Text>
@@ -121,7 +128,11 @@ export class InviteFriends extends Component {
                 justifyContent: 'space-between',
               }}>
               <Text
-                style={{color: 'black', fontWeight: 'bold', marginLeft: 20}}>
+                style={{
+                  color: 'black',
+                  fontFamily: 'Montserrat-Bold',
+                  marginLeft: 20,
+                }}>
                 STEVEN01
               </Text>
               <TouchableOpacity
@@ -144,6 +155,7 @@ export class InviteFriends extends Component {
                 }}>
                 <Text
                   style={{
+                    fontFamily: 'Montserrat-Regular',
                     color:
                       this.state.copy_text == 'STEVEN01' ? '#EC4464' : 'white',
                     fontSize: 13,
@@ -170,7 +182,12 @@ export class InviteFriends extends Component {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
+              }}>
               Invite Friends
             </Text>
           </View>

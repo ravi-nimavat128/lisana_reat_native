@@ -36,7 +36,7 @@ export class ShareAccount extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                fontFamily: 'Montserrat-Bold',
                 fontSize: 16,
               }}>
               Share Account
@@ -50,7 +50,13 @@ export class ShareAccount extends Component {
               source={require('../assets/share_account_img.png')}
               style={{width: 215, height: 135, marginTop: 45}}></Image>
 
-            <Text style={{marginTop: 44, fontSize: 24, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                marginTop: 44,
+                fontSize: 24,
+                color: '#1F1F1F',
+                fontFamily: 'Montserrat-Bold',
+              }}>
               Share With Member
             </Text>
             <Text
@@ -60,6 +66,7 @@ export class ShareAccount extends Component {
                 color: '#A3A3A3',
                 textAlign: 'center',
                 marginHorizontal: 50,
+                fontFamily: 'Montserrat-Regular',
               }}>
               You can share this account with your family members to enjoy
               Lisana's benefits together
@@ -69,14 +76,15 @@ export class ShareAccount extends Component {
               style={{
                 height: 56,
                 marginHorizontal: 24,
-                borderColor: '#DFDFE2',
+                borderColor: '#E6E6E8',
                 borderWidth: 1,
                 width: '90%',
                 borderRadius: 8,
-                marginTop: 24,
+                marginTop: 40,
                 justifyContent: 'center',
               }}>
               <TextInput
+                placeholderTextColor="#CCCCCC"
                 placeholder="Personal number"
                 style={{marginLeft: 20}}></TextInput>
             </View>
@@ -85,7 +93,7 @@ export class ShareAccount extends Component {
               style={{
                 height: 56,
                 marginHorizontal: 24,
-                borderColor: '#DFDFE2',
+                borderColor: '#E6E6E8',
                 borderWidth: 1,
                 width: '90%',
                 borderRadius: 8,
@@ -93,6 +101,7 @@ export class ShareAccount extends Component {
                 justifyContent: 'center',
               }}>
               <TextInput
+                placeholderTextColor="#CCCCCC"
                 placeholder="Email address"
                 style={{marginLeft: 20}}></TextInput>
             </View>
@@ -113,7 +122,12 @@ export class ShareAccount extends Component {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
+              }}>
               Share Account
             </Text>
           </View>

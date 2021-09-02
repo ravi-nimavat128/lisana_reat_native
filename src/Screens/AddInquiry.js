@@ -416,8 +416,9 @@ class AddInquiry extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                // fontWeight: 'bold',
                 fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
               }}>
               Ask Inquiry
             </Text>

@@ -39,8 +39,9 @@ export class Setting extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                // fontWeight: 'bold',
                 fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
               }}>
               Settings
             </Text>
@@ -64,9 +65,20 @@ export class Setting extends Component {
                 alignSelf: 'center',
                 marginLeft: 16,
               }}>
-              <Text style={{color: '#7F7F7F', fontSize: 14}}>Morning</Text>
               <Text
-                style={{color: '#040415', fontSize: 24, fontWeight: 'bold'}}>
+                style={{
+                  color: '#7F7F7F',
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Regular',
+                }}>
+                Morning
+              </Text>
+              <Text
+                style={{
+                  color: '#040415',
+                  fontSize: 24,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Stevenson
               </Text>
             </View>
@@ -230,7 +242,12 @@ export class Setting extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 16,
+                  fontFamily: 'Montserrat-Bold',
+                }}>
                 Share With Members
               </Text>
             </View>
@@ -277,6 +294,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#3B3B3B',
     marginLeft: 14,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
+    // fontWeight: '700',
   },
 });

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Rating, AirbnbRating} from 'react-native-ratings';
+// import {Rating, AirbnbRating} from 'react-native-ratings';
+
+import StarRating from 'react-native-star-rating';
+
 import {BottomSheet} from 'react-native-btr';
 
 import {
@@ -188,16 +191,24 @@ export class AddReview extends Component {
               </Text>
             </View>
 
-            <Rating
-              style={{width: Dimensions.get('screen').width, marginTop: 50}}
-              type="star"
-              ratingCount={5}
-              imageSize={50}
-              readonly
-              showRating={false}
-              startingValue={this.state.rating}
-              onFinishRating={this.ratingCompleted}
-            />
+            <View style={{width: Dimensions.get('screen').width}}>
+              <StarRating
+                disabled={true}
+                maxStars={5}
+                rating={this.state.rating}
+                // buttonStyle={{height: 16, width: 60}}
+                starSize={26}
+                starStyle={{marginHorizontal: 18}}
+                containerStyle={{
+                  marginHorizontal: 20,
+                  marginTop: 50,
+                  marginBottom: 30,
+                }}
+                fullStar={require('../assets/star_icon.png')}
+                emptyStar={require('../assets/non_selected_star.png')}
+                selectedStar={rating => this.setState({rating: rating})}
+              />
+            </View>
 
             <View
               style={{
@@ -327,7 +338,7 @@ export class AddReview extends Component {
                     fontSize: 16,
                     fontWeight: 'bold',
                   }}>
-                  Back to Home
+                  Go to Home
                 </Text>
               </TouchableOpacity>
             </View>

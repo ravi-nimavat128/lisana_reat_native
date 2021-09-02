@@ -13,80 +13,46 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import HTMLView from 'react-native-htmlview';
+import {ScrollView} from 'react-native-gesture-handler';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export class HelpFAQ extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: false,
       service: 0,
       job: 0,
       inq: 0,
       service_data: '',
       job_data: '',
       inq_data: '',
+      FAQ_DATA: [],
     };
   }
 
   componentDidMount() {
     this._get_lisana_service();
-    this._get_lisana_job();
-    this._get_lisana_inq();
   }
 
   _get_lisana_service = () => {
+    this.setState({isLoading: true});
     const token = 'Bearer '.concat(this.props.login_token);
 
     var headers = {
       Authorization: token,
     };
     axios
-      .post('http://binarygeckos.com/lisana/api/get_about_us_details', null, {
+      .post('http://binarygeckos.com/lisana/api/get_faq_details', null, {
         headers: headers,
       })
       .then(responses => {
+        this.setState({isLoading: false});
         if (responses.data.status == 1) {
           this.setState({
-            service_data: responses.data.result,
-          });
-        } else {
-          alert(responses.data.message);
-        }
-      });
-  };
-  _get_lisana_job = () => {
-    const token = 'Bearer '.concat(this.props.login_token);
-
-    var headers = {
-      Authorization: token,
-    };
-    axios
-      .post('http://binarygeckos.com/lisana/api/get_monitored_job', null, {
-        headers: headers,
-      })
-      .then(responses => {
-        if (responses.data.status == 1) {
-          this.setState({
-            job_data: responses.data.result,
-          });
-        } else {
-          alert(responses.data.message);
-        }
-      });
-  };
-  _get_lisana_inq = () => {
-    const token = 'Bearer '.concat(this.props.login_token);
-
-    var headers = {
-      Authorization: token,
-    };
-    axios
-      .post('http://binarygeckos.com/lisana/api/get_consult_my_inquiry', null, {
-        headers: headers,
-      })
-      .then(responses => {
-        if (responses.data.status == 1) {
-          this.setState({
-            inq_data: responses.data.result,
+            FAQ_DATA: responses.data.result.map(item => {
+              return {...item, isVisible: false};
+            }),
           });
         } else {
           alert(responses.data.message);
@@ -95,11 +61,28 @@ export class HelpFAQ extends Component {
   };
 
   render() {
-    console.log(this.state.service_data);
+    console.log(JSON.stringify(this.state.FAQ_DATA, null, 2));
     console.log('login token', this.props.login_token);
 
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+        <Spinner
+          //visibility of Overlay Loading Spinner
+          visible={this.state.isLoading}
+          //Text with the Spinner
+          textContent={'Loading...'}
+          size={'large'}
+          animation={'fade'}
+          cancelable={false}
+          color="#EC4464"
+          //Text style of the Spinner Text
+          textStyle={{
+            color: '#EC4464',
+            fontSize: 20,
+            marginLeft: 10,
+            fontFamily: 'Montserrat-Regular',
+          }}
+        />
         <View style={styles.header}>
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
             <Image
@@ -116,15 +99,90 @@ export class HelpFAQ extends Component {
             <Text
               style={{
                 color: '#1F1F1F',
-                fontWeight: 'bold',
+                // fontWeight: 'bold',
                 fontSize: 16,
+                fontFamily: 'Montserrat-Bold',
               }}>
               Help and FAQ
             </Text>
           </View>
         </View>
 
-        <View style={{marginHorizontal: 24}}>
+        <ScrollView>
+          <View>
+            {this.state.FAQ_DATA.map((item, index) => {
+              return (
+                <View style={{alignItems: 'center'}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState({
+                        FAQ_DATA: this.state.FAQ_DATA.map((item, sindex) => {
+                          return {
+                            ...item,
+                            isVisible: (index == sindex) === !item.isVisible,
+                            // ? !this.state.PastOrderData.isSelected
+                            // : this.state.PastOrderData.isSelected,
+                          };
+                        }),
+                      });
+                    }}
+                    style={{
+                      flexDirection: 'row',
+                      marginVertical: 25,
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: '#3B3B3B',
+                        marginHorizontal: 20,
+                        fontFamily: 'Montserrat-Bold',
+                      }}>
+                      {item.title}
+                    </Text>
+                    <Image
+                      source={require('../assets/down_arrow.png')}
+                      style={{
+                        width: 10,
+                        height: 8,
+                        marginRight: 22,
+                        resizeMode: 'contain',
+                        alignSelf: 'center',
+                        transform:
+                          item.isVisible == true
+                            ? [{rotate: '180deg'}]
+                            : [{rotate: '0deg'}],
+                      }}></Image>
+                  </TouchableOpacity>
+
+                  {item.isVisible == true ? (
+                    <View>
+                      <View
+                        style={{
+                          marginTop: 5,
+                          borderBottomColor: '#EC4464',
+                          opacity: 0.4,
+                          borderBottomWidth: 1,
+                        }}
+                      />
+                      <HTMLView
+                        style={{
+                          fontSize: 18,
+                          color: 'black',
+                          marginTop: 10,
+                          marginHorizontal: 22,
+                        }}
+                        value={item.description}></HTMLView>
+                    </View>
+                  ) : null}
+                </View>
+              );
+            })}
+          </View>
+        </ScrollView>
+
+        {/* <View style={{marginHorizontal: 24}}>
           <TouchableOpacity
             onPress={() => {
               this.setState({
@@ -275,6 +333,7 @@ export class HelpFAQ extends Component {
             </View>
           ) : null}
         </View>
+     */}
       </SafeAreaView>
     );
   }
