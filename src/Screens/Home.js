@@ -113,12 +113,19 @@ class Home extends Component {
       slider_dot: 0,
       slider_data: [],
       category_list: [],
+      today: new Date().getHours(),
     };
   }
 
-  // componentDidMount() {
-  //   this._get_slider_data();
-  // }
+  componentDidMount() {
+    // this._get_slider_data();
+    this.setState({today: new Date().getHours()});
+
+    this.onFocusSubscribe = this.props.navigation.addListener('focus', () => {
+      // Your code
+      this.setState({today: new Date().getHours()});
+    });
+  }
 
   _get_slider_data = () => {
     // this.setState({isLoading: true});
@@ -174,6 +181,18 @@ class Home extends Component {
 
   render() {
     // console.log('slider data', JSON.stringify(this.state.slider_data, null, 2));
+    // var curHr= this.state.today.getHours(),
+    // var today = new Date();
+    // var curHr = today.getHours();
+
+    // if (curHr < 12) {
+    //   console.log('good morning');
+    // } else if (curHr < 18) {
+    //   console.log('good afternoon');
+    // } else {
+    //   console.log('good evening');
+    // }
+
     return (
       <SafeAreaView
         style={{backgroundColor: 'white', flex: 1, marginBottom: 85}}>
@@ -218,7 +237,12 @@ class Home extends Component {
                   fontSize: 14,
                   fontFamily: 'Montserrat-Regular',
                 }}>
-                Morning
+                {/* Morning */}
+                {this.state.today < 12
+                  ? 'Morning'
+                  : this.state.today < 18
+                  ? 'Afternoon'
+                  : 'Evening'}
               </Text>
               <Text
                 style={{

@@ -17,7 +17,9 @@ export class Setting extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      today: new Date().getHours(),
+    };
   }
 
   render() {
@@ -71,7 +73,11 @@ export class Setting extends Component {
                   fontSize: 14,
                   fontFamily: 'Montserrat-Regular',
                 }}>
-                Morning
+                {this.state.today < 12
+                  ? 'Morning'
+                  : this.state.today < 18
+                  ? 'Afternoon'
+                  : 'Evening'}
               </Text>
               <Text
                 style={{

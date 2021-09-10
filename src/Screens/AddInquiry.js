@@ -200,7 +200,7 @@ class AddInquiry extends Component {
         this.setState({isLoading: false});
         if (responses.data.status == 1) {
           // alert('Your Inquiry is added successful');
-          this.props.navigation.navigate('Success_inquiry');
+          this.props.navigation.replace('Success_inquiry');
           this.props.addTime(''),
             this.props.addDate(''),
             this.props.addMethodName('');

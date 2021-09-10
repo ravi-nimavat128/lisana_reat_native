@@ -284,7 +284,7 @@ class EditInquiry extends Component {
           // this.props.addTime(''),
           //   this.props.addDate(''),
           //   this.props.addMethodName('');
-          this.props.navigation.navigate('Success_inquiry');
+          this.props.navigation.replace('Success_inquiry');
         } else {
           alert(responses.data.message);
         }

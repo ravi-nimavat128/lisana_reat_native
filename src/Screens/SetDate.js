@@ -299,6 +299,7 @@ export class SetDate extends Component {
               justifyContent: 'center',
             }}>
             <TextInput
+              placeholderTextColor="#A3A3A3"
               placeholder="Add location"
               style={{
                 marginLeft: 20,
