@@ -30,6 +30,7 @@ import EditSetDate from '../Screens/EditSetDate';
 import EditInquiry from '../Screens/EditInquiry';
 import AddReview from '../Screens/AddReview';
 import ShowReview from '../Screens/ShowReview';
+import Crash from '../Screens/crash';
 
 const Stack = createStackNavigator();
 
@@ -167,6 +168,11 @@ export default function MainNavigation() {
         <Stack.Screen
           name="ShowReview"
           component={ShowReview}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Crash"
+          component={Crash}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

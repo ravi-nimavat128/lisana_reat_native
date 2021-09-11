@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "652383149097",
+    "project_id": "lisana-44b4e",
+    "storage_bucket": "lisana-44b4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652383149097:android:a3434f6ee4b01457c55038",
+        "android_client_info": {
+          "package_name": "com.lisana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652383149097-56gho4mai4okap55sf1e7cul8s8h3eom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lisana",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "652383149097-sovg39mucrq03gsq52pa8dj90mcgqj19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9Wnsb3tuT5mjL3W6WNZmtilsdaejuQPA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652383149097-sovg39mucrq03gsq52pa8dj90mcgqj19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

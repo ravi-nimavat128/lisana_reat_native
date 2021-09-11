@@ -23,6 +23,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 
+import crashlytics from '@react-native-firebase/crashlytics';
+
 const Data = [
   {id: 1, titel: 'All'},
   {id: 2, titel: 'Bathroom'},
@@ -114,11 +116,13 @@ class Home extends Component {
       slider_data: [],
       category_list: [],
       today: new Date().getHours(),
+      userCounts: null,
     };
   }
 
   componentDidMount() {
     // this._get_slider_data();
+    crashlytics().log('App mounted.');
     this.setState({today: new Date().getHours()});
 
     this.onFocusSubscribe = this.props.navigation.addListener('focus', () => {
@@ -126,6 +130,36 @@ class Home extends Component {
       this.setState({today: new Date().getHours()});
     });
   }
+
+  logCrashlytics = async () => {
+    crashlytics().log('Dummy Details Added');
+    await Promise.all([
+      crashlytics().setUserId('101'),
+      crashlytics().setAttribute('credits', String(50)),
+      crashlytics().setAttributes({
+        email: 'aboutreact11@gmail.com',
+        username: 'aboutreact11',
+      }),
+    ]);
+  };
+
+  logCrash = async user => {
+    crashlytics().crash();
+  };
+
+  logError = async user => {
+    crashlytics().log('Updating user count.');
+    try {
+      if (users) {
+        // An empty array is truthy, but not actually true.
+        // Therefore the array was never initialised.
+        this.setState({userCounts: userCounts.push(users.length)});
+      }
+    } catch (error) {
+      crashlytics().recordError(error);
+      console.log(error);
+    }
+  };
 
   _get_slider_data = () => {
     // this.setState({isLoading: true});
@@ -355,6 +389,12 @@ class Home extends Component {
               </Text>
             </View>
           </View>
+          {/* <Button
+            title="Log User Details"
+            onPress={() => this.logCrashlytics()}
+          />
+          <Button title="Log crash" onPress={() => this.logCrash()} />
+          <Button title="Log Error" onPress={() => this.logError()} /> */}
           <View
             style={{
               flexDirection: 'row',
